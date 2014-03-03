@@ -1,0 +1,22 @@
+% GBVI parameters for AM1-BCC charges.
+% From Labute. J. Comput. Chem. 29:1693, 2008.
+% http://dx.doi.org/10.1002/jcc.20933
+
+% atomtype   radius (A)   gamma (kcal/mol)
+HN           1.25         1.0461
+HO           1.00         2.2465
+HP           1.00         1.4322
+HS           1.25         0.8739
+HC           1.25         0.2437
+C(pi)        2.00        -0.1199
+C            1.80        -0.2863
+N(pi)        1.65        -0.6263
+N            1.65        -4.0443
+O(pi)        1.40         5.0707
+O            1.35         0.6859
+P            2.15        -4.1181
+S            1.95        -1.0215
+F            1.50         1.9309
+Cl           1.80         0.0131
+Br           2.40        -1.1648
+I            2.60         0.0869

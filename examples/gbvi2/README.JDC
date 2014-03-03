@@ -1,0 +1,1 @@
+ python parameterize-gbvi_2.py --types ../gbvi/parameters/gbvi.types --parameters ../gbvi/parameters/gbvi-am1bcc.parameters --molecules ../gbvi/datasets/neutrals.sdf --iterations 150 --mcmcDb /Users/yank/code/gbff/examples/gbvi2/MCMC.txt

@@ -1,0 +1,8 @@
+Example illustrating Bayesian reparameterization of GBVI implicit solvent [1] using small-molecule hydration free energy data.
+
+parameterize-gbvi.py - MCMC parameterization engine for GBVI
+evaluate-gbvi.py - evaluation of GBVI final parameter set
+datasets/ - input datasets for parameterization
+parameters/ - parameter sets and atom types for GBVI
+attic/ - old unused files
+

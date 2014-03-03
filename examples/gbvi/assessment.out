@@ -1,0 +1,4614 @@
+/System/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/pkgutil.py:186: ImportWarning: Not importing directory '/opt/local/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/site-packages/PyObjC/PyObjCTools': missing __init__.py
+  file, filename, etc = imp.find_module(subname, path)
+/opt/local/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/site-packages/matplotlib/dates.py:91: ImportWarning: Not importing directory '/opt/local/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/site-packages/pytz/zoneinfo': missing __init__.py
+  import pytz.zoneinfo
+Loading internal fraglib
+81736 fragments loaded in 0.65 seconds
+
+Title = methane
+Generated fragment C
+num confs = 1
+elapsed time (s) = 0.00
+Title = ethane
+Library fragment = CC
+num confs = 1
+elapsed time (s) = 0.00
+Title = propane
+Library fragment = CCC
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-butane
+Library fragment = CCCC
+  1   3   4  13 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-methylpopane
+Library fragment = CC(C)C
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-pentane
+Library fragment = CCCCC
+ 16   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 16   5   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methylbutane
+Library fragment = CCC(C)C
+  2   5   4   1 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,2-dimethylpropane
+Library fragment = CC(C)(C)C
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-hexane
+Library fragment = CCCCCC
+ 17   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 19   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  3   5   6  19 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methylpentane
+Library fragment = CCCC(C)C
+ 18   5   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  4   5   6   2 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-methylpentane
+Library fragment = CCC(C)CC
+ 20   6   4   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  C-  C-  C 180 60 -60
+ 20   6   5   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,2-dimethylbutane
+Library fragment = CCC(C)(C)C
+  2   6   5  19 [CH3:1][C:2]([CH3])([CH3])-[*:3][*:4]
+  C-  C-  C-  H 0 30 60
+Symmetric Bond =   5   6
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,3-dimethylbutane
+Library fragment = CC(C)C(C)C
+  1   5   6  20 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-heptane
+Library fragment = CCCCCCC
+ 18   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 20   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 22   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 22   7   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-methylhexane
+Library fragment = CCCCC(C)C
+ 19   5   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 21   6   5   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  5   6   7   2 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3-methylhexane
+Library fragment = CCCC(C)CC
+ 21   6   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 23   7   5   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  C-  C-  C 180 60 -60
+  3   7   6  21 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2,2-dimethylpentane
+Generated fragment CCCC(C)(C)C
+ 22   6   5   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   7   6  22 [CH3:1][C:2]([CH3])([CH3])-[*:3][*:4]
+  C-  C-  C-  H 0 30 60
+Symmetric Bond =   6   7
+num confs = 1
+elapsed time (s) = 0.21
+Title = 2,3-dimethylpentane
+Generated fragment CCC(C)C(C)C
+ 23   7   5   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  C-  C-  C 180 60 -60
+ 23   7   6   2 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.26
+Title = 2,4-dimethylpentane
+Library fragment = CC(C)CC(C)C
+  7   5   6   1 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+  6   5   7   3 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3,3-dimethylpentane
+Library fragment = CCC(C)(C)CC
+  3   7   5   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  C-  C-  C 180 60 -60
+  3   7   6   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = n-octane
+Library fragment = CCCCCCCC
+ 19   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 21   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 23   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 25   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  5   7   8  25 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3-methylheptane
+Library fragment = CCCC(C)CCC
+ 22   6   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   7   5   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  3   8   6  22 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+  3   8   7  24 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2,2,4-trimethylpentane
+Generated fragment CC(C)CC(C)(C)C
+  8   6   7   1 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+ 24   6   8   3 [CH3:1][C:2]([CH3])([CH3])-[*:3][*:4]
+  H-  C-  C-  C 0 30 60
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.30
+Title = 2,3,4-trimethylpentane
+Generated fragment CC(C)C(C)C(C)C
+ 26   8   6   1 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+ 26   8   7   3 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.34
+Title = n-nonane
+Library fragment = CCCCCCCCC
+ 20   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 22   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 26   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 28   9   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 28   9   8   6 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2,2,5-trimethylhexane
+Generated fragment CC(C)CCC(C)(C)C
+ 27   7   6   8 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  7   6   8   1 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+ 27   7   9   3 [CH3:1][C:2]([CH3])([CH3])-[*:3][*:4]
+  H-  C-  C-  C 0 30 60
+Symmetric Bond =   7   9
+num confs = 1
+elapsed time (s) = 0.53
+Title = n-decane
+Library fragment = CCCCCCCCCC
+ 21   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 23   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 25   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 27   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 29   9   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 31  10   8   6 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  7   9  10  31 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.04
+Title = cyclopropane
+Library fragment = C1CC1
+Library fragment = C1CC1
+num confs = 1
+elapsed time (s) = 0.00
+Title = cyclopentane
+Generated fragment C1CCCC1
+Library fragment = C1CCCC1
+ring conformation template = C1CCCC1
+num confs = 1
+elapsed time (s) = 0.02
+Title = methylcyclopentane
+Library fragment = CC1CCCC1
+Library fragment = CC
+Library fragment = CC1CCCC1
+ring conformation template = CC1CCCC1
+num confs = 1
+elapsed time (s) = 0.01
+Title = n-propylcyclopentane
+Library fragment = CC1CCCC1
+Library fragment = CCCC
+Library fragment = CC1CCCC1
+ring conformation template = CC1CCCC1
+  3   5   7  21 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+  5   7   8  23 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.02
+Title = n-pentylcyclopentane
+Library fragment = CC1CCCC1
+Library fragment = CCCCCC
+Library fragment = CC1CCCC1
+ring conformation template = CC1CCCC1
+ 23   7   5   3 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+  5   7   9  27 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+ 29  10   8   6 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  7   9  10  29 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.02
+Title = cyclohexane
+Generated fragment C1CCCCC1
+Library fragment = C1CCCCC1
+ring conformation template = C1CCCCC1
+num confs = 1
+elapsed time (s) = 0.05
+Title = methylcyclohexane
+Library fragment = CC1CCCCC1
+Library fragment = CC
+Library fragment = CC1CCCCC1
+ring conformation template = CC1CCCCC1
+num confs = 1
+elapsed time (s) = 0.02
+Title = cis-1,2-dimethylcyclohexane
+Library fragment = C[C@@H]1CCCC[C@@H]1C
+Library fragment = CC
+Library fragment = CC
+Library fragment = C[C@@H]1CCCC[C@@H]1C
+ring conformation template = C[C@@H]1CCCC[C@@H]1C
+num confs = 1
+elapsed time (s) = 0.01
+Title = trans-1,4-dimethylcyclohexane
+Library fragment = CC1CCC(CC1)C
+Library fragment = CC
+Library fragment = CC
+Library fragment = CC1CCC(CC1)C
+ring conformation template = CC1CCC(CC1)C
+num confs = 1
+elapsed time (s) = 0.03
+Title = ethene
+Library fragment = C=C
+num confs = 1
+elapsed time (s) = 0.00
+Title = propene
+Library fragment = CC=C
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-butene
+Library fragment = CCC=C
+  3   4   2   1 [C:1]=[C:2][CH2:3][CH3:4]
+  C-  C-  C=  C 0 180 90 -90
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-pentene
+Library fragment = CCCC=C
+ 12   4   2   1 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  2   4   5  14 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = Z-2-pentene
+Library fragment = CCC=CC
+  1   2   5   4 [C:1]=[C:2][CH2:3][CH3:4]
+  C=  C-  C-  C 0 180 90 -90
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-methyl-1-butene
+Library fragment = CC(C)C=C
+ 15   5   2   1 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methyl-2-butene
+Library fragment = CC=C(C)C
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-hexene
+Library fragment = CCCCC=C
+ 13   4   2   1 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 17   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 17   6   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methyl-1-pentene
+Library fragment = CCCC(=C)C
+ 15   5   2   1 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  2   5   6  17 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-heptene
+Library fragment = CCCCCC=C
+ 14   4   2   1 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 18   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 20   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  4   6   7  20 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = E-2-heptene
+Library fragment = CCCCC=CC
+ 16   5   2   1 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  2   5   7  20 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+ 20   7   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1-octene
+Generated fragment CCCCCCC=C
+ 15   4   2   1 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 19   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 21   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 23   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 23   8   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.38
+Title = 1-nonene
+Generated fragment CCCCCCCC=C
+ 16   4   2   1 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 20   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 22   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 26   9   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  6   8   9  26 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.53
+Title = 1,3-butadiene
+Library fragment = C=CC=C
+  1   3   4   2 [C:1]=[C:2]-[C:3]=[C:4]
+  C=  C-  C=  C 180 40 -40
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methyl-1,3-butadiene
+Library fragment = CC(=C)C=C
+  2   4   3   1 [C:1]=[C:2]-[C:3]=[C:4]
+  C=  C-  C=  C 180 40 -40
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,3-methyl-1,3-butadiene
+Generated fragment CC(=C)C(=C)C
+  1   3   4   2 [C:1]=[C:2]-[C:3]=[C:4]
+  C=  C-  C=  C 180 40 -40
+num confs = 1
+elapsed time (s) = 0.09
+Title = 1,4-pentadiene
+Generated fragment C=CCC=C
+ 12   5   3   1 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 12   5   4   2 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.10
+Title = 1,5-hexadiene
+Generated fragment C=CCCC=C
+ 13   5   3   1 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 15   6   4   2 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  3   5   6  15 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.16
+Title = cyclopentene
+Generated fragment C1CC=CC1
+Library fragment = C1CC=CC1
+ring conformation template = C1CC=CC1
+num confs = 1
+elapsed time (s) = 0.01
+Title = cyclohexene
+Generated fragment C1CCC=CC1
+Library fragment = C1CCC=CC1
+ring conformation template = C1CCC=CC1
+num confs = 1
+elapsed time (s) = 0.03
+Title = 1-methyl-cyclohexene
+Library fragment = CC1=CCCCC1
+Library fragment = C[CH2]
+Library fragment = CC1=CCCCC1
+ring conformation template = CC1=CCCCC1
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1,3,5-cycloheptatriene
+Generated fragment C1C=CC=CC=C1
+Library fragment = C1C=CC=CC=C1
+ring conformation template = C1C=CC=CC=C1
+num confs = 1
+elapsed time (s) = 0.06
+Title = propyne
+Library fragment = CC#C
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-butyne
+Library fragment = CCC#C
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-pentyne
+Generated fragment CCCC#C
+ 12   5   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.03
+Title = 1-hexyne
+Generated fragment CCCCC#C
+ 15   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 15   6   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.09
+Title = 1-heptyne
+Generated fragment CCCCCC#C
+ 16   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 18   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 18   7   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.16
+Title = 1-octyne
+Generated fragment CCCCCCC#C
+ 17   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 19   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 21   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 21   8   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.24
+Title = tetrafluoromethane
+Generated fragment C(F)(F)(F)F
+num confs = 1
+elapsed time (s) = 0.00
+Title = chloromethane
+Generated fragment CCl
+num confs = 1
+elapsed time (s) = 0.00
+Title = dichloromethane
+Generated fragment C(Cl)Cl
+num confs = 1
+elapsed time (s) = 0.00
+Title = trichloromethane
+Generated fragment C(Cl)(Cl)Cl
+num confs = 1
+elapsed time (s) = 0.00
+Title = tetrachloromethane
+Generated fragment C(Cl)(Cl)(Cl)Cl
+num confs = 1
+elapsed time (s) = 0.00
+Title = chloroethane
+Library fragment = CCCl
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,1-dichloroethane
+Library fragment = CC(Cl)Cl
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,2-dichloroethane
+Generated fragment C(CCl)Cl
+  3   1   2   7 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+ Cl-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1,1,1-trichloroethane
+Library fragment = CC(Cl)(Cl)Cl
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,1,2-trichloroethane
+Generated fragment C(C(Cl)Cl)Cl
+  3   1   2   8 [*:1]~[^3:2]-[^3:3]~[*:4]
+ Cl-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1,1,2,2-tetrachloroethane
+Generated fragment C(C(Cl)Cl)(Cl)Cl
+  3   1   2   8 [*:1]~[^3:2]-[^3:3]~[*:4]
+ Cl-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.02
+Title = 1,1,1,2-tetrachloroethane
+Generated fragment C(C(Cl)(Cl)Cl)Cl
+  3   1   2   4 [*:1]~[^3:2]-[^3:3]~[*:4]
+ Cl-  C-  C- Cl 180 60 -60 40 -40 80 -80 -160 160
+Symmetric Bond =   1   2
+num confs = 1
+elapsed time (s) = 0.01
+Title = pentachloroethane
+Generated fragment C(C(Cl)(Cl)Cl)(Cl)Cl
+  8   1   2   5 [*:1]~[C^3H0:2]-[C^3H0,C^3H1:3]~[*:4]
+  H-  C-  C- Cl 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+Symmetric Bond =   1   2
+num confs = 1
+elapsed time (s) = 0.02
+Title = 1-chloropropane
+Library fragment = CCCCl
+  1   2   3  10 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-chloropropane
+Library fragment = CC(C)Cl
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,2-dichloropropane
+Library fragment = CC(CCl)Cl
+  1   3   2   9 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,3-dichloropropane
+Generated fragment C(CCl)CCl
+  3   1   2   8 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  2   1   3  10 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.04
+Title = 1-chlorobutane
+Library fragment = CCCCCl
+  1   2   3  11 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  2   3   4  13 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-chlorobutane
+Generated fragment CCC(C)Cl
+  1   3   4  14 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.04
+Title = 2-chloro-2-methylpropane
+Library fragment = CCC(C)(C)Cl
+  2   5   4   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,4-dichlorobutane
+Generated fragment C(CCCl)CCl
+  3   1   2   9 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  2   1   3  11 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  1   2   4  13 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.07
+Title = 1-chloropentane
+Library fragment = CCCCCCl
+ 12   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   4  14 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  3   4   5  16 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-chlorohexane
+Library fragment = CCCCCCCl
+ 13   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   4  15 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  3   4   5  17 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  4   5   6  19 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1-chloroheptane
+Generated fragment CCCCCCCCl
+ 14   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 16   4   3   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  3   4   5  18 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  4   5   6  20 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  5   6   7  22 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.28
+Title = 1,1-dichloroethene
+Library fragment = C=C(Cl)Cl
+num confs = 1
+elapsed time (s) = 0.00
+Title = Z-1,2-dichloroethene
+Generated fragment C(=CCl)Cl
+num confs = 1
+elapsed time (s) = 0.01
+Title = E-1,2-dichloroethene
+Library fragment = C(=CCl)Cl
+num confs = 1
+elapsed time (s) = 0.00
+Title = trichloroethene
+Generated fragment C(=C(Cl)Cl)Cl
+num confs = 1
+elapsed time (s) = 0.01
+Title = tetrachloroethene
+Generated fragment C(=C(Cl)Cl)(Cl)Cl
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3-chloropropene
+Generated fragment C=CCCl
+  1   2   3   8 [*:1]~[^2:2]-[^3:3]~[*:4]
+  C=  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.03
+Title = bromomethane
+Generated fragment CBr
+num confs = 1
+elapsed time (s) = 0.00
+Title = dibromomethane
+Generated fragment C(Br)Br
+num confs = 1
+elapsed time (s) = 0.00
+Title = tribromomethane
+Generated fragment C(Br)(Br)Br
+num confs = 1
+elapsed time (s) = 0.00
+Title = bromoethane
+Library fragment = CCBr
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,2-dibromoethane
+Generated fragment C(CBr)Br
+  3   1   2   7 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+ Br-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1-bromopropane
+Generated fragment CCCBr
+  1   2   3  10 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.02
+Title = 2-bromopropane
+Generated fragment CC(C)Br
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1-bromobutane
+Generated fragment CCCCBr
+  1   2   3  11 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  2   3   4  13 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.07
+Title = 1-bromo-2-methylpropane
+Generated fragment CC(C)CBr
+  1   4   3   5 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C- Br 60 -60
+num confs = 1
+elapsed time (s) = 0.04
+Title = 2-bromo-2-methylpropane
+Generated fragment CC(C)(C)Br
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1-bromopentane
+Generated fragment CCCCCBr
+ 12   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   4  14 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  3   4   5  16 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.11
+Title = 1-bromohexane
+Generated fragment CCCCCCBr
+ 13   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   4  15 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  3   4   5  17 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  4   5   6  19 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.18
+Title = 1-bromoheptane
+Generated fragment CCCCCCCBr
+ 14   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 16   4   3   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  3   4   5  18 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  4   5   6  20 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  5   6   7  22 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.29
+Title = 1-bromooctane
+Generated fragment CCCCCCCCBr
+ 15   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 17   4   3   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  3   4   5  19 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  4   5   6  21 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  5   6   7  23 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  6   7   8  25 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.39
+Title = iodomethane
+Generated fragment CI
+num confs = 1
+elapsed time (s) = 0.00
+Title = iodoethane
+Library fragment = CCI
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-iodopropane
+Library fragment = CCCI
+  1   2   3  10 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-iodobutane
+Library fragment = CCCCI
+  1   2   3  11 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  2   3   4  13 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-iodopentane
+Generated fragment CCCCCI
+ 12   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   4  14 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  3   4   5  16 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.11
+Title = 1-iodohexane
+Generated fragment CCCCCCI
+ 13   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   4  15 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  3   4   5  17 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  4   5   6  19 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.18
+Title = 1-iodoheptane
+Generated fragment CCCCCCCI
+ 14   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 16   4   3   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  3   4   5  18 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  4   5   6  20 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  5   6   7  22 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.28
+Title = diethylether
+Library fragment = CCO
+Library fragment = COC
+Library fragment = CCO
+  4   5   3   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  O-  C-  C 180 60 -60
+  3   5   4   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  O-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = di-n-propylether
+Library fragment = CCCO
+Library fragment = COC
+Library fragment = CCCO
+ 18   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 20   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  6   7   5   3 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  O-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+  5   7   6   4 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  O-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = diisopropylether
+Library fragment = CC(C)O
+Library fragment = COC
+Library fragment = CC(C)O
+  6   7   5  20 [CX4H:2]([H:1])[O:3][CX4H:4]
+  C-  O-  C-  H 0 30 -30 60 -60 180
+  5   7   6  21 [CX4H:2]([H:1])[O:3][CX4H:4]
+  C-  O-  C-  H 0 30 -30 60 -60 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = di-n-butylether
+Library fragment = CCCCO
+Library fragment = COC
+Library fragment = CCCCO
+ 20   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 22   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 26   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  8   9   7   5 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  O-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+  7   9   8   6 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  O-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.07
+Title = tetrahydrofuran
+Generated fragment C1CCOC1
+Library fragment = C1CCOC1
+ring conformation template = C1CCOC1
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-methyltetrahydrofuran
+Library fragment = C[C@@H]1CCCO1
+Library fragment = CC
+Library fragment = C[C@@H]1CCCO1
+ring conformation template = C[C@@H]1CCCO1
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2,5-dimethyltetrahydrofuran
+Generated fragment C[C@H]1CC[C@@H](O1)C
+Library fragment = CC
+Library fragment = CC
+Library fragment = C[C@H]1CC[C@@H](O1)C
+ring conformation template = C[C@H]1CC[C@@H](O1)C
+num confs = 1
+elapsed time (s) = 0.06
+Title = tetrahydropyran
+Generated fragment C1CCOCC1
+Library fragment = C1CCOCC1
+ring conformation template = C1CCOCC1
+num confs = 1
+elapsed time (s) = 0.04
+Title = 1,4-dioxane
+Generated fragment C1COCCO1
+Library fragment = C1COCCO1
+ring conformation template = C1COCCO1
+num confs = 1
+elapsed time (s) = 0.02
+Title = isobutraldehyde
+Generated fragment CC(C)(C)C=O
+  2   5   1   7 [CH3:1][C:2]([CH3])([CH3])-[*:3][*:4]
+  C-  C-  C-  H 0 30 60
+Symmetric Bond =   1   5
+num confs = 1
+elapsed time (s) = 0.04
+Title = formaldehyde
+Generated fragment C=O
+num confs = 1
+elapsed time (s) = 0.00
+Title = acetaldehyde
+Library fragment = CC=O
+num confs = 1
+elapsed time (s) = 0.00
+Title = priopionaldehyde
+Library fragment = CCC=O
+  9   3   1   4 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = butraldehyde
+Generated fragment CCCC=O
+ 10   3   1   5 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 12   4   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.07
+Title = pentanal
+Generated fragment CCCCC=O
+ 11   3   1   6 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 15   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 15   5   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.12
+Title = hexanal
+Generated fragment CCCCCC=O
+ 12   3   1   7 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 16   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 18   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 18   6   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.20
+Title = heptanal
+Generated fragment CCCCCCC=O
+ 13   3   1   8 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 17   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 19   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 21   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 21   7   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.28
+Title = octanal
+Generated fragment CCCCCCCC=O
+ 14   3   1   9 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 18   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 20   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 22   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   8   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.42
+Title = nonanal
+Generated fragment CCCCCCCCC=O
+ 15   3   1  10 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 19   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 21   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 23   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 25   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 27   9   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 27   9   8   6 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.61
+Title = E-2-butenal
+Library fragment = CC=CC=O
+  2   1   3   8 [*:1]~[^2:2]-[^2:3]~[*:4]
+  C=  C-  C-  H 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+num confs = 1
+elapsed time (s) = 0.00
+Title = E-2-hexenal
+Generated fragment CCCC=CC=O
+  2   1   3  10 [*:1]~[^2:2]-[^2:3]~[*:4]
+  C=  C-  C-  H 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+ 14   5   2   1 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  2   5   6  16 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.19
+Title = E-2-octenal
+Generated fragment CCCCCC=CC=O
+  2   1   3  12 [*:1]~[^2:2]-[^2:3]~[*:4]
+  C=  C-  C-  H 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+ 16   5   2   1 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 20   7   5   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 22   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  5   7   8  22 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.42
+Title = 2-propanone
+Library fragment = CC(=O)C
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-butanone
+Library fragment = CCC(=O)C
+ 12   4   1   2 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-pentanone
+Library fragment = CCCC(=O)C
+ 13   4   1   2 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  1   4   5  15 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-pentanone
+Library fragment = CCC(=O)CC
+  5   1   4  13 [*:1]~[^2:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  4   1   5  15 [*:1]~[^2:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-methyl-2-butanone
+Library fragment = CC(C)C(=O)C
+ 16   5   1   2 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-hexanone
+Library fragment = CCCCC(=O)C
+ 14   4   1   2 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 18   6   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 18   6   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-methyl-2-pentanone
+Library fragment = CC(C)CC(=O)C
+ 17   5   1   2 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  3   6   5   1 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-heptanone
+Library fragment = CCCCCC(=O)C
+ 15   4   1   2 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 19   6   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 21   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  4   6   7  21 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-heptanone
+Library fragment = CCCC(=O)CCC
+  5   1   4  15 [*:1]~[^2:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  4   1   5  17 [*:1]~[^2:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  1   4   6  19 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  1   5   7  21 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-octanone
+Library fragment = CCCCCCC(=O)C
+ 16   4   1   2 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 20   6   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 22   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   8   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-nonanone
+Generated fragment CCCCCCCC(=O)C
+ 17   4   1   2 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 21   6   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 23   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 25   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 27   9   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  6   8   9  27 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.58
+Title = 5-nonanone
+Generated fragment CCCCC(=O)CCCC
+  5   1   4  17 [*:1]~[^2:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  4   1   5  19 [*:1]~[^2:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  1   4   8  25 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  1   5   9  27 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+ 25   8   6   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 27   9   7   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.70
+Title = 2-decanone
+Library fragment = CCCCCCCCC(=O)C
+ 18   4   1   2 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 22   6   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 26   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 28   9   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 30  10   8   6 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 30  10   9   7 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.11
+Title = 2-undecanone
+Generated fragment CCCCCCCCCC(=O)C
+ 19   4   1   2 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 23   6   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 25   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 27   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 29   9   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 31  10   8   6 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 33  11   9   7 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  8  10  11  33 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+fragments = 2
+num confs = 1
+elapsed time (s) = 1.07
+Title = cyclopentanone
+Generated fragment C1CCC(=O)C1
+Library fragment = C1CCC(=O)C1
+ring conformation template = C1CCC(=O)C1
+num confs = 1
+elapsed time (s) = 0.02
+Title = cyclohexanone
+Generated fragment C1CCC(=O)CC1
+Library fragment = C1CCC(=O)CC1
+ring conformation template = C1CCC(=O)CC1
+num confs = 1
+elapsed time (s) = 0.07
+Title = methylformate
+Library fragment = CO
+Library fragment = COC=O
+  2   4   1   3 [O:1]=[C:2]-[O:3][CH3:4]
+  C-  O-  C=  O 0
+num confs = 1
+elapsed time (s) = 0.00
+Title = ethylformate
+Library fragment = CCO
+Library fragment = COC=O
+  3   5   1   4 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+  2   3   5   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-propylformate
+Library fragment = CCCO
+Library fragment = COC=O
+  4   6   1   5 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+  2   3   4  13 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  3   4   6   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = isopropylformate
+Library fragment = CC(C)O
+Library fragment = COC=O
+  4   6   1   5 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+ 14   4   6   1 O=[C:1][O:2][CH:3]([#6])([#6])[#1:4]
+  H-  C-  O-  C 0 30 -30 60 60 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = isobutylformate
+Library fragment = CC(C)CO
+Library fragment = COC=O
+  4   7   1   6 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+  2   5   4   7 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  O 60 -60
+  5   4   7   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = isoamylformate
+Library fragment = CC(C)CCO
+Library fragment = COC=O
+  5   8   1   7 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+  6   4   5  18 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  5   4   6   2 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+  4   5   8   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = methylacetate
+Library fragment = CO
+Library fragment = CC(=O)OC
+  4   1   5   3 [O:1]=[C:2]-[O:3][CH3:4]
+  O=  C-  O-  C 0
+num confs = 1
+elapsed time (s) = 0.00
+Title = ethylacetate
+Library fragment = CCO
+Library fragment = CC(=O)OC
+  4   6   1   5 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+  3   4   6   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-propylacetate
+Library fragment = CCCO
+Library fragment = CC(=O)OC
+  5   7   1   6 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+ 16   5   4   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  4   5   7   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = isopropylacetate
+Library fragment = CC(C)O
+Library fragment = CC(=O)OC
+  5   7   1   6 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+ 17   5   7   1 O=[C:1][O:2][CH:3]([#6])([#6])[#1:4]
+  H-  C-  O-  C 0 30 -30 60 60 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-butylacetate
+Library fragment = CCCCO
+Library fragment = CC(=O)OC
+  6   8   1   7 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+ 17   5   4   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  4   5   6  19 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  5   6   8   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = isobutylacetate
+Library fragment = CC(C)CO
+Library fragment = CC(=O)OC
+  5   8   1   7 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+  8   5   6   3 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  O-  C-  C-  C 60 -60
+  6   5   8   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-pentylacetate
+Library fragment = CCCCCO
+Library fragment = CC(=O)OC
+  7   9   1   8 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+ 18   5   4   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 20   6   5   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  5   6   7  22 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  6   7   9   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = isoamylacetate
+Library fragment = CC(C)CCO
+Library fragment = CC(=O)OC
+  6   9   1   8 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+  7   5   6  21 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  6   5   7   3 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+  5   6   9   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = n-hexylacetate
+Library fragment = CCCCCCO
+Library fragment = CC(=O)OC
+  8  10   1   9 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+ 19   5   4   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 21   6   5   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  5   6   7  23 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  6   7   8  25 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  7   8  10   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.04
+Title = methylpropanoate
+Library fragment = CO
+Library fragment = CCC(=O)OC
+  5   1   4  13 [*:1]~[^2:2]-[^3:3]~[*:4]
+  O=  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  5   1   6   3 [O:1]=[C:2]-[O:3][CH3:4]
+  O=  C-  O-  C 0
+num confs = 1
+elapsed time (s) = 0.00
+Title = ethylpropanoate
+Library fragment = CCO
+Library fragment = CCC(=O)OC
+  6   1   4  14 [*:1]~[^2:2]-[^3:3]~[*:4]
+  O=  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  6   1   7   5 [O:1]=[C:2][O:3][C:4]
+  O=  C-  O-  C 0 30 -30 60 -60
+  1   7   5   3 O=[C:1][O:2][CH2:3][#6:4]
+  C-  O-  C-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = n-propylpropanoate
+Library fragment = CCCO
+Library fragment = CCC(=O)OC
+  7   1   4  15 [*:1]~[^2:2]-[^3:3]~[*:4]
+  O=  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  6   8   1   7 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+ 19   6   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  5   6   8   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = n-pentylpropanoate
+Library fragment = CCCCO
+Library fragment = CCC(=O)OC
+  8   1   4  16 [*:1]~[^2:2]-[^3:3]~[*:4]
+  O=  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  7   9   1   8 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+ 20   6   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 22   7   6   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  6   7   9   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.04
+Title = methylbutanoate
+Library fragment = CO
+Library fragment = CCCC(=O)OC
+ 14   4   1   6 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  6   1   7   3 [O:1]=[C:2]-[O:3][CH3:4]
+  O=  C-  O-  C 0
+  1   4   5  16 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = ethylbutanoate
+Library fragment = CCO
+Library fragment = CCCC(=O)OC
+  7   1   4  15 [*:1]~[^2:2]-[^3:3]~[*:4]
+  O=  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  7   1   8   6 [O:1]=[C:2][O:3][C:4]
+  O=  C-  O-  C 0 30 -30 60 -60
+  1   4   5  17 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  1   8   6   3 O=[C:1][O:2][CH2:3][#6:4]
+  C-  O-  C-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = n-propylbutanoate
+Library fragment = CCCO
+Library fragment = CCCC(=O)OC
+  8   1   4  16 [*:1]~[^2:2]-[^3:3]~[*:4]
+  O=  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  8   1   9   7 [O:1]=[C:2][O:3][C:4]
+  O=  C-  O-  C 0 30 -30 60 -60
+  1   4   5  18 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+ 22   7   6   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  1   9   7   6 O=[C:1][O:2][CH2:3][#6:4]
+  C-  O-  C-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.04
+Title = methylpentanoate
+Library fragment = CO
+Library fragment = CCCCC(=O)OC
+ 15   4   1   7 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  7   1   8   3 [O:1]=[C:2]-[O:3][CH3:4]
+  O=  C-  O-  C 0
+  1   4   6  19 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+ 19   6   5   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = ethylpentanoate
+Library fragment = CCO
+Library fragment = CCCCC(=O)OC
+ 16   4   1   8 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  8   1   9   7 [O:1]=[C:2][O:3][C:4]
+  O=  C-  O-  C 0 30 -30 60 -60
+  1   4   6  20 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+ 20   6   5   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  1   9   7   3 O=[C:1][O:2][CH2:3][#6:4]
+  C-  O-  C-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.04
+Title = methylhexanoate
+Library fragment = CO
+Library fragment = CCCCCC(=O)OC
+ 16   4   1   8 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  8   1   9   3 [O:1]=[C:2]-[O:3][CH3:4]
+  O=  C-  O-  C 0
+ 20   6   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 22   7   5   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  4   6   7  22 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = ethylhexanoate
+Library fragment = CCO
+Library fragment = CCCCCC(=O)OC
+ 17   4   1   9 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  9   1  10   8 [O:1]=[C:2][O:3][C:4]
+  O=  C-  O-  C 0 30 -30 60 -60
+  1   4   6  21 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+ 23   7   5   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  4   6   7  23 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  1  10   8   3 O=[C:1][O:2][CH2:3][#6:4]
+  C-  O-  C-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.13
+Title = isobutylisobutanoate
+Library fragment = CC(C)CO
+Library fragment = CC(C)CC(=O)OC
+ 10   1   6  24 [*:1]~[^2:2]-[^3:3]~[*:4]
+  O=  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 10   1  11   7 [O:1]=[C:2][O:3][C:4]
+  O=  C-  O-  C 0 30 -30 60 -60
+  1   6   8   2 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+ 11   7   9   4 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  O-  C-  C-  C 60 -60
+  1  11   7   9 O=[C:1][O:2][CH2:3][#6:4]
+  C-  O-  C-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.03
+Title = propanitrile
+Library fragment = CCC#N
+num confs = 1
+elapsed time (s) = 0.00
+Title = butanenitrile
+Library fragment = CCCC#N
+ 11   4   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = pentanenitrile
+Library fragment = CCCCC#N
+ 14   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 14   5   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = ammonia
+Generated fragment N
+num confs = 1
+elapsed time (s) = 0.00
+Title = methylamine
+Library fragment = CN
+Library fragment = CN
+num confs = 1
+elapsed time (s) = 0.00
+Title = ethylamine
+Library fragment = CCN
+Library fragment = CN
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-propylamine
+Library fragment = CCCN
+Library fragment = CN
+  1   2   3  10 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-butylamine
+Library fragment = CCCCN
+Library fragment = CN
+ 11   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   4  13 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-pentylamine
+Library fragment = CCCCCN
+Library fragment = CN
+ 12   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   4  14 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  3   4   5  16 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = n-hexylamine
+Library fragment = CCCCCCN
+Library fragment = CN
+ 13   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 15   4   3   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  3   4   5  17 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  4   5   6  19 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = n-heptylamine
+Library fragment = CCCCCCCN
+Library fragment = CN
+ 14   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 16   4   3   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  3   4   5  18 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  4   5   6  20 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  5   6   7  22 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = n-octylamine
+Library fragment = CCCCCCCCN
+Library fragment = CN
+ 15   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 17   4   3   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 19   5   4   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  4   5   6  21 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  5   6   7  23 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  6   7   8  25 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = cyclohexylamine
+Library fragment = C1CCC(CC1)N
+Library fragment = CN
+Library fragment = C1CCC(CC1)N
+ring conformation template = C1CCC(CC1)N
+num confs = 1
+elapsed time (s) = 0.02
+Title = dimethylamine
+Library fragment = CN
+Library fragment = CNC
+Library fragment = CN
+num confs = 1
+elapsed time (s) = 0.00
+Title = diethylamine
+Library fragment = CCN
+Library fragment = CNC
+Library fragment = CCN
+ 16   5   3   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  N-  C-  C 180 60 -60
+ 16   5   4   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  N-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = di-n-propylamine
+Library fragment = CCCN
+Library fragment = CNC
+Library fragment = CCCN
+ 18   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 20   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 22   7   5   3 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  N-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+ 22   7   6   4 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  N-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = diisopropylamine
+Library fragment = CC(C)N
+Library fragment = CNC
+Library fragment = CC(C)N
+ 22   7   5   1 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  N-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+ 22   7   6   3 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  N-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = trimethylamine
+Library fragment = CN
+Library fragment = CN(C)C
+Library fragment = CN
+Library fragment = CN
+num confs = 1
+elapsed time (s) = 0.00
+Title = triethylamine
+Library fragment = CCN
+Library fragment = CN(C)C
+Library fragment = CCN
+Library fragment = CCN
+  5   7   4   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  N-  C-  C 180 60 -60
+  4   7   5   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  N-  C-  C 180 60 -60
+  4   7   6   3 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  N-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = nitromethane
+Library fragment = C[NH2+]
+Generated fragment C[N+](=O)[O-]
+num confs = 1
+elapsed time (s) = 0.00
+Title = nitroethane
+Library fragment = CC[NH2+]
+Library fragment = C[N+](=O)[O-]
+  9   2   3   4 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  N-  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+Symmetric Bond =   2   3
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-nitropropane
+Library fragment = CCC[NH2+]
+Library fragment = C[N+](=O)[O-]
+  1   2   3  12 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+ 12   3   4   5 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  N-  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+Symmetric Bond =   3   4
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-nitropropane
+Library fragment = CC(C)[NH2+]
+Library fragment = C[N+](=O)[O-]
+ 13   3   4   5 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  N-  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+Symmetric Bond =   3   4
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-nitrobutane
+Library fragment = CCCC[NH2+]
+Library fragment = C[N+](=O)[O-]
+ 13   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   4  15 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+ 15   4   5   6 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  N-  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+Symmetric Bond =   4   5
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-nitropentane
+Library fragment = CCCCC[NH2+]
+Library fragment = C[N+](=O)[O-]
+ 14   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   4  16 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  3   4   5  18 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+ 18   5   6   7 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  N-  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+Symmetric Bond =   5   6
+num confs = 1
+elapsed time (s) = 0.01
+Title = n-butylacetamide
+Library fragment = CCCCN
+Library fragment = CC(=O)NC
+  6   7   1   8 [O:1]=[C:2][NX3H:3][C,N:4]
+  C-  N-  C=  O 0
+ 17   5   4   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 19   6   5   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  5   6   7   1 O=[C:1][NH:2][CX4H2:3][C:4]
+  C-  C-  N-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = N,N-dimethylformamide
+Library fragment = CN
+Library fragment = CN(C)C=O
+Library fragment = CN
+  2   4   1   5 [O:1]=[C:2][NX3H0:3][C:4]
+  C-  N-  C=  O 0 180 30 -30 150 -150
+num confs = 1
+elapsed time (s) = 0.00
+Title = aceticacid
+Library fragment = CC(=O)O
+num confs = 1
+elapsed time (s) = 0.00
+Title = propanoicacid
+Library fragment = CCC(=O)O
+  9   3   1   4 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = butanoicacid
+Library fragment = CCCC(=O)O
+ 10   3   1   5 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  1   3   4  12 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = pentanoicacid
+Library fragment = CCCCC(=O)O
+ 11   3   1   6 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 15   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 15   5   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-methylbutanoicacid
+Generated fragment CC(C)CC(=O)O
+ 14   4   1   6 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  2   5   4   1 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+num confs = 1
+elapsed time (s) = 0.14
+Title = hexanoicacid
+Library fragment = CCCCCC(=O)O
+ 12   3   1   7 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 16   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 18   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  3   5   6  18 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = water
+Generated fragment O
+num confs = 1
+elapsed time (s) = 0.00
+Title = methanol
+Library fragment = CO
+Library fragment = CO
+num confs = 1
+elapsed time (s) = 0.00
+Title = ethanol
+Library fragment = CCO
+Library fragment = CO
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-propanol
+Library fragment = CCCO
+Library fragment = CO
+  1   2   3  10 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-propanol
+Library fragment = CC(C)O
+Library fragment = CO
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-butanol
+Library fragment = CCCCO
+Library fragment = CO
+ 11   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   4  13 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methyl-1-propanol
+Library fragment = CC(C)CO
+Library fragment = CO
+  1   4   3   5 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  O 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-butanol
+Library fragment = CCC(C)O
+Library fragment = CO
+ 14   4   3   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methyl-2-propanol
+Library fragment = CC(C)(C)O
+Library fragment = CO
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-pentanol
+Library fragment = CCCCCO
+Library fragment = CO
+ 12   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   4  14 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  3   4   5  16 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-pentanol
+Library fragment = CCCC(C)O
+Library fragment = CO
+ 15   4   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 15   4   5   2 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-pentanol
+Library fragment = CCC(CC)O
+Library fragment = CO
+ 17   5   3   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  C-  C-  C 180 60 -60
+ 17   5   4   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methyl-1-butanol
+Library fragment = CCC(C)CO
+Library fragment = CO
+ 17   5   3   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  C-  C-  C 180 60 -60
+  2   5   4  15 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-methyl-1-butanol
+Library fragment = CC(C)CCO
+Library fragment = CO
+  5   3   4  15 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  1   5   3   4 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methyl-2-butanol
+Library fragment = CCC(C)(C)O
+Library fragment = CO
+  2   5   4   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-hexanol
+Library fragment = CCCCCCO
+Library fragment = CO
+ 13   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 15   4   3   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  3   4   5  17 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  4   5   6  19 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3-hexanol
+Library fragment = CCCC(CC)O
+Library fragment = CO
+ 18   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 20   6   4   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  C-  C-  C 180 60 -60
+ 20   6   5   3 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-methyl-2-pentanol
+Library fragment = CCCC(C)(C)O
+Library fragment = CO
+ 19   5   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   6   5  19 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-methyl-2-pentanol
+Library fragment = CC(C)CC(C)O
+Library fragment = CO
+  6   4   5   1 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+ 17   4   6   3 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-methyl-3-pentanol
+Library fragment = CCC(C(C)C)O
+Library fragment = CO
+ 20   6   4   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  C-  C-  C 180 60 -60
+ 20   6   5   2 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1-heptanol
+Library fragment = CCCCCCCO
+Library fragment = CO
+ 14   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 16   4   3   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  3   4   5  18 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  4   5   6  20 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  5   6   7  22 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1-octanol
+Library fragment = CCCCCCCCO
+Library fragment = CO
+ 15   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 17   4   3   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 19   5   4   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  4   5   6  21 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  5   6   7  23 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  6   7   8  25 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1-nonanol
+Library fragment = CCCCCCCCCO
+Library fragment = CO
+ 16   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 18   4   3   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 20   5   4   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  4   5   6  22 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  5   6   7  24 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  6   7   8  26 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  7   8   9  28 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.03
+Title = 1-decanol
+Library fragment = CCCCCCCCCCO
+Library fragment = CO
+ 17   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 19   4   3   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 21   5   4   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 23   6   5   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  5   6   7  25 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  6   7   8  27 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  7   8   9  29 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  8   9  10  31 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.10
+Title = cyclopentanol
+Library fragment = C1CCC(C1)O
+Library fragment = CO
+Library fragment = C1CCC(C1)O
+ring conformation template = C1CCC(C1)O
+num confs = 1
+elapsed time (s) = 0.02
+Title = cyclohexanol
+Library fragment = C1CCC(CC1)O
+Library fragment = CO
+Library fragment = C1CCC(CC1)O
+ring conformation template = C1CCC(CC1)O
+num confs = 1
+elapsed time (s) = 0.02
+Title = cycloheptanol
+Library fragment = C1CCCC(CC1)O
+Library fragment = CO
+Library fragment = C1CCCC(CC1)O
+ring conformation template = C1CCCC(CC1)O
+num confs = 1
+elapsed time (s) = 0.07
+Title = 2-propene-1-ol
+Library fragment = C=CCO
+Library fragment = CO
+  1   2   3   8 [*:1]~[^2:2]-[^3:3]~[*:4]
+  C=  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methoxyethanol
+Library fragment = CO
+Library fragment = COC
+Library fragment = C(CO)O
+Library fragment = CO
+ 11   3   2   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  O 180 60 -60
+ 11   3   5   1 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-ethoxyethanol
+Library fragment = CCO
+Library fragment = COC
+Library fragment = C(CO)O
+Library fragment = CO
+  4   6   2   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  O-  C-  C 180 60 -60
+ 14   4   3   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  O 180 60 -60
+ 14   4   6   2 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-propoxyethanol
+Library fragment = CCCO
+Library fragment = COC
+Library fragment = C(CO)O
+Library fragment = CO
+ 13   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   7   5 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+ 17   5   4   6 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  O 180 60 -60
+  3   7   5  17 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  O-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-butoxyethanol
+Library fragment = CCCCO
+Library fragment = COC
+Library fragment = C(CO)O
+Library fragment = CO
+ 14   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 16   4   3   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  3   4   8   6 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+ 20   6   5   7 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  O 180 60 -60
+  4   8   6  20 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  O-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.02
+Title = 2,2,2-trifluoroethanol
+Library fragment = C(C(F)(F)F)O
+Library fragment = CO
+  7   1   2   4 [F:1][C:2](F)(F)-[CX4:3][*:4]
+  H-  C-  C-  F 60
+Symmetric Bond =   1   2
+num confs = 1
+elapsed time (s) = 0.00
+Title = hexafluoropropene
+Generated fragment C(=C(F)F)(C(F)(F)F)F
+  4   1   3   7 [F:1][C:2](F)(F)-[CX3:3][*:4]
+  F-  C-  C-  F 0
+Symmetric Bond =   1   3
+num confs = 1
+elapsed time (s) = 0.05
+Title = N-methylpiperidine
+Library fragment = CN
+Library fragment = CN1CCCCC1
+Library fragment = CN1CCCCC1
+ring conformation template = CN1CCCCC1
+num confs = 1
+elapsed time (s) = 0.02
+Title = ethanethiol
+Library fragment = CCS
+Library fragment = CS
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-propanethiol
+Library fragment = CCCS
+Library fragment = CS
+  1   2   3  10 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-butanethiol
+Library fragment = CCCCS
+Library fragment = CS
+ 11   3   2   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  2   3   4  13 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = diethylsulfide
+Library fragment = CCS
+Library fragment = CSC
+Library fragment = CCS
+  4   5   3   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  S-  C-  C 180 60 -60
+  3   5   4   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  S-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = di-n-propylsulfide
+Library fragment = CCCS
+Library fragment = CSC
+Library fragment = CCCS
+ 18   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 20   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  6   7   5   3 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  S-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+  5   7   6   4 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  S-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = di-isopropylsulfide
+Library fragment = CC(C)S
+Library fragment = CSC
+Library fragment = CC(C)S
+  6   7   5   1 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  S-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+  5   7   6   3 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  S-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = diethyldisulfide
+Library fragment = CCS
+Library fragment = CSSC
+Library fragment = CCS
+  6   5   3   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  S-  S-  C-  C 180 60 -60
+  5   6   4   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  S-  S-  C-  C 180 60 -60
+  3   5   6   4 [*:1][S:2]-[S:3][*:4]
+  C-  S-  S-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = triethylphosphate
+Library fragment = CC[PH3]
+Library fragment = CP(=O)(C)C
+Library fragment = CC[PH3]
+Library fragment = CC[PH3]
+  5   8   4   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  P-  C-  C 180 60 -60
+  4   8   5   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  P-  C-  C 180 60 -60
+  4   8   6   3 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  P-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = N-acetylpryyolidine
+Library fragment = CC(=O)N1CCCC1
+Library fragment = C[CH2]
+Library fragment = CC(=O)N1CCCC1
+ring conformation template = CC(=O)N1CCCC1
+  4   7   1   8 [O:1]=[C:2][NX3H0:3][C:4]
+  C-  N-  C=  O 0 180 30 -30 150 -150
+num confs = 1
+elapsed time (s) = 0.01
+Title = morpholine
+Generated fragment C1COCCN1
+Library fragment = C1COCCN1
+ring conformation template = C1COCCN1
+num confs = 1
+elapsed time (s) = 0.03
+Title = N-methylmorpholine
+Library fragment = CN
+Library fragment = CN1CCOCC1
+Library fragment = CN1CCOCC1
+ring conformation template = CN1CCOCC1
+num confs = 1
+elapsed time (s) = 0.01
+Title = benzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = toluene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = ethylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]CC
+Library fragment = c1ccccc1
+  5   6   8   7 [cH]1[cH][cH][cH][cH:1][c:2]1-[CX4H2,CX4H:3][C,O,N:4]
+  c:  c-  C-  C 90 30 -30
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = o-xylene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = m-xylene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = p-xylene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = n-propylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]CCC
+Library fragment = c1ccccc1
+  5   6   8   9 [cH]1[cH][cH][cH][cH:1][c:2]1-[CX4H2,CX4H:3][C,O,N:4]
+  c:  c-  C-  C 90 30 -30
+  6   8   9  20 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  c-  C-  C-  H 180 60 -60
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = isopropylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]C(C)C
+Library fragment = c1ccccc1
+  5   6   9   7 [cH]1[cH][cH][cH][cH:1][c:2]1-[CX4H2,CX4H:3][C,O,N:4]
+  c:  c-  C-  C 90 30 -30
+Symmetric Bond =   6   9
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1,2,3-trimethylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,2,4-trimethylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,3,5-trimethylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-ethyltoluene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]CC
+Library fragment = c1ccccc1
+  4   6   9  20 [*:1][CH2:2][a:3][a:4]
+  c:  c-  C-  H 0 180 90 -90 45 -45 135 -135
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-ethyltoluene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]CC
+Library fragment = c1ccccc1
+  4   6   9   8 [C:1][CH2:2][c:3]([cH])[cH,n:4]
+  c:  c-  C-  C 90 -90 30 -30 150 -150 0 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = n-butylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]CCCC
+Library fragment = c1ccccc1
+ 10   8   6   5 [cH]1[cH][cH][cH][cH:1][c:2]1-[CX4H2,CX4H:3][C,O,N:4]
+  C-  C-  c:  c 90 30 -30
+  6   8  10  23 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  c-  C-  C-  H 180 60 -60
+ 23  10   9   7 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = isobutylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]CC(C)C
+Library fragment = c1ccccc1
+ 10   9   6   5 [cH]1[cH][cH][cH][cH:1][c:2]1-[CX4H2,CX4H:3][C,O,N:4]
+  C-  C-  c:  c 90 30 -30
+  6   9  10   7 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  c-  C-  C-  C 60 -60
+Symmetric Bond =   6   9
+num confs = 1
+elapsed time (s) = 0.01
+Title = sec-butylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]C(C)CC
+Library fragment = c1ccccc1
+  8  10   6   5 [cH]1[cH][cH][cH][cH:1][c:2]1-[CX4H2,CX4H:3][C,O,N:4]
+  C-  C-  c:  c 90 30 -30
+ 24  10   9   7 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  C-  C-  C 180 60 -60
+Symmetric Bond =   6  10
+num confs = 1
+elapsed time (s) = 0.01
+Title = tert-butylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]C(C)(C)C
+Library fragment = c1ccccc1
+  7  10   6   4 [CH3:1][C:2]([CH3])([CH3])-[*:3][*:4]
+  C-  C-  c:  c 0 30 60
+Symmetric Bond =   6  10
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-isopropyltoluene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C(C)C
+Library fragment = c1ccccc1
+  3   6  10  24 [c:1][c:2][CH:3]([CH3])([CH3])[H:4]
+  c:  c-  C-  H 90 -90 0 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = n-pentylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]CCCCC
+Library fragment = c1ccccc1
+ 10   8   6   5 [cH]1[cH][cH][cH][cH:1][c:2]1-[CX4H2,CX4H:3][C,O,N:4]
+  C-  C-  c:  c 90 30 -30
+  6   8  10  24 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  c-  C-  C-  H 180 60 -60
+ 26  11   9   7 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  8  10  11  26 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = n-hexylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]CCCCCC
+Library fragment = c1ccccc1
+ 10   8   6   5 [cH]1[cH][cH][cH][cH:1][c:2]1-[CX4H2,CX4H:3][C,O,N:4]
+  C-  C-  c:  c 90 30 -30
+ 25  10   8   6 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  c 180 60 -60
+ 27  11   9   7 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  8  10  12  29 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+ 29  12  11   9 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = biphenyl
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+  8  11  12   9 [cH]1[cH][cH][cH][cH:1][c:2]1-[c:3]([cH:4])[cH]
+  c:  c-  c:  c 0 180 90 -90
+Symmetric Bond =  11  12
+num confs = 1
+elapsed time (s) = 0.01
+Title = napthalene
+Library fragment = c1ccc2ccccc2c1
+Library fragment = c1ccc2ccccc2c1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-methylnapthalene
+Library fragment = c1ccc2ccccc2c1
+Library fragment = [c]C
+Library fragment = c1ccc2ccccc2c1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,3-dimethylnapthalene
+Library fragment = c1ccc2ccccc2c1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccc2ccccc2c1
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1,4-dimethylnapthalene
+Library fragment = c1ccc2ccccc2c1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccc2ccccc2c1
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2,3-dimethylnapthalene
+Library fragment = c1ccc2ccccc2c1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccc2ccccc2c1
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2,6-dimethylnapthalene
+Library fragment = c1ccc2ccccc2c1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccc2ccccc2c1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-ethylnapthalene
+Library fragment = c1ccc2ccccc2c1
+Library fragment = [c]CC
+Library fragment = c1ccc2ccccc2c1
+  7  10  12  23 [*:1][CH2:2][a:3][a:4]
+  c:  c-  C-  H 0 180 90 -90 45 -45 135 -135
+num confs = 1
+elapsed time (s) = 0.01
+Title = acenapthalene
+Library fragment = c1cc2cccc3c2c(c1)C=C3
+Library fragment = c1cc2cccc3c2c(c1)C=C3
+num confs = 1
+elapsed time (s) = 0.00
+Title = fluorobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = benzotrifluoride
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = chlorobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,2-dichlorobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,3-dichlorobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,4-dichlorobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,2,3-trichlorobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,2,4-trichlorobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,3,5-trichlorobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,2,3,4-tetrachlorobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,2,3,5-tetrachlorobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,2,4,5-tetrachlorobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-chlorotoluene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = bromobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 4-bromotoluene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = iodobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = anisole
+Library fragment = c1ccccc1
+Library fragment = [c]OC
+Library fragment = CO
+Library fragment = c1ccccc1
+  4   6   8   7 [cH:1][c:2]([cH])[O:3][CH3:4]
+  c:  c-  O-  C 0 180
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = ethylphenylether
+Library fragment = c1ccccc1
+Library fragment = [c]OC
+Library fragment = CCO
+Library fragment = c1ccccc1
+  4   6   9   8 [cH,n:1][c:2]([cH,n])[O:3][CH2:4]C
+  c:  c-  O-  C 0 180 30 -30 150 -150
+  6   9   8  18 [c:1][O:2][CX4:3][*:4]
+  c-  O-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+Symmetric Bond =   6   9
+num confs = 1
+elapsed time (s) = 0.01
+Title = benzaldehyde
+Library fragment = c1ccccc1
+Library fragment = [c]C=O
+Library fragment = c1ccccc1
+  4   6   7  14 [*:1]~[^2:2]-[^2:3]~[*:4]
+  c:  c-  C-  H 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+Symmetric Bond =   6   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-methylbenzaldehyde
+Library fragment = c1ccccc1
+Library fragment = [c]C=O
+Library fragment = [c]C
+Library fragment = c1ccccc1
+  1   5   7  14 [*:1]~[^2:2]-[^2:3]~[*:4]
+  c:  c-  C-  H 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+Symmetric Bond =   5   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = acetophenone
+Library fragment = c1ccccc1
+Library fragment = [c]C(=O)C
+Library fragment = c1ccccc1
+  4   6   7   8 [*:1]~[^2:2]-[^2:3]~[*:4]
+  c:  c-  C-  C 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+Symmetric Bond =   6   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-methylacetophenone
+Library fragment = c1ccccc1
+Library fragment = [c]C(=O)C
+Library fragment = [c]C
+Library fragment = c1ccccc1
+  1   5   7   9 [*:1]~[^2:2]-[^2:3]~[*:4]
+  c:  c-  C-  C 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+Symmetric Bond =   5   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = methylbenzoate
+Library fragment = c1ccccc1
+Library fragment = [c]C(=O)OC
+Library fragment = CO
+Library fragment = c1ccccc1
+  4   6   7   9 [*:1]~[^2:2]-[^2:3]~[*:4]
+  c:  c-  C=  O 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+  9   7  10   8 [O:1]=[C:2]-[O:3][CH3:4]
+  O=  C-  O-  C 0
+Symmetric Bond =   6   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = ethylbenzoate
+Library fragment = c1ccccc1
+Library fragment = [c]C(=O)OC
+Library fragment = CCO
+Library fragment = c1ccccc1
+  4   6   7  10 [*:1]~[^2:2]-[^2:3]~[*:4]
+  c:  c-  C=  O 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+ 10   7  11   9 [O:1]=[C:2][O:3][C:4]
+  O=  C-  O-  C 0 30 -30 60 -60
+  7  11   9   8 O=[C:1][O:2][CH2:3][#6:4]
+  C-  O-  C-  C 60 -60 90 -90 120 -120 150 -150 180
+Symmetric Bond =   6   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = benzonitrile
+Library fragment = [c]C#N
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,6-dimethylaniline
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = [c]N
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-chloroaniline
+Library fragment = c1ccccc1
+Library fragment = [c]N
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-chloroaniline
+Library fragment = c1ccccc1
+Library fragment = [c]N
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 4-chloroaniline
+Library fragment = c1ccccc1
+Library fragment = [c]N
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methoxyaniline
+Library fragment = c1ccccc1
+Library fragment = [c]N
+Library fragment = [c]OC
+Library fragment = CO
+Library fragment = c1ccccc1
+  5   6   9   7 [cH0:1][c:2]([cH,nH0])[O:3][CH3:4]
+  c:  c-  O-  C 90 -90 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3-methoxyaniline
+Library fragment = c1ccccc1
+Library fragment = [c]N
+Library fragment = [c]OC
+Library fragment = CO
+Library fragment = c1ccccc1
+  3   6   9   7 [cH:1][c:2]([cH])[O:3][CH3:4]
+  c:  c-  O-  C 0 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-methoxyaniline
+Library fragment = c1ccccc1
+Library fragment = [c]N
+Library fragment = [c]OC
+Library fragment = CO
+Library fragment = c1ccccc1
+  3   6   9   7 [cH:1][c:2]([cH])[O:3][CH3:4]
+  c:  c-  O-  C 0 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-nitroaniline
+Library fragment = c1ccccc1
+Library fragment = [c]N
+Generated fragment [c][N+](=O)[O-]
+Library fragment = c1ccccc1
+  5   6   8  10 [O:1]=[C,N:2]([OX1])-[c:3][cH0:4]
+  c:  c-  N=  O 0 90 -90
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.09
+Title = 3-nitroaniline
+Library fragment = c1ccccc1
+Library fragment = [c]N
+Library fragment = [c][N+](=O)[O-]
+Library fragment = c1ccccc1
+  3   6   8   9 [O-:1][N+:2](=O)[c:3][c:4]
+  c:  c-  N-  O 0
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-nitroaniline
+Library fragment = c1ccccc1
+Library fragment = [c]N
+Library fragment = [c][N+](=O)[O-]
+Library fragment = c1ccccc1
+  3   6   8   9 [O-:1][N+:2](=O)[c:3][c:4]
+  c:  c-  N-  O 0
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1-napthalamine
+Library fragment = c1ccc2ccccc2c1
+Library fragment = [c]N
+Library fragment = c1ccc2ccccc2c1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-napthalamine
+Library fragment = c1ccc2ccccc2c1
+Library fragment = [c]N
+Library fragment = c1ccc2ccccc2c1
+num confs = 1
+elapsed time (s) = 0.00
+Title = N-methylaniline
+Library fragment = c1ccccc1
+Library fragment = [c]NC
+Library fragment = CN
+Library fragment = c1ccccc1
+  4   6   8  17 [*:1]~[^2:2]-[^3:3]~[*:4]
+  c:  c-  N-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = N,N-dimethylaniline
+Library fragment = c1ccccc1
+Library fragment = [c]N(C)C
+Library fragment = CN
+Library fragment = CN
+Library fragment = c1ccccc1
+  4   6   9   7 [*:1]~[^2:2]-[^3:3]~[*:4]
+  c:  c-  N-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+Symmetric Bond =   6   9
+num confs = 1
+elapsed time (s) = 0.01
+Title = nitrobenzene
+Library fragment = c1ccccc1
+Library fragment = [c][N+](=O)[O-]
+Library fragment = c1ccccc1
+  4   6   7   8 [O-:1][N+:2](=O)[c:3][c:4]
+  c:  c-  N-  O 0
+Symmetric Bond =   6   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-nitrotoluene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c][N+](=O)[O-]
+Library fragment = c1ccccc1
+  5   6   8  10 [O:1]=[C,N:2]([OX1])-[c:3][cH0:4]
+  c:  c-  N=  O 0 90 -90
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3-nitrotoluene
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c][N+](=O)[O-]
+Library fragment = c1ccccc1
+  3   6   8   9 [O-:1][N+:2](=O)[c:3][c:4]
+  c:  c-  N-  O 0
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = benzamide
+Library fragment = c1ccccc1
+Library fragment = [c]C(=O)N
+Library fragment = c1ccccc1
+  4   6   7   8 [cH:1][c:2]([cH])[C:3](=O)[NH2:4]
+  c:  c-  C-  N 0 180
+Symmetric Bond =   6   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = phenol
+Library fragment = c1ccccc1
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = o-cresol
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = p-cresol
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,3-dimethylphenol
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,4-dimethylphenol
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,5-dimethylphenol
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,6-dimethylphenol
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3,4-dimethylphenol
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3,5-dimethylphenol
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-ethylphenol
+Library fragment = c1ccccc1
+Library fragment = [c]CC
+Library fragment = [c]O
+Library fragment = c1ccccc1
+  4   5   8   7 [C:1][CH2:2][c:3]([cH])[cH,n:4]
+  c:  c-  C-  C 90 -90 30 -30 150 -150 0 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-ethylphenol
+Library fragment = c1ccccc1
+Library fragment = [c]CC
+Library fragment = [c]O
+Library fragment = c1ccccc1
+  2   5   8   7 [C:1][CH2:2][c:3]([cH])[cH,n:4]
+  c:  c-  C-  C 90 -90 30 -30 150 -150 0 180
+Symmetric Bond =   5   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-n-propylphenol
+Library fragment = c1ccccc1
+Library fragment = [c]CCC
+Library fragment = [c]O
+Library fragment = c1ccccc1
+  2   5   8   9 [C:1][CH2:2][c:3]([cH])[cH,n:4]
+  c:  c-  C-  C 90 -90 30 -30 150 -150 0 180
+  5   8   9  20 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  c-  C-  C-  H 180 60 -60
+Symmetric Bond =   5   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-tert-butylphenol
+Library fragment = c1ccccc1
+Library fragment = [c]C(C)(C)C
+Library fragment = [c]O
+Library fragment = c1ccccc1
+  7  10   5   1 [CH3:1][C:2]([CH3])([CH3])-[*:3][*:4]
+  C-  C-  c:  c 0 30 60
+Symmetric Bond =   5  10
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-fluorophenol
+Library fragment = c1ccccc1
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 4-fluorophenol
+Library fragment = c1ccccc1
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-chlorophenol
+Library fragment = c1ccccc1
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-chlorophenol
+Library fragment = c1ccccc1
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 4-chlorophenol
+Library fragment = c1ccccc1
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 4-chloro-3-methylphenol
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 4-bromophenol
+Library fragment = c1ccccc1
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-iodophenol
+Library fragment = c1ccccc1
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methoxyphenol
+Library fragment = c1ccccc1
+Library fragment = [c]O
+Library fragment = [c]OC
+Library fragment = CO
+Library fragment = c1ccccc1
+  5   6   9   7 [cH0:1][c:2]([cH,nH0])[O:3][CH3:4]
+  c:  c-  O-  C 90 -90 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3-methoxyphenol
+Library fragment = c1ccccc1
+Library fragment = [c]O
+Library fragment = [c]OC
+Library fragment = CO
+Library fragment = c1ccccc1
+  3   6   9   7 [cH:1][c:2]([cH])[O:3][CH3:4]
+  c:  c-  O-  C 0 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3-hydroxybenzaldehyde
+Library fragment = c1ccccc1
+Library fragment = [c]C=O
+Library fragment = [c]O
+Library fragment = c1ccccc1
+  2   5   7  14 [*:1]~[^2:2]-[^2:3]~[*:4]
+  c:  c-  C-  H 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-hydroxybenzaldehyde
+Library fragment = c1ccccc1
+Library fragment = [c]C=O
+Library fragment = [c]O
+Library fragment = c1ccccc1
+  1   5   7  14 [*:1]~[^2:2]-[^2:3]~[*:4]
+  c:  c-  C-  H 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+Symmetric Bond =   5   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3-cyanophenol
+Library fragment = [c]C#N
+Library fragment = c1ccccc1
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 4-cyanophenol
+Library fragment = [c]C#N
+Library fragment = c1ccccc1
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-nitrophenol
+Library fragment = c1ccccc1
+Library fragment = [c][N+](=O)[O-]
+Library fragment = [c]O
+Library fragment = c1ccccc1
+  6   5   7   9 [O:1]=[C,N:2]([OX1])-[c:3][cH0:4]
+  c:  c-  N=  O 0 90 -90
+Symmetric Bond =   5   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3-nitrophenol
+Library fragment = c1ccccc1
+Library fragment = [c][N+](=O)[O-]
+Library fragment = [c]O
+Library fragment = c1ccccc1
+  2   5   7   8 [O-:1][N+:2](=O)[c:3][c:4]
+  c:  c-  N-  O 0
+Symmetric Bond =   5   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-nitrophenol
+Library fragment = c1ccccc1
+Library fragment = [c][N+](=O)[O-]
+Library fragment = [c]O
+Library fragment = c1ccccc1
+  1   5   7   8 [O-:1][N+:2](=O)[c:3][c:4]
+  c:  c-  N-  O 0
+Symmetric Bond =   5   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1-napthol
+Library fragment = c1ccc2ccccc2c1
+Library fragment = [c]O
+Library fragment = c1ccc2ccccc2c1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-napthol
+Library fragment = c1ccc2ccccc2c1
+Library fragment = [c]O
+Library fragment = c1ccc2ccccc2c1
+num confs = 1
+elapsed time (s) = 0.00
+Title = benzylalcohol
+Library fragment = c1ccccc1
+Library fragment = [c]CO
+Library fragment = CO
+Library fragment = c1ccccc1
+  5   6   7   8 [cH]1[cH][cH][cH][cH:1][c:2]1-[CX4H2,CX4H:3][C,O,N:4]
+  c:  c-  C-  O 90 30 -30
+Symmetric Bond =   6   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = benzylethanol
+Library fragment = c1ccccc1
+Library fragment = [c]CCO
+Library fragment = CO
+Library fragment = c1ccccc1
+  5   6   7   8 [cH]1[cH][cH][cH][cH:1][c:2]1-[CX4H2,CX4H:3][C,O,N:4]
+  c:  c-  C-  C 90 30 -30
+  6   7   8  17 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  c-  C-  C-  H 180 60 -60
+Symmetric Bond =   6   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3-phenylpropanol
+Library fragment = c1ccccc1
+Library fragment = [c]CCCO
+Library fragment = CO
+Library fragment = c1ccccc1
+  5   6   7   8 [cH]1[cH][cH][cH][cH:1][c:2]1-[CX4H2,CX4H:3][C,O,N:4]
+  c:  c-  C-  C 90 30 -30
+  6   7   8  18 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  c-  C-  C-  H 180 60 -60
+  7   8   9  20 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+Symmetric Bond =   6   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = thiophenol
+Library fragment = c1ccccc1
+Library fragment = [c]S
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = thioanisol
+Library fragment = c1ccccc1
+Library fragment = [c]SC
+Library fragment = CS
+Library fragment = c1ccccc1
+  4   6   8   7 [*:1]~[^2:2]-[^3:3]~[*:4]
+  c:  c-  S-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.01
+Title = pyridine
+Library fragment = c1ccncc1
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]C
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-methylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]C
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 4-methylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]C
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,3-dimethylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,4-dimethylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,5-dimethylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,6-dimethylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3,4-dimethylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3,5-dimethylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]C
+Library fragment = [c]C
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-ethylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]CC
+Library fragment = c1ccncc1
+  8   5   7   6 [C:1][CH2:2][c:3]([cH])[cH,n:4]
+  n:  c-  C-  C 90 -90 30 -30 150 -150 0 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3-ethylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]CC
+Library fragment = c1ccncc1
+  4   5   7   6 [C:1][CH2:2][c:3]([cH])[cH,n:4]
+  c:  c-  C-  C 90 -90 30 -30 150 -150 0 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-ethylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]CC
+Library fragment = c1ccncc1
+  2   5   7   6 [C:1][CH2:2][c:3]([cH])[cH,n:4]
+  c:  c-  C-  C 90 -90 30 -30 150 -150 0 180
+Symmetric Bond =   5   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-chloropyridine
+Library fragment = c1ccncc1
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-chloropyridine
+Library fragment = c1ccncc1
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-cyanopyridine
+Library fragment = [c]C#N
+Library fragment = c1ccncc1
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 4-cyanopyridine
+Library fragment = [c]C#N
+Library fragment = c1ccncc1
+Library fragment = c1ccncc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-formylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]OC=O
+Library fragment = c1ccncc1
+  2   5   9   6 [*:1]~[^2:2]-[^3:3]~[*:4]
+  c:  c-  O-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  5   9   6   8 [*:1]~[^2:2]-[^3:3]~[*:4]
+  c-  O-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-formylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]OC=O
+Library fragment = c1ccncc1
+  1   5   9   6 [*:1]~[^2:2]-[^3:3]~[*:4]
+  c:  c-  O-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  5   9   6   8 [*:1]~[^2:2]-[^3:3]~[*:4]
+  c-  O-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+Symmetric Bond =   5   9
+num confs = 1
+elapsed time (s) = 0.01
+Title = 3-acetylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]OC(=O)C
+Library fragment = c1ccncc1
+  2   5  10   6 [*:1]~[^2:2]-[^3:3]~[*:4]
+  c:  c-  O-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  5  10   6   7 [*:1]~[^2:2]-[^3:3]~[*:4]
+  c-  O-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = 4-acetylpyridine
+Library fragment = c1ccncc1
+Library fragment = [c]OC(=O)C
+Library fragment = c1ccncc1
+  1   5  10   6 [*:1]~[^2:2]-[^3:3]~[*:4]
+  c:  c-  O-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  5  10   6   7 [*:1]~[^2:2]-[^3:3]~[*:4]
+  c-  O-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+Symmetric Bond =   5  10
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-methylpyrazine
+Library fragment = c1cnccn1
+Library fragment = [c]C
+Library fragment = c1cnccn1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-ethylpyrazine
+Library fragment = c1cnccn1
+Library fragment = [c]CC
+Library fragment = c1cnccn1
+  8   4   6   5 [C:1][CH2:2][c:3]([cH])[cH,n:4]
+  n:  c-  C-  C 90 -90 30 -30 150 -150 0 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-isobutylpyrazine
+Library fragment = c1cnccn1
+Library fragment = [c]CC(C)C
+Library fragment = c1cnccn1
+  8   7   4  10 [C:1][CH2:2][c:3]([cH])[cH,n:4]
+  C-  C-  c:  n 90 -90 30 -30 150 -150 0 180
+  4   7   8   5 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  c-  C-  C-  C 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = thiophene
+Library fragment = c1ccsc1
+Library fragment = c1ccsc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methylthiophene
+Library fragment = c1ccsc1
+Library fragment = [c]C
+Library fragment = c1ccsc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = dimethylether
+Library fragment = CO
+Library fragment = COC
+Library fragment = CO
+num confs = 1
+elapsed time (s) = 0.00
+Title = methylethylether
+Library fragment = CO
+Library fragment = COC
+Library fragment = CCO
+  1   3   4   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  C-  O-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = methyl-tert-butylether
+Library fragment = CO
+Library fragment = COC
+Library fragment = CC(C)(C)O
+  1   5   6   4 [CH3:1][C:2]([CH3])([CH3])-[*:3][*:4]
+  C-  C-  O-  C 0 30 60
+Symmetric Bond =   5   6
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3,3-dimethyl-2-butanone
+Library fragment = CC(=O)C(C)(C)C
+  3   6   1   2 [CH3:1][C:2]([CH3])([CH3])-[*:3][*:4]
+  C-  C-  C-  C 0 30 60
+Symmetric Bond =   1   6
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,4-dimethyl-3-pentanone
+Generated fragment CC(C)C(=O)C(C)C
+  7   1   6  21 [*:1]~[^2:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  6   1   7  22 [*:1]~[^2:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.26
+Title = methylcyclopropylketone
+Library fragment = CC(=O)C
+Library fragment = C1CC1
+Library fragment = C1CC1
+ 11   4   1   5 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = methylcyclohexylketone
+Library fragment = CC(=O)C
+Library fragment = [CH2]C1CCCCC1
+Library fragment = [CH2]C1CCCCC1
+ring conformation template = [CH2]C1CCCCC1
+ 20   7   1   8 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.02
+Title = methyltrimethylacetate
+Library fragment = CC(C)(C)O
+Library fragment = CC(=O)OC
+  6   8   1   7 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+  3   6   8   1 [CH3:1][C:2]([CH3])([CH3])-[*:3][*:4]
+  C-  C-  O-  C 0 30 60
+Symmetric Bond =   6   8
+num confs = 1
+elapsed time (s) = 0.00
+Title = methylcyclopropylcarboxylate
+Library fragment = CC(=O)OC
+Library fragment = C1CC1
+Library fragment = CO
+Library fragment = C1CC1
+ 12   4   1   6 [CX4H:2]([H:1])[C:3](=[O:4])O[CH3]
+  H-  C-  C=  O 0 120 -120
+  6   1   7   5 [O:1]=[C:2]-[O:3][CH3:4]
+  O=  C-  O-  C 0
+num confs = 1
+elapsed time (s) = 0.01
+Title = methylcyclohexylcarboxylate
+Library fragment = CC(=O)OC
+Library fragment = [CH2]C1CCCCC1
+Library fragment = CO
+Library fragment = [CH2]C1CCCCC1
+ring conformation template = [CH2]C1CCCCC1
+ 21   7   1   9 [CX4H:2]([H:1])[C:3](=[O:4])O[CH3]
+  H-  C-  C=  O 0 120 -120
+  9   1  10   8 [O:1]=[C:2]-[O:3][CH3:4]
+  O=  C-  O-  C 0
+num confs = 1
+elapsed time (s) = 0.03
+Title = dimethylsulfide
+Library fragment = CS
+Library fragment = CSC
+Library fragment = CS
+num confs = 1
+elapsed time (s) = 0.00
+Title = methylethylsulfide
+Library fragment = CS
+Library fragment = CSC
+Library fragment = CCS
+  1   3   4   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  C-  S-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = dimethylsulfoxide
+Library fragment = C[SH2]
+Library fragment = CS(=O)C
+Library fragment = C[SH2]
+num confs = 1
+elapsed time (s) = 0.00
+Title = 4-methoxyacetophenone
+Library fragment = c1ccccc1
+Library fragment = [c]C(=O)C
+Library fragment = [c]OC
+Library fragment = CO
+Library fragment = c1ccccc1
+  1   5   7   8 [*:1]~[^2:2]-[^2:3]~[*:4]
+  c:  c-  C-  C 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+  3   6  11   9 [cH:1][c:2]([cH])[O:3][CH3:4]
+  c:  c-  O-  C 0 180
+Symmetric Bond =   5   7
+num confs = 1
+elapsed time (s) = 0.01
+Title = anthracene
+Library fragment = c1ccc2cc3ccccc3cc2c1
+Library fragment = c1ccc2cc3ccccc3cc2c1
+num confs = 1
+elapsed time (s) = 0.01
+Title = phenanthrene
+Library fragment = c1ccc2c(c1)ccc3c2cccc3
+Library fragment = c1ccc2c(c1)ccc3c2cccc3
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2-methylpropene
+Library fragment = CC(=C)C
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,2-ethanediol
+Library fragment = C(CO)O
+Library fragment = CO
+Library fragment = CO
+  3   1   2   7 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  O-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = m-cresol
+Library fragment = c1ccccc1
+Library fragment = [c]C
+Library fragment = [c]O
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = methylpropylether
+Library fragment = CO
+Library fragment = COC
+Library fragment = CCCO
+ 14   4   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 14   4   5   2 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.00
+Title = methylisopropylether
+Library fragment = CO
+Library fragment = COC
+Library fragment = CC(C)O
+  1   4   5   3 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,2-dimethoxyethane
+Library fragment = CO
+Library fragment = COC
+Library fragment = CO
+Library fragment = COC
+Library fragment = C(CO)O
+  5   3   4  15 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  O-  C-  C-  H 180 60 -60
+ 13   3   5   1 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+ 15   4   6   2 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = methyloctanoate
+Library fragment = CO
+Library fragment = CCCCCCCC(=O)OC
+ 18   4   1  10 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 10   1  11   3 [O:1]=[C:2]-[O:3][CH3:4]
+  O=  C-  O-  C 0
+ 22   6   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   7   5   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 26   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 28   9   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  6   8   9  28 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.04
+Title = pyrrolidine
+Generated fragment C1CCNC1
+Library fragment = C1CCNC1
+ring conformation template = C1CCNC1
+num confs = 1
+elapsed time (s) = 0.02
+Title = N-methylpiperazine
+Library fragment = CN
+Library fragment = CN1CCNCC1
+Library fragment = CN1CCNCC1
+ring conformation template = CN1CCNCC1
+num confs = 1
+elapsed time (s) = 0.02
+Title = piperidine
+Generated fragment C1CCNCC1
+Library fragment = C1CCNCC1
+ring conformation template = C1CCNCC1
+num confs = 1
+elapsed time (s) = 0.06
+Title = aniline
+Library fragment = c1ccccc1
+Library fragment = [c]N
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = ethanamide
+Library fragment = CCC(=O)N
+  9   3   1   4 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C-  N 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = N-methylacetamide
+Library fragment = CN
+Library fragment = CC(=O)NC
+  5   1   4   3 [O:1]=[C:2][NX3H:3][C,N:4]
+  O=  C-  N-  C 0
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-methoxyethanamine
+Library fragment = CO
+Generated fragment CC(N)OC
+  1   3   5   2 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.04
+Title = methanethiol
+Library fragment = CS
+Library fragment = CS
+num confs = 1
+elapsed time (s) = 0.00
+Title = hydrogensulfide
+Generated fragment S
+num confs = 1
+elapsed time (s) = 0.00
+Title = dimethyldisulfide
+Library fragment = CS
+Library fragment = CSSC
+Library fragment = CS
+  1   3   4   2 [*:1][S:2]-[S:3][*:4]
+  C-  S-  S-  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = fluoromethane
+Generated fragment CF
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,1-difluoroethane
+Generated fragment CC(F)F
+num confs = 1
+elapsed time (s) = 0.00
+Title = chloroethylene
+Generated fragment C=CCl
+num confs = 1
+elapsed time (s) = 0.00
+Title = p-dibromobenzene
+Library fragment = c1ccccc1
+Library fragment = c1ccccc1
+num confs = 1
+elapsed time (s) = 0.00
+Title = diiodomethane
+Generated fragment C(I)I
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2-iodopropane
+Generated fragment CC(C)I
+num confs = 1
+elapsed time (s) = 0.01
+Title = bromotrifluoromethane
+Generated fragment C(F)(F)(F)Br
+num confs = 1
+elapsed time (s) = 0.00
+Title = chlorofluoromethane
+Generated fragment C(F)Cl
+num confs = 1
+elapsed time (s) = 0.00
+Title = chlorodifluoromethane
+Generated fragment C(F)(F)Cl
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-bromo-2-chloroethane
+Generated fragment C(CBr)Cl
+  3   1   2   7 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+ Cl-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1-chloro-2,2,2-trifluoroethane
+Generated fragment C(C(F)(F)F)Cl
+  7   1   2   3 [F:1][C:2](F)(F)-[CX4:3][*:4]
+  H-  C-  C-  F 60
+Symmetric Bond =   1   2
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1,1,2-trichloro-1,2,2-trifluoroethane
+Generated fragment C(C(F)(Cl)Cl)(F)(F)Cl
+  3   1   2   5 [*:1]~[C^3H0:2]-[C^3H0,C^3H1:3]~[*:4]
+  F-  C-  C-  F 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+num confs = 1
+elapsed time (s) = 0.02
+Title = 1,1,1-trifluoro-2-propanol
+Generated fragment CC(C(F)(F)F)O
+Library fragment = CO
+ 11   2   3   5 [F:1][C:2](F)(F)-[CX4:3][*:4]
+  H-  C-  C-  F 60
+Symmetric Bond =   2   3
+num confs = 1
+elapsed time (s) = 0.04
+Title = imidazole
+Library fragment = c1cnc[nH]1
+Library fragment = c1cnc[nH]1
+num confs = 1
+elapsed time (s) = 0.00
+Title = pyrrole
+Library fragment = c1cc[nH]c1
+Library fragment = c1cc[nH]c1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-methylpyrrole
+Library fragment = C[n]
+Library fragment = c1cc[nH]c1
+Library fragment = c1cc[nH]c1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-methylimidazole
+Library fragment = C[n]
+Library fragment = c1cnc[nH]1
+Library fragment = c1cnc[nH]1
+num confs = 1
+elapsed time (s) = 0.00
+Title = 4-methyl-1-pentene
+Library fragment = CC(C)CC=C
+ 16   5   2   1 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  C 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  3   6   5   2 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = E-2-pentene
+Library fragment = CCC=CC
+  1   2   5   4 [C:1]=[C:2][CH2:3][CH3:4]
+  C=  C-  C-  C 0 180 90 -90
+num confs = 1
+elapsed time (s) = 0.00
+Title = E-2-pentene
+Library fragment = CCC=CC
+  1   2   5   4 [C:1]=[C:2][CH2:3][CH3:4]
+  C=  C-  C-  C 0 180 90 -90
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-nonyne
+Generated fragment CCCCCCCC#C
+ 18   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 20   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 22   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   9   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   9   8   6 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.33
+Title = acetylene
+Generated fragment C#C
+num confs = 1
+elapsed time (s) = 0.00
+Title = 4-methylimidazole
+Library fragment = c1cnc[nH]1
+Library fragment = [c]C
+Library fragment = c1cnc[nH]1
+num confs = 1
+elapsed time (s) = 0.00
+Title = chloropentafluoroethane
+Generated fragment C(C(F)(F)Cl)(F)(F)F
+  3   1   2   6 [F:1][C:2](F)(F)-[CX4:3][*:4]
+  F-  C-  C-  F 60
+Symmetric Bond =   1   2
+num confs = 1
+elapsed time (s) = 0.03
+Title = chlorotrifluoromethane
+Generated fragment C(F)(F)(F)Cl
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,1-dichloro-tetrafluoroethane
+Generated fragment C(C(F)(Cl)Cl)(F)(F)F
+  3   1   2   6 [F:1][C:2](F)(F)-[CX4:3][*:4]
+  F-  C-  C-  F 60
+Symmetric Bond =   1   2
+num confs = 1
+elapsed time (s) = 0.03
+Title = 1,2-dichloro-tetrafluoroethane
+Generated fragment C(C(F)(F)Cl)(F)(F)Cl
+  3   1   2   5 [*:1]~[C^3H0:2]-[C^3H0,C^3H1:3]~[*:4]
+  F-  C-  C-  F 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+num confs = 1
+elapsed time (s) = 0.03
+Title = dichlorodifluoromethane
+Generated fragment C(F)(F)(Cl)Cl
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,1,2,2-tetrachloro-difluoroethane
+Generated fragment C(C(F)(Cl)Cl)(F)(Cl)Cl
+  3   1   2   4 [*:1]~[C^3H0:2]-[C^3H0,C^3H1:3]~[*:4]
+  F-  C-  C-  F 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+num confs = 1
+elapsed time (s) = 0.02
+Title = trifluoromethane
+Generated fragment C(F)(F)F
+num confs = 1
+elapsed time (s) = 0.00
+Title = phosphine
+Generated fragment P
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-bromo-3-methylbutane
+Generated fragment CC(C)CCBr
+  5   3   4  15 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  1   5   3   4 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  C-  C-  C-  C 60 -60
+num confs = 1
+elapsed time (s) = 0.10
+Title = 2-chloropentane
+Generated fragment CCCC(C)Cl
+ 15   4   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 15   4   5   2 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.12
+Title = 3-chloropentane
+Generated fragment CCC(CC)Cl
+ 17   5   3   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  C-  C-  C 180 60 -60
+ 17   5   4   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  H-  C-  C-  C 180 60 -60
+num confs = 1
+elapsed time (s) = 0.10
+Title = butenyne
+Generated fragment C=CC#C
+num confs = 1
+elapsed time (s) = 0.01
+Title = tert-amylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]CC(C)(C)C
+Library fragment = c1ccccc1
+ 11  10   6   5 [cH]1[cH][cH][cH][cH:1][c:2]1-[CX4H2,CX4H:3][C,O,N:4]
+  C-  C-  c:  c 90 30 -30
+ 26  10  11   7 [CH3:1][C:2]([CH3])([CH3])-[*:3][*:4]
+  H-  C-  C-  C 0 30 60
+Symmetric Bond =   6  10
+Symmetric Bond =  10  11
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1,1-dichlorobutane
+Generated fragment CCCC(Cl)Cl
+  1   2   3  12 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  2   3   4  14 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.07
+Title = o-bromocumene
+Library fragment = c1ccccc1
+Library fragment = [c]C(C)C
+Library fragment = c1ccccc1
+  3   5   9  21 [c:1][c:2][CH:3]([CH3])([CH3])[H:4]
+  c:  c-  C-  H 90 -90 0 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = (CH3)3P
+Library fragment = CP
+Library fragment = CP(C)C
+Library fragment = CP
+Library fragment = CP
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1-bromo-2-ethylbenzene
+Library fragment = c1ccccc1
+Library fragment = [c]CC
+Library fragment = c1ccccc1
+  3   5   8  17 [*:1][CH2:2][a:3][a:4]
+  c:  c-  C-  H 0 180 90 -90 45 -45 135 -135
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1,2-dichloropropane
+Library fragment = CC(CCl)Cl
+  1   3   2   9 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.00
+Title = hexachloroethane
+Generated fragment C(C(Cl)(Cl)Cl)(Cl)(Cl)Cl
+  3   1   2   6 [*:1]~[C^3H0:2]-[C^3H0,C^3H1:3]~[*:4]
+ Cl-  C-  C- Cl 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+Symmetric Bond =   1   2
+num confs = 1
+elapsed time (s) = 0.04
+Title = ethylpropyl ether
+Library fragment = CCO
+Library fragment = COC
+Library fragment = CCCO
+ 17   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  5   6   4   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  O-  C-  C 180 60 -60
+  3   5   6   4 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1,2-dibromopropane
+Generated fragment CC(CBr)Br
+  1   3   2   9 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.03
+Title = 1,3-dibromopropane
+Generated fragment C(CBr)CBr
+  3   1   2   8 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  2   1   3  10 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.04
+Title = amylpriopionate
+Library fragment = CCCCCO
+Library fragment = CCC(=O)OC
+  9   1   4  17 [*:1]~[^2:2]-[^3:3]~[*:4]
+  O=  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  8  10   1   9 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+ 21   6   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 23   7   6   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  6   7   8  25 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  7   8  10   1 O=[C:1][O:2][CH2:3][#6:4]
+  C-  C-  O-  C 60 -60 90 -90 120 -120 150 -150 180
+num confs = 1
+elapsed time (s) = 0.13
+Title = isopropyl priopionate
+Library fragment = CC(C)O
+Library fragment = CCC(=O)OC
+  7   1   5  18 [*:1]~[^2:2]-[^3:3]~[*:4]
+  O=  C-  C-  H 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+  6   8   1   7 [O:1]=[C:2][O:3][C:4]
+  C-  O-  C=  O 0 30 -30 60 -60
+ 20   6   8   1 O=[C:1][O:2][CH:3]([#6])([#6])[#1:4]
+  H-  C-  O-  C 0 30 -30 60 60 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = ethylheptanoate
+Library fragment = CCO
+Library fragment = CCCCCCC(=O)OC
+ 18   4   1  10 [*:1]~[^2:2]-[^3:3]~[*:4]
+  H-  C-  C=  O 0 30 -30 60 -60 90 -90 120 -120 -150 150 180
+ 10   1  11   9 [O:1]=[C:2][O:3][C:4]
+  O=  C-  O-  C 0 30 -30 60 -60
+ 22   6   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   7   5   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  4   6   8  26 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+ 26   8   7   5 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+  1  11   9   3 O=[C:1][O:2][CH2:3][#6:4]
+  C-  O-  C-  C 60 -60 90 -90 120 -120 150 -150 180
+fragments = 2
+num confs = 1
+elapsed time (s) = 0.17
+Title = dimethyoxymethane
+Library fragment = CO
+Library fragment = COCOC
+Library fragment = CO
+ 12   3   4   1 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+ 12   3   5   2 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1,2-diethoxyethane
+Library fragment = CCO
+Library fragment = COC
+Library fragment = CCO
+Library fragment = COC
+Library fragment = C(CO)O
+  5   7   3   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  O-  C-  C 180 60 -60
+  6   8   4   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  O-  C-  C 180 60 -60
+  7   5   6  21 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  O-  C-  C-  H 180 60 -60
+ 19   5   7   3 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+ 21   6   8   4 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.02
+Title = 1,1-diethoxyethane
+Library fragment = CCO
+Library fragment = CC(OC)OC
+Library fragment = CCO
+  6   7   4   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  O-  C-  C 180 60 -60
+  6   8   5   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  C-  O-  C-  C 180 60 -60
+  3   6   7   4 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+  3   6   8   5 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = dibutylamine
+Library fragment = CCCCN
+Library fragment = CNC
+Library fragment = CCCCN
+ 20   5   3   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 22   6   4   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 24   7   5   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 26   8   6   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 28   9   7   5 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  N-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+ 28   9   8   6 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  N-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.07
+Title = 2-isobutyl-3-methoxypyrazine
+Library fragment = c1cnccn1
+Library fragment = [c]CC(C)C
+Library fragment = [c]OC
+Library fragment = CO
+Library fragment = c1cnccn1
+  4   3   8   9 [CX4H1:1][CX4H2:2][c:3][cH0;$(cA):4]
+  c:  c-  C-  C 60 -60 90 -90 120 -120 150 -150 180
+  3   4  12   7 [cH0:1][c:2]([cH,nH0])[O:3][CH3:4]
+  c:  c-  O-  C 90 -90 180
+  3   8   9   5 [CH3:1][CX4H:2]([CH3])[CX4H2:3][!#1:4]
+  c-  C-  C-  C 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = hexafluoro-2-propanol
+Library fragment = C(C(F)(F)F)(C(F)(F)F)O
+Library fragment = CO
+ 11   1   2   5 [F:1][C:2](F)(F)-[CX4:3][*:4]
+  H-  C-  C-  F 60
+ 11   1   3   8 [F:1][C:2](F)(F)-[CX4:3][*:4]
+  H-  C-  C-  F 60
+Symmetric Bond =   1   2
+Symmetric Bond =   1   3
+num confs = 1
+elapsed time (s) = 0.00
+Title = acetonitrile
+Library fragment = CC#N
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,3-dimethylbutanol
+Library fragment = CC(C)C(C)CO
+Library fragment = CO
+  3   6   4  17 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+ 20   6   5   1 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = 2,2'-dichlorodiethyl sulfide
+Library fragment = C(CCl)S
+Library fragment = CSC
+Library fragment = C(CCl)S
+  5   1   3  12 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  S-  C-  C-  H 180 60 -60
+  2   5   1   8 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  S-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+  5   2   4  14 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  S-  C-  C-  H 180 60 -60
+  1   5   2  10 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  S-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = N-methylpyrrolidine
+Library fragment = CN
+Library fragment = CN1CCCC1
+Library fragment = CN1CCCC1
+ring conformation template = CN1CCCC1
+num confs = 1
+elapsed time (s) = 0.01
+Title = 1,1,1-trifluoro-2-propanol
+Library fragment = CC(C(F)(F)F)O
+Library fragment = CO
+ 11   2   3   5 [F:1][C:2](F)(F)-[CX4:3][*:4]
+  H-  C-  C-  F 60
+Symmetric Bond =   2   3
+num confs = 1
+elapsed time (s) = 0.00
+Title = 3-ethyl-2-methoxypyrazine
+Library fragment = c1cnccn1
+Library fragment = [c]CC
+Library fragment = [c]OC
+Library fragment = CO
+Library fragment = c1cnccn1
+  4   3   7  19 [*:1][CH2:2][a:3][a:4]
+  c:  c-  C-  H 0 180 90 -90 45 -45 135 -135
+  3   4  10   6 [cH0:1][c:2]([cH,nH0])[O:3][CH3:4]
+  c:  c-  O-  C 90 -90 180
+num confs = 1
+elapsed time (s) = 0.01
+Title = trans-trans-2,4-hexadienal
+Generated fragment CC=CC=CC=O
+  4   3   1   2 [C:1]=[C:2]-[C:3]=[C:4]
+  C=  C-  C=  C 180 40 -40
+  1   2   5  12 [*:1]~[^2:2]-[^2:3]~[*:4]
+  C=  C-  C-  H 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+num confs = 1
+elapsed time (s) = 0.16
+Title = 2,2,3,3-tetrafluoropropanol
+Library fragment = C(C(C(F)F)(F)F)O
+Library fragment = CO
+  2   3   1   9 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+  1   3   2  11 [*:1]~[C^3H0:2]-[C^3H0,C^3H1:3]~[*:4]
+  C-  C-  C-  H 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+num confs = 1
+elapsed time (s) = 0.00
+Title = 2,2,3,3,3-pentafluoropropanol
+Library fragment = C(C(C(F)(F)F)(F)F)O
+Library fragment = CO
+  3   2   1  10 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+  1   2   3   7 [F:1][C:2](F)(F)-[CX4:3][*:4]
+  C-  C-  C-  F 60
+Symmetric Bond =   2   3
+num confs = 1
+elapsed time (s) = 0.00
+Title = hexamethylenediamine
+Library fragment = C(CCCN)CCN
+Library fragment = CN
+Library fragment = CN
+  3   1   2  11 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  2   1   3  13 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  1   2   4  15 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  1   3   5  17 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+  2   4   6  19 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  C-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.01
+Title = allyl alcohol
+Generated fragment C=C=CO
+Library fragment = [CH2]O
+num confs = 1
+elapsed time (s) = 0.01
+Title = N-methylindole
+Library fragment = C[n]
+Library fragment = c1ccc2c(c1)cc[nH]2
+Library fragment = c1ccc2c(c1)cc[nH]2
+num confs = 1
+elapsed time (s) = 0.00
+Title = P(OC3H7)3
+Library fragment = CCCO
+Library fragment = COP(OC)OC
+Library fragment = CCCO
+Library fragment = CCCO
+ 29   7   4   1 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 31   8   5   2 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 33   9   6   3 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  C 180 60 -60
+ 13  10   7   4 [*:1]~[^3:2]-[^3:3]~[*:4]
+  P-  O-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+ 13  11   8   5 [*:1]~[^3:2]-[^3:3]~[*:4]
+  P-  O-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+ 13  12   9   6 [*:1]~[^3:2]-[^3:3]~[*:4]
+  P-  O-  C-  C 180 60 -60 40 -40 80 -80 -160 160
+ 11  13  10   7 [*:1]~[^3:2]-[^3:3]~[*:4]
+  O-  P-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+ 10  13  11   8 [*:1]~[^3:2]-[^3:3]~[*:4]
+  O-  P-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+ 10  13  12   9 [*:1]~[^3:2]-[^3:3]~[*:4]
+  O-  P-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+fragments = 3
+num confs = 1
+elapsed time (s) = 0.38
+Title = 2-methoxyethanamine
+Library fragment = CO
+Library fragment = COC
+Library fragment = C(CO)N
+Library fragment = CN
+ 11   3   2   4 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  H-  C-  C-  N 180 60 -60
+ 11   3   5   1 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = piperazine
+Generated fragment C1CNCCN1
+Library fragment = C1CNCCN1
+ring conformation template = C1CNCCN1
+num confs = 1
+elapsed time (s) = 0.04
+Title = N,N'-dimethylpiperazine
+Library fragment = CN
+Library fragment = CN1CCN(CC1)C
+Library fragment = CN
+Library fragment = CN1CCN(CC1)C
+ring conformation template = CN1CCN(CC1)C
+num confs = 1
+elapsed time (s) = 0.04
+Title = P(OC2H5)3
+Library fragment = CCO
+Library fragment = COP(OC)OC
+Library fragment = CCO
+Library fragment = CCO
+ 10   7   4   1 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  P-  O-  C-  C 180 60 -60
+ 10   8   5   2 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  P-  O-  C-  C 180 60 -60
+ 10   9   6   3 [*:1]~[^3:2]-[^3H2:3]~[CH3:4]
+  P-  O-  C-  C 180 60 -60
+  8  10   7   4 [*:1]~[^3:2]-[^3:3]~[*:4]
+  O-  P-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+  7  10   8   5 [*:1]~[^3:2]-[^3:3]~[*:4]
+  O-  P-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+  7  10   9   6 [*:1]~[^3:2]-[^3:3]~[*:4]
+  O-  P-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.14
+Title = glycerol
+Library fragment = C(C(CO)O)O
+Library fragment = CO
+Library fragment = CO
+Library fragment = CO
+  2   3   1   7 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+  1   3   2   9 [*:1]~[^3:2]-[^3:3]~[*:4]
+  C-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = P(OCH3)3
+Library fragment = CO
+Library fragment = COP(OC)OC
+Library fragment = CO
+Library fragment = CO
+  5   7   4   1 [*:1]~[^3:2]-[^3:3]~[*:4]
+  O-  P-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+  4   7   5   2 [*:1]~[^3:2]-[^3:3]~[*:4]
+  O-  P-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+  4   7   6   3 [*:1]~[^3:2]-[^3:3]~[*:4]
+  O-  P-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.01
+Title = ethylenediamine
+Library fragment = C(CN)N
+Library fragment = CN
+Library fragment = CN
+  3   1   2   7 [*:1]~[^3H2:2]-[^3H2:3]~[*:4]
+  N-  C-  C-  H 180 60 -60
+num confs = 1
+elapsed time (s) = 0.00
+Title = 1,3-dioxolane
+Library fragment = CO
+Generated fragment COCO
+  8   2   4   1 [*:1]~[^3:2]-[^3:3]~[*:4]
+  H-  C-  O-  C 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.02
+Title = trans-N-methylformamide
+Library fragment = CN
+Library fragment = CNC=O
+  2   3   1   4 [O:1]=[CH:2][NH:3][#6:4]
+  C-  N-  C=  O 0 180
+num confs = 1
+elapsed time (s) = 0.00
+Title = bis-2-chloroethyl sulfide
+Generated fragment C(C(Cl)Cl)S
+Library fragment = CS
+  3   1   2   8 [*:1]~[^3:2]-[^3:3]~[*:4]
+  S-  C-  C-  H 180 60 -60 40 -40 80 -80 -160 160
+num confs = 1
+elapsed time (s) = 0.02
+Loading OpenMM plugins...
+Loading and typing all molecules in dataset...
+504 molecules read
+0.069 s elapsed
+Building conformations for all molecules...
+18.186 s elapsed
+Regularizing all molecules...
+0.130 s elapsed
+Assigning AM1-BCC charges...
+68.060 s elapsed
+504 molecules remaining
+504 molecules correctly typed
+0 molecules missing some types
+0.315 s elapsed
+Computing all energies...
+29.301 s elapsed
+iteration        0 : RMS error    3.787 kcal/mol
+Computing all energies...
+29.684 s elapsed
+iteration        1 : RMS error    2.733 kcal/mol
+Computing all energies...
+30.360 s elapsed
+iteration        2 : RMS error    2.186 kcal/mol
+Computing all energies...
+30.887 s elapsed
+iteration        3 : RMS error    1.624 kcal/mol
+Computing all energies...
+30.805 s elapsed
+iteration        4 : RMS error    1.256 kcal/mol
+Computing all energies...
+31.241 s elapsed
+iteration        5 : RMS error    1.196 kcal/mol
+Computing all energies...
+32.552 s elapsed
+iteration        6 : RMS error    1.280 kcal/mol
+Computing all energies...
+33.355 s elapsed
+iteration        7 : RMS error    1.271 kcal/mol
+Computing all energies...
+33.969 s elapsed
+iteration        8 : RMS error    1.287 kcal/mol
+Computing all energies...
+33.140 s elapsed
+iteration        9 : RMS error    1.281 kcal/mol
+Computing all energies...
+35.294 s elapsed
+iteration       10 : RMS error    1.287 kcal/mol
+Computing all energies...
+35.824 s elapsed
+iteration       11 : RMS error    1.265 kcal/mol
+Computing all energies...
+36.303 s elapsed
+iteration       12 : RMS error    1.235 kcal/mol
+Computing all energies...
+34.756 s elapsed
+iteration       13 : RMS error    1.241 kcal/mol
+Computing all energies...
+37.397 s elapsed
+iteration       14 : RMS error    1.271 kcal/mol
+Computing all energies...
+38.034 s elapsed
+iteration       15 : RMS error    1.266 kcal/mol
+Computing all energies...
+38.900 s elapsed
+iteration       16 : RMS error    1.246 kcal/mol
+Computing all energies...
+36.883 s elapsed
+iteration       17 : RMS error    1.311 kcal/mol
+Computing all energies...
+37.395 s elapsed
+iteration       18 : RMS error    1.311 kcal/mol
+Computing all energies...
+40.590 s elapsed
+iteration       19 : RMS error    1.317 kcal/mol
+Computing all energies...
+41.116 s elapsed
+iteration       20 : RMS error    1.341 kcal/mol
+Computing all energies...
+38.703 s elapsed
+iteration       21 : RMS error    1.322 kcal/mol
+Computing all energies...
+38.878 s elapsed
+iteration       22 : RMS error    1.324 kcal/mol
+Computing all energies...
+42.871 s elapsed
+iteration       23 : RMS error    1.275 kcal/mol
+Computing all energies...
+43.327 s elapsed
+iteration       24 : RMS error    1.247 kcal/mol
+Computing all energies...
+44.277 s elapsed
+iteration       25 : RMS error    1.234 kcal/mol
+Computing all energies...
+40.587 s elapsed
+iteration       26 : RMS error    1.101 kcal/mol
+Computing all energies...
+44.881 s elapsed
+iteration       27 : RMS error    1.134 kcal/mol
+Computing all energies...
+45.689 s elapsed
+iteration       28 : RMS error    1.107 kcal/mol
+Computing all energies...
+46.260 s elapsed
+iteration       29 : RMS error    1.100 kcal/mol
+Computing all energies...
+42.290 s elapsed
+iteration       30 : RMS error    1.107 kcal/mol
+Computing all energies...
+47.094 s elapsed
+iteration       31 : RMS error    1.103 kcal/mol
+Computing all energies...
+47.578 s elapsed
+iteration       32 : RMS error    1.099 kcal/mol
+Computing all energies...
+48.464 s elapsed
+iteration       33 : RMS error    1.099 kcal/mol
+Computing all energies...
+43.890 s elapsed
+iteration       34 : RMS error    1.102 kcal/mol
+Computing all energies...
+44.235 s elapsed
+iteration       35 : RMS error    1.096 kcal/mol
+Computing all energies...
+49.882 s elapsed
+iteration       36 : RMS error    1.094 kcal/mol
+Computing all energies...
+50.446 s elapsed
+iteration       37 : RMS error    1.118 kcal/mol
+Computing all energies...
+50.875 s elapsed
+iteration       38 : RMS error    1.114 kcal/mol
+Computing all energies...
+45.743 s elapsed
+iteration       39 : RMS error    1.108 kcal/mol
+Computing all energies...
+52.133 s elapsed
+iteration       40 : RMS error    1.095 kcal/mol
+Computing all energies...
+52.527 s elapsed
+iteration       41 : RMS error    1.105 kcal/mol
+Computing all energies...
+53.415 s elapsed
+iteration       42 : RMS error    1.108 kcal/mol
+Computing all energies...
+48.189 s elapsed
+iteration       43 : RMS error    1.097 kcal/mol
+Computing all energies...
+54.622 s elapsed
+iteration       44 : RMS error    1.102 kcal/mol
+Computing all energies...
+55.231 s elapsed
+iteration       45 : RMS error    1.108 kcal/mol
+Computing all energies...
+55.967 s elapsed
+iteration       46 : RMS error    1.096 kcal/mol
+Computing all energies...
+49.699 s elapsed
+iteration       47 : RMS error    1.095 kcal/mol
+Computing all energies...
+49.859 s elapsed
+iteration       48 : RMS error    1.090 kcal/mol
+Computing all energies...
+57.271 s elapsed
+iteration       49 : RMS error    1.087 kcal/mol
+Computing all energies...
+58.107 s elapsed
+iteration       50 : RMS error    1.113 kcal/mol
+Computing all energies...
+58.643 s elapsed
+iteration       51 : RMS error    1.082 kcal/mol
+Computing all energies...
+51.461 s elapsed
+iteration       52 : RMS error    1.089 kcal/mol
+Computing all energies...
+59.756 s elapsed
+iteration       53 : RMS error    1.094 kcal/mol
+Computing all energies...
+60.136 s elapsed
+iteration       54 : RMS error    1.096 kcal/mol
+Computing all energies...
+60.774 s elapsed
+iteration       55 : RMS error    1.087 kcal/mol
+Computing all energies...
+53.132 s elapsed
+iteration       56 : RMS error    1.088 kcal/mol
+Computing all energies...
+61.601 s elapsed
+iteration       57 : RMS error    1.087 kcal/mol
+Computing all energies...
+62.201 s elapsed
+iteration       58 : RMS error    1.060 kcal/mol
+Computing all energies...
+62.852 s elapsed
+iteration       59 : RMS error    1.058 kcal/mol
+Computing all energies...
+54.787 s elapsed
+iteration       60 : RMS error    1.066 kcal/mol
+Computing all energies...
+55.534 s elapsed
+iteration       61 : RMS error    1.067 kcal/mol
+Computing all energies...
+64.698 s elapsed
+iteration       62 : RMS error    1.071 kcal/mol
+Computing all energies...
+65.439 s elapsed
+iteration       63 : RMS error    1.073 kcal/mol
+Computing all energies...
+56.496 s elapsed
+iteration       64 : RMS error    1.050 kcal/mol
+Computing all energies...
+57.131 s elapsed
+iteration       65 : RMS error    1.057 kcal/mol
+Computing all energies...
+67.064 s elapsed
+iteration       66 : RMS error    1.057 kcal/mol
+Computing all energies...
+68.307 s elapsed
+iteration       67 : RMS error    1.058 kcal/mol
+Computing all energies...
+68.487 s elapsed
+iteration       68 : RMS error    1.060 kcal/mol
+Computing all energies...
+59.317 s elapsed
+iteration       69 : RMS error    1.059 kcal/mol
+Computing all energies...
+69.615 s elapsed
+iteration       70 : RMS error    1.070 kcal/mol
+Computing all energies...
+70.226 s elapsed
+iteration       71 : RMS error    1.066 kcal/mol
+Computing all energies...
+71.020 s elapsed
+iteration       72 : RMS error    1.055 kcal/mol
+Computing all energies...
+60.851 s elapsed
+iteration       73 : RMS error    1.059 kcal/mol
+Computing all energies...
+72.134 s elapsed
+iteration       74 : RMS error    1.098 kcal/mol
+Computing all energies...
+72.323 s elapsed
+iteration       75 : RMS error    1.079 kcal/mol
+Computing all energies...
+73.034 s elapsed
+iteration       76 : RMS error    1.085 kcal/mol
+Computing all energies...
+62.312 s elapsed
+iteration       77 : RMS error    1.093 kcal/mol
+Computing all energies...
+62.788 s elapsed
+iteration       78 : RMS error    1.064 kcal/mol
+Computing all energies...
+74.904 s elapsed
+iteration       79 : RMS error    1.050 kcal/mol
+Computing all energies...
+75.337 s elapsed
+iteration       80 : RMS error    1.071 kcal/mol
+Computing all energies...
+75.846 s elapsed
+iteration       81 : RMS error    1.066 kcal/mol
+Computing all energies...
+64.598 s elapsed
+iteration       82 : RMS error    1.051 kcal/mol
+Computing all energies...
+76.943 s elapsed
+iteration       83 : RMS error    1.062 kcal/mol
+Computing all energies...
+77.381 s elapsed
+iteration       84 : RMS error    1.061 kcal/mol
+Computing all energies...
+79.556 s elapsed
+iteration       85 : RMS error    1.070 kcal/mol
+Computing all energies...
+68.269 s elapsed
+iteration       86 : RMS error    1.068 kcal/mol
+Computing all energies...
+80.035 s elapsed
+iteration       87 : RMS error    1.065 kcal/mol
+Computing all energies...
+80.655 s elapsed
+iteration       88 : RMS error    1.050 kcal/mol
+Computing all energies...
+82.075 s elapsed
+iteration       89 : RMS error    1.046 kcal/mol
+Computing all energies...
+69.141 s elapsed
+iteration       90 : RMS error    1.044 kcal/mol
+Computing all energies...
+69.155 s elapsed
+iteration       91 : RMS error    1.040 kcal/mol
+Computing all energies...
+83.778 s elapsed
+iteration       92 : RMS error    1.048 kcal/mol
+Computing all energies...
+83.266 s elapsed
+iteration       93 : RMS error    1.047 kcal/mol
+Computing all energies...
+83.984 s elapsed
+iteration       94 : RMS error    1.071 kcal/mol
+Computing all energies...
+70.761 s elapsed
+iteration       95 : RMS error    1.063 kcal/mol
+Computing all energies...
+85.102 s elapsed
+iteration       96 : RMS error    1.062 kcal/mol
+Computing all energies...
+85.796 s elapsed
+iteration       97 : RMS error    1.063 kcal/mol
+Computing all energies...
+85.944 s elapsed
+iteration       98 : RMS error    1.058 kcal/mol
+Computing all energies...
+72.260 s elapsed
+iteration       99 : RMS error    1.051 kcal/mol
+Computing all energies...
+87.501 s elapsed
+iteration      100 : RMS error    1.059 kcal/mol
