@@ -149,9 +149,9 @@ def read_gbsa_parameters(filename):
             # Parse parameters
             elements = line.split()
             if len(elements) == 3:
-                [atomtype, radius, gamma] = elements
+                [atomtype, radius, scalingFactor] = elements
                 parameters['%s_%s' % (atomtype,'radius')] = float(radius)
-                parameters['%s_%s' % (atomtype,'gamma')] = float(gamma)
+                parameters['%s_%s' % (atomtype,'scalingFactor')] = float(scalingFactor)
 
         return parameters                
 
@@ -216,8 +216,8 @@ def compute_hydration_energies(molecules, parameters):
         #   system.addForce(nonbonded_force)
 
         # Add GBSA term
-        gbsa_force = openmm.OBCGBSAForce()   
-        gbsa_force.setNonbondedMethod(openmm.OBCGBSAForce.NoCutoff) # set no cutoff
+        gbsa_force = openmm.GBSAOBCForce()   
+        gbsa_force.setNonbondedMethod(openmm.GBSAOBCForce.NoCutoff) # set no cutoff
         gbsa_force.setSoluteDielectric(1)
         gbsa_force.setSolventDielectric(78)
 
@@ -281,8 +281,8 @@ def compute_hydration_energy(molecule, parameters, platform_name="Reference"):
         system.addParticle(mass * units.amu)
 
     # Add GB term
-    gbsa_force = openmm.OBCGBSAForce()   
-    gbsa_force.setNonbondedMethod(openmm.OBCGBSAForce.NoCutoff) # set no cutoff
+    gbsa_force = openmm.GBSAOBCForce()   
+    gbsa_force.setNonbondedMethod(openmm.GBSAOBCForce.NoCutoff) # set no cutoff
     gbsa_force.setSoluteDielectric(1)
     gbsa_force.setSolventDielectric(78)
     
@@ -440,7 +440,8 @@ if __name__=="__main__":
     # Read GBSA parameters.
     parameters = read_gbsa_parameters(options.parameters_filename)
 
-    mcmcDbName     = options.mcmcDb
+    mcmcDbName     = os.path.abspath(options.mcmcDb)
+
     printString  = "Starting " + sys.argv[0] + "\n"
     printString += '    atom types=<'   + options.atomtypes_filename + ">\n"
     printString += '    parameters=<'   + options.parameters_filename + ">\n"
@@ -571,6 +572,8 @@ if __name__=="__main__":
                 parameter_sets.append( dict() )
                 parameter_sets[index][key] = parameter
 
+    outfile = open('evaluate.txt', 'w');
+
     for (index, parameter_set) in enumerate([parameters] + parameter_sets): # skip some
     #for (index, parameter_set) in enumerate([parameters] + parameter_sets[::10]): # skip some
         
@@ -609,3 +612,8 @@ if __name__=="__main__":
 
         print "iteration %8d : RMS error %8.3f kcal/mol" % (index, signed_errors.std())
 
+        for i in range(signed_errors.size):
+            outfile.write('%12.6f ' % signed_errors[i])
+        outfile.write('\n')
+        outfile.flush()
+    outfile.close()

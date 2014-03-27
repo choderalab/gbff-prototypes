@@ -153,9 +153,9 @@ def read_gbsa_parameters(filename):
             # Parse parameters
             elements = line.split()
             if len(elements) == 3:
-                [atomtype, radius, gamma] = elements
+                [atomtype, radius, scalingFactor] = elements
                 parameters['%s_%s' % (atomtype,'radius')] = float(radius)
-                parameters['%s_%s' % (atomtype,'gamma')] = float(gamma)
+                parameters['%s_%s' % (atomtype,'scalingFactor')] = float(scalingFactor)
 
         return parameters                
 
@@ -200,33 +200,21 @@ def compute_hydration_energies(molecules, parameters):
         #   system.addForce(nonbonded_force)
 
         # Add GBSA term
-        gbsa_force = openmm.OBCGBSAForce()   
-        gbsa_force.setNonbondedMethod(openmm.GBSAForce.NoCutoff) # set no cutoff
+        gbsa_force = openmm.GBSAOBCForce()   
+        gbsa_force.setNonbondedMethod(openmm.GBSAOBCForce.NoCutoff) # set no cutoff
         gbsa_force.setSoluteDielectric(1)
         gbsa_force.setSolventDielectric(78)
 
         # Build indexable list of atoms.
         atoms = [atom for atom in molecule.GetAtoms()]   
    
-        # Assign GB/VI parameters.
+        # Assign GBSA parameters.
         for atom in molecule.GetAtoms():            
             atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
             charge = atom.GetPartialCharge() * units.elementary_charge
             radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
             scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')] * units.kilocalories_per_mole            
             gbsa_force.addParticle(charge, radius, scalingFactor) 
-
-        # Add bonds.
-        for bond in molecule.GetBonds():
-            # Get atom indices.
-            iatom = bond.GetBgnIdx()
-            jatom = bond.GetEndIdx()
-            # Get bond length.
-            (xi, yi, zi) = molecule.GetCoords(atoms[iatom])
-            (xj, yj, zj) = molecule.GetCoords(atoms[jatom])
-            distance = math.sqrt((xi-xj)**2 + (yi-yj)**2 + (zi-zj)**2) * units.angstroms
-            # Identify bonded atoms to GBSA.
-            gbsa_force.addBond(iatom, jatom, distance)
 
         # Add the force to the system.
         system.addForce(gbsa_force)
@@ -276,21 +264,15 @@ def compute_hydration_energy(molecule, parameters, platform_name="Reference"):
         system.addParticle(mass * units.amu)
 
     # Add GBSA term
-    # gbsa_force = openmm.GBSASoftcoreForce()
-    gbsa_force = openmm.GBSAForce()   
-    gbsa_force.setNonbondedMethod(openmm.GBSAForce.NoCutoff) # set no cutoff
+    gbsa_force = openmm.GBSAOBCForce()   
+    gbsa_force.setNonbondedMethod(openmm.GBSAOBCForce.NoCutoff) # set no cutoff
     gbsa_force.setSoluteDielectric(1)
     gbsa_force.setSolventDielectric(78)
-    
-    # Use scaling method.
-    # gbsa_force.setBornRadiusScalingMethod(openmm.GBSASoftcoreForce.QuinticSpline)
-    # gbsa_force.setQuinticLowerLimitFactor(0.75)
-    # gbsa_force.setQuinticUpperBornRadiusLimit(50.0*units.nanometers)
     
     # Build indexable list of atoms.
     atoms = [atom for atom in molecule.GetAtoms()]   
     
-    # Assign GB/VI parameters.
+    # Assign GBSA parameters.
     for atom in molecule.GetAtoms():            
         atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
         charge = atom.GetPartialCharge() * units.elementary_charge
@@ -302,22 +284,7 @@ def compute_hydration_energy(molecule, parameters, platform_name="Reference"):
             print parameters.keys()
             raise exception
         
-        # scalingFactor *= -1.0 # DEBUG
-        lambda_ = 1.0 # fully interacting
-        # gbsa_force.addParticle(charge, radius, scalingFactor, lambda_) # for GBSASoftcoreForce
-        gbsa_force.addParticle(charge, radius, scalingFactor) # for GBSAForce
-        
-    # Add bonds.
-    for bond in molecule.GetBonds():
-        # Get atom indices.
-        iatom = bond.GetBgnIdx()
-        jatom = bond.GetEndIdx()
-        # Get bond length.
-        (xi, yi, zi) = molecule.GetCoords(atoms[iatom])
-        (xj, yj, zj) = molecule.GetCoords(atoms[jatom])
-        distance = math.sqrt((xi-xj)**2 + (yi-yj)**2 + (zi-zj)**2) * units.angstroms
-        # Identify bonded atoms to GBSA.
-        gbsa_force.addBond(iatom, jatom, distance)
+        gbsa_force.addParticle(charge, radius, scalingFactor) #        
 
     # Add the force to the system.
     system.addForce(gbsa_force)
@@ -347,7 +314,7 @@ def compute_hydration_energy(molecule, parameters, platform_name="Reference"):
 
 def hydration_energy_factory(molecule):
     def hydration_energy(**parameters):
-        return compute_hydration_energy(molecule, parameters, platform_name="Reference")
+        return compute_hydration_energy(molecule, parameters, platform_name="CPU")
     return hydration_energy
 
 #=============================================================================================
@@ -366,9 +333,9 @@ def create_model(molecules, initial_parameters):
     for (key, value) in initial_parameters.iteritems():
         (atomtype, parameter_name) = key.split('_')
         if parameter_name == 'scalingFactor':
-            stochastic = pymc.Uniform(key, value=value, lower=-10.0, upper=+10.0)
+            stochastic = pymc.Uniform(key, value=value, lower=+0.01, upper=+1.0)
         elif parameter_name == 'radius':
-            stochastic = pymc.Uniform(key, value=value, lower=1.0, upper=3.0)
+            stochastic = pymc.Uniform(key, value=value, lower=0.5, upper=3.5)
         else:
             raise Exception("Unrecognized parameter name: %s" % parameter_name)
         model[key] = stochastic
@@ -410,7 +377,7 @@ def create_model(molecules, initial_parameters):
         molecule_name          = molecule.GetTitle()
         variable_name          = "dg_exp_%08d" % molecule_index
         dg_exp                 = float(OEGetSDData(molecule, 'dG(exp)')) # observed hydration free energy in kcal/mol
-        model[variable_name]   = pymc.Normal(mu=model['dg_gbsa_%08d' % molecule_index], tau=model['tau'], value=dg_exp, observed=True)        
+        model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%08d' % molecule_index], tau=model['tau'], value=dg_exp, observed=True)        
 
     return model
 
@@ -424,7 +391,7 @@ if __name__=="__main__":
     usage_string = """\
     usage: %prog --types typefile --parameters paramfile --molecules molfile --iterations MCMC_iterations --mcmcout MCMC_db_name
     
-    example: %prog --types parameters/gbsa.types --parameters parameters/gbsa-am1bcc.parameters --molecules datasets/neutrals.sdf --iterations 150 --mcmcout MCMC.txt
+    example: %prog --types parameters/gbsa.types --parameters parameters/gbsa-am1bcc.parameters --molecules datasets/neutrals.sdf --iterations 150 --mcmcout MCMC
     
     """
     version_string = "%prog %__version__"
@@ -447,7 +414,7 @@ if __name__=="__main__":
                       help="MCMC iterations.")
     
     parser.add_option("-o", "--mcmcout", metavar='MCMCOUT',
-                      action="store", type="string", dest='mcmcout', default='MCMC.txt',
+                      action="store", type="string", dest='mcmcout', default='MCMC',
                       help="MCMC output database name.")
     
     # Parse command-line arguments.
@@ -460,6 +427,7 @@ if __name__=="__main__":
 
     # Read GBSA parameters.
     parameters = read_gbsa_parameters(options.parameters_filename)
+    print parameters
 
     mcmcIterations = options.iterations
     mcmcDbName     = os.path.abspath(options.mcmcout)
@@ -614,4 +582,5 @@ if __name__=="__main__":
     from pymc import MCMC
     sampler = MCMC(model, db='txt', name=mcmcDbName)
     sampler.isample(iter=mcmcIterations, burn=0, save_interval=1, verbose=True)
-    #sampler.sample(iter=mcmcIterations, burn=0, save_interval=1, verbose=False)
+    #sampler.sample(iter=mcmcIterations, burn=0, save_interval=1, verbose=True, progress_bar=True)
+    sampler.db.close()

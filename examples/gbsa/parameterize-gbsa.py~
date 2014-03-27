@@ -5,9 +5,9 @@
 #=============================================================================================
 
 """
-parameterize-gbvi.py
+parameterize-gbsa.py
 
-Parameterize the GBVI model on hydration free energies of small molecules using Bayesian inference
+Parameterize the GBSA model on hydration free energies of small molecules using Bayesian inference
 via Markov chain Monte Carlo (MCMC).
 
 AUTHORS
@@ -123,9 +123,9 @@ class AtomTyper(object):
 # Utility routines
 #=============================================================================================
 
-def read_gbvi_parameters(filename):
+def read_gbsa_parameters(filename):
         """
-        Read a GBVI parameter set from a file.
+        Read a GBSA parameter set from a file.
 
         ARGUMENTS
 
@@ -153,9 +153,9 @@ def read_gbvi_parameters(filename):
             # Parse parameters
             elements = line.split()
             if len(elements) == 3:
-                [atomtype, radius, gamma] = elements
+                [atomtype, radius, scalingFactor] = elements
                 parameters['%s_%s' % (atomtype,'radius')] = float(radius)
-                parameters['%s_%s' % (atomtype,'gamma')] = float(gamma)
+                parameters['%s_%s' % (atomtype,'scalingFactor')] = float(scalingFactor)
 
         return parameters                
 
@@ -165,12 +165,12 @@ def read_gbvi_parameters(filename):
 
 def compute_hydration_energies(molecules, parameters):
     """
-    Compute solvation energies of a set of molecules given a GBVI parameter set.
+    Compute solvation energies of a set of molecules given a GBSA parameter set.
 
     ARGUMENTS
 
-    molecules (list of OEMol) - molecules with GBVI assigned atom types in type field
-    parameters (dict) - dictionary of GBVI parameters keyed on GBVI atom types
+    molecules (list of OEMol) - molecules with GBSA assigned atom types in type field
+    parameters (dict) - dictionary of GBSA parameters keyed on GBSA atom types
 
     RETURNS
 
@@ -180,7 +180,7 @@ def compute_hydration_energies(molecules, parameters):
 
     energies = dict() # energies[index] is the computed solvation energy of molecules[index]
 
-    platform = openmm.Platform.getPlatformByName("Reference")
+    platform = openmm.Platform.getPlatformByName("CPU")
 
     for molecule in molecules:
         # Create OpenMM System.
@@ -199,46 +199,25 @@ def compute_hydration_energies(molecules, parameters):
         #      nonbonded_force.addParticle(charge, sigma, epsilon)
         #   system.addForce(nonbonded_force)
 
-        # Add GBVI term
-        # gbvi_force = openmm.GBVISoftcoreForce()
-        gbvi_force = openmm.GBVIForce()   
-        gbvi_force.setNonbondedMethod(openmm.GBVIForce.NoCutoff) # set no cutoff
-        gbvi_force.setSoluteDielectric(1)
-        gbvi_force.setSolventDielectric(78)
-
-        # Use scaling method.
-        # gbvi_force.setBornRadiusScalingMethod(openmm.GBVISoftcoreForce.QuinticSpline)
-        # gbvi_force.setQuinticLowerLimitFactor(0.75)
-        # gbvi_force.setQuinticUpperBornRadiusLimit(50.0*units.nanometers)
+        # Add GBSA term
+        gbsa_force = openmm.GBSAOBCForce()   
+        gbsa_force.setNonbondedMethod(openmm.GBSAOBCForce.NoCutoff) # set no cutoff
+        gbsa_force.setSoluteDielectric(1)
+        gbsa_force.setSolventDielectric(78)
 
         # Build indexable list of atoms.
         atoms = [atom for atom in molecule.GetAtoms()]   
    
-        # Assign GB/VI parameters.
+        # Assign GBSA parameters.
         for atom in molecule.GetAtoms():            
-            atomtype = atom.GetStringData("gbvi_type") # GBVI atomtype
+            atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
             charge = atom.GetPartialCharge() * units.elementary_charge
             radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
-            gamma = parameters['%s_%s' % (atomtype, 'gamma')] * units.kilocalories_per_mole            
-            # gamma *= -1.0 # DEBUG
-            lambda_ = 1.0 # fully interacting
-            # gbvi_force.addParticle(charge, radius, gamma, lambda_) # for GBVISoftcoreForce
-            gbvi_force.addParticle(charge, radius, gamma) # for GBVIForce
-
-        # Add bonds.
-        for bond in molecule.GetBonds():
-            # Get atom indices.
-            iatom = bond.GetBgnIdx()
-            jatom = bond.GetEndIdx()
-            # Get bond length.
-            (xi, yi, zi) = molecule.GetCoords(atoms[iatom])
-            (xj, yj, zj) = molecule.GetCoords(atoms[jatom])
-            distance = math.sqrt((xi-xj)**2 + (yi-yj)**2 + (zi-zj)**2) * units.angstroms
-            # Identify bonded atoms to GBVI.
-            gbvi_force.addBond(iatom, jatom, distance)
+            scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')] * units.kilocalories_per_mole            
+            gbsa_force.addParticle(charge, radius, scalingFactor) 
 
         # Add the force to the system.
-        system.addForce(gbvi_force)
+        system.addForce(gbsa_force)
         
         # Build coordinate array.
         natoms = len(atoms)
@@ -261,14 +240,14 @@ def compute_hydration_energies(molecules, parameters):
 
     return energies
 
-def compute_hydration_energy(molecule, parameters, platform_name="Reference"):
+def compute_hydration_energy(molecule, parameters, platform_name="CPU"):
     """
-    Compute hydration energy of a single molecule given a GBVI parameter set.
+    Compute hydration energy of a single molecule given a GBSA parameter set.
 
     ARGUMENTS
 
-    molecule (OEMol) - molecule with GBVI atom types
-    parameters (dict) - parameters for GBVI atom types
+    molecule (OEMol) - molecule with GBSA atom types
+    parameters (dict) - parameters for GBSA atom types
 
     RETURNS
 
@@ -284,52 +263,31 @@ def compute_hydration_energy(molecule, parameters, platform_name="Reference"):
         mass = OEGetDefaultMass(atom.GetAtomicNum())
         system.addParticle(mass * units.amu)
 
-    # Add GBVI term
-    # gbvi_force = openmm.GBVISoftcoreForce()
-    gbvi_force = openmm.GBVIForce()   
-    gbvi_force.setNonbondedMethod(openmm.GBVIForce.NoCutoff) # set no cutoff
-    gbvi_force.setSoluteDielectric(1)
-    gbvi_force.setSolventDielectric(78)
-    
-    # Use scaling method.
-    # gbvi_force.setBornRadiusScalingMethod(openmm.GBVISoftcoreForce.QuinticSpline)
-    # gbvi_force.setQuinticLowerLimitFactor(0.75)
-    # gbvi_force.setQuinticUpperBornRadiusLimit(50.0*units.nanometers)
+    # Add GBSA term
+    gbsa_force = openmm.GBSAOBCForce()   
+    gbsa_force.setNonbondedMethod(openmm.GBSAOBCForce.NoCutoff) # set no cutoff
+    gbsa_force.setSoluteDielectric(1)
+    gbsa_force.setSolventDielectric(78)
     
     # Build indexable list of atoms.
     atoms = [atom for atom in molecule.GetAtoms()]   
     
     # Assign GB/VI parameters.
     for atom in molecule.GetAtoms():            
-        atomtype = atom.GetStringData("gbvi_type") # GBVI atomtype
+        atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
         charge = atom.GetPartialCharge() * units.elementary_charge
         try:
             radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
-            gamma = parameters['%s_%s' % (atomtype, 'gamma')] * units.kilocalories_per_mole
+            scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')] * units.kilocalories_per_mole
         except Exception, exception:
             print "Cannot find parameters for atomtype '%s' in molecule '%s'" % (atomtype, molecule.GetTitle())
             print parameters.keys()
             raise exception
         
-        # gamma *= -1.0 # DEBUG
-        lambda_ = 1.0 # fully interacting
-        # gbvi_force.addParticle(charge, radius, gamma, lambda_) # for GBVISoftcoreForce
-        gbvi_force.addParticle(charge, radius, gamma) # for GBVIForce
-        
-    # Add bonds.
-    for bond in molecule.GetBonds():
-        # Get atom indices.
-        iatom = bond.GetBgnIdx()
-        jatom = bond.GetEndIdx()
-        # Get bond length.
-        (xi, yi, zi) = molecule.GetCoords(atoms[iatom])
-        (xj, yj, zj) = molecule.GetCoords(atoms[jatom])
-        distance = math.sqrt((xi-xj)**2 + (yi-yj)**2 + (zi-zj)**2) * units.angstroms
-        # Identify bonded atoms to GBVI.
-        gbvi_force.addBond(iatom, jatom, distance)
+        gbsa_force.addParticle(charge, radius, scalingFactor) #        
 
     # Add the force to the system.
-    system.addForce(gbvi_force)
+    system.addForce(gbsa_force)
     
     # Build coordinate array.
     natoms = len(atoms)
@@ -356,7 +314,7 @@ def compute_hydration_energy(molecule, parameters, platform_name="Reference"):
 
 def hydration_energy_factory(molecule):
     def hydration_energy(**parameters):
-        return compute_hydration_energy(molecule, parameters, platform_name="Reference")
+        return compute_hydration_energy(molecule, parameters, platform_name="CPU")
     return hydration_energy
 
 #=============================================================================================
@@ -374,10 +332,10 @@ def create_model(molecules, initial_parameters):
     parameters = dict() # just the parameters
     for (key, value) in initial_parameters.iteritems():
         (atomtype, parameter_name) = key.split('_')
-        if parameter_name == 'gamma':
-            stochastic = pymc.Uniform(key, value=value, lower=-10.0, upper=+10.0)
+        if parameter_name == 'scalingFactor':
+            stochastic = pymc.Uniform(key, value=value, lower=+0.01, upper=+1.0)
         elif parameter_name == 'radius':
-            stochastic = pymc.Uniform(key, value=value, lower=1.0, upper=3.0)
+            stochastic = pymc.Uniform(key, value=value, lower=0.5, upper=3.5)
         else:
             raise Exception("Unrecognized parameter name: %s" % parameter_name)
         model[key] = stochastic
@@ -386,12 +344,12 @@ def create_model(molecules, initial_parameters):
     # Define deterministic functions for hydration free energies.
     for (molecule_index, molecule) in enumerate(molecules):
         molecule_name = molecule.GetTitle()
-        variable_name = "dg_gbvi_%08d" % molecule_index
+        variable_name = "dg_gbsa_%08d" % molecule_index
         # Determine which parameters are involved in this molecule to limit number of parents for caching.
         parents = dict()
         for atom in molecule.GetAtoms():
-            atomtype = atom.GetStringData("gbvi_type") # GBVI atomtype
-            for parameter_name in ['gamma', 'radius']:
+            atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
+            for parameter_name in ['scalingFactor', 'radius']:
                 stochastic_name = '%s_%s' % (atomtype,parameter_name)
                 parents[stochastic_name] = parameters[stochastic_name]
         print "%s : " % molecule_name,
@@ -419,7 +377,7 @@ def create_model(molecules, initial_parameters):
         molecule_name          = molecule.GetTitle()
         variable_name          = "dg_exp_%08d" % molecule_index
         dg_exp                 = float(OEGetSDData(molecule, 'dG(exp)')) # observed hydration free energy in kcal/mol
-        model[variable_name]   = pymc.Normal(mu=model['dg_gbvi_%08d' % molecule_index], tau=model['tau'], value=dg_exp, observed=True)        
+        model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%08d' % molecule_index], tau=model['tau'], value=dg_exp, observed=True)        
 
     return model
 
@@ -433,7 +391,7 @@ if __name__=="__main__":
     usage_string = """\
     usage: %prog --types typefile --parameters paramfile --molecules molfile --iterations MCMC_iterations --mcmcout MCMC_db_name
     
-    example: %prog --types parameters/gbvi.types --parameters parameters/gbvi-am1bcc.parameters --molecules datasets/neutrals.sdf --iterations 150 --mcmcout MCMC.txt
+    example: %prog --types parameters/gbsa.types --parameters parameters/gbsa-am1bcc.parameters --molecules datasets/neutrals.sdf --iterations 150 --mcmcout MCMC
     
     """
     version_string = "%prog %__version__"
@@ -456,7 +414,7 @@ if __name__=="__main__":
                       help="MCMC iterations.")
     
     parser.add_option("-o", "--mcmcout", metavar='MCMCOUT',
-                      action="store", type="string", dest='mcmcout', default='MCMC.txt',
+                      action="store", type="string", dest='mcmcout', default='MCMC',
                       help="MCMC output database name.")
     
     # Parse command-line arguments.
@@ -467,8 +425,9 @@ if __name__=="__main__":
         parser.print_help()
         parser.error("All input files must be specified.")
 
-    # Read GBVI parameters.
-    parameters = read_gbvi_parameters(options.parameters_filename)
+    # Read GBSA parameters.
+    parameters = read_gbsa_parameters(options.parameters_filename)
+    print parameters
 
     mcmcIterations = options.iterations
     mcmcDbName     = os.path.abspath(options.mcmcout)
@@ -483,7 +442,7 @@ if __name__=="__main__":
     #sys.stdout.write( printString )
         
     # Construct atom typer.
-    atom_typer = AtomTyper(options.atomtypes_filename, "gbvi_type")
+    atom_typer = AtomTyper(options.atomtypes_filename, "gbsa_type")
     #atom_typer.dump()
     
     # Load and type all molecules in the specified dataset.
@@ -562,12 +521,12 @@ if __name__=="__main__":
     print "%.3f s elapsed" % elapsed_time
     print "%d molecules remaining" % len(molecules)
     
-    # Type all molecules with GBVI parameters.
+    # Type all molecules with GBSA parameters.
     start_time = time.time()
     typed_molecules = list()
     untyped_molecules = list()
     for molecule in molecules:
-        # Assign GBVI types according to SMARTS rules.
+        # Assign GBSA types according to SMARTS rules.
         try:
             atom_typer.assignTypes(molecule)
             typed_molecules.append(OEGraphMol(molecule))
@@ -623,4 +582,5 @@ if __name__=="__main__":
     from pymc import MCMC
     sampler = MCMC(model, db='txt', name=mcmcDbName)
     sampler.isample(iter=mcmcIterations, burn=0, save_interval=1, verbose=True)
-    #sampler.sample(iter=mcmcIterations, burn=0, save_interval=1, verbose=False)
+    #sampler.sample(iter=mcmcIterations, burn=0, save_interval=1, verbose=True, progress_bar=True)
+    sampler.db.close()
