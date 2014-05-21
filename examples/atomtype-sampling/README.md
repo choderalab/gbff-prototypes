@@ -76,6 +76,18 @@ Each decorator has a corresponding string token (no spaces allowed!) that is use
 
 For example, we may find the atom type ```[#6]&H3``` which is `carbon total-h-count-3` for a C atom bonded to three hydrogens.
 
+## Prerequisites
+
+* Python
+[Anaconda](https://store.continuum.io/cshop/anaconda/) is suggested.
+
+* OpenMM
+Suggested installation route is via [conda](http://conda.pydata.org):
+```
+conda install openmm
+```
+
+
 ## Usage
 
 Example:
