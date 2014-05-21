@@ -76,6 +76,15 @@ Each decorator has a corresponding string token (no spaces allowed!) that is use
 
 For example, we may find the atom type ```[#6]&H3``` which is `carbon total-h-count-3` for a C atom bonded to three hydrogens.
 
+Newly proposed atom types are added to the end of the list.
+MAfter a new atom type is proposed, all molecules are reparameterized using the new set of atom types.
+Atom type matching proceeds by trying to see if each SMARTS match can be applied working from top to bottom of the list.
+This means the atom type list is hierarchical, with more general types appearing at the top of the list and more specific subtypes appearing at the bottom.
+
+If a proposed type matches zero atoms, the RJMCMC move is rejected.
+
+Currently, the acceptance criteria does not include the full Metropolis-Hastings acceptance criteria that would include the reverse probability.  This needs to be added in.
+
 ## Prerequisites
 
 * Python
@@ -92,7 +101,46 @@ conda install openmm
 
 Example:
 ```
-python atomtype-sampling-example.py --basetypes=atomtypes/basetypes.smarts --decorators=atomtypes/decorations.smarts --molecules=datasets/mobley-504-molecules.sdf
+python atomtype-sampling-example.py --basetypes=atomtypes/basetypes.smarts --decorators=atomtypes/decorators.smarts --molecules=datasets/mobley-504-molecules.sdf --iterations 1000
+```
+
+Initially, the base atom types are added to the pool of current atom types, and the number of atoms and molecules matched by each atom type are shown:
+```
+INDEX        ATOMS  MOLECULES                                          TYPE NAME                                           SMARTS
+    1 :       4371        483 |                                         hydrogen                                             [#1]
+    2 :       2717        488 |                                           carbon                                             [#6]
+    3 :        117        102 |                                         nitrogen                                             [#7]
+    4 :        338        216 |                                           oxygen                                             [#8]
+    5 :         69         24 |                                         fluorine                                             [#9]
+    6 :          2          2 |                                      phosphorous                                            [#15]
+    7 :         20         18 |                                           sulfur                                            [#16]
+    8 :        116         62 |                                         chlorine                                            [#17]
+    9 :         28         23 |                                          bromine                                            [#35]
+   10 :         12         11 |                                           iodine                                            [#53]
+TOTAL         7790        490
+```
+After many iterations, the pool of current atom types will have diverged, with some children having been added to the set.  (Base atom types can never be deleted.)
+```
+Iteration 999 / 1000: True
+INDEX        ATOMS  MOLECULES                                          TYPE NAME                                           SMARTS
+    1 :       4366        483 |                                         hydrogen                                             [#1]
+    2 :          5          5 |                         hydrogen sulfur-adjacent                                  [#1&$(*~[#16])]
+    3 :       2602        474 |                                           carbon                                             [#6]
+    4 :         22         18 |                         carbon fluorine-adjacent                                   [#6&$(*~[#9])]
+    5 :          7          6 |       carbon fluorine-adjacent hydrogen-adjacent                         [#6&$(*~[#9])&$(*~[#1])]
+    6 :         25         23 |                          carbon bromine-adjacent                                  [#6&$(*~[#35])]
+    7 :         61         33 |         carbon total-h-count-1 nitrogen-adjacent                                [#6&H1&$(*~[#7])]
+    8 :        105         92 |                                         nitrogen                                             [#7]
+    9 :         12         12 |                           nitrogen triple-bonded                                  [#7&$([*]#[*])]
+   10 :        338        216 |                                           oxygen                                             [#8]
+   11 :         69         24 |                                         fluorine                                             [#9]
+   12 :          2          2 |                                      phosphorous                                            [#15]
+   13 :         16         14 |                                           sulfur                                            [#16]
+   14 :          4          4 |                                 sulfur valence-6                                         [#16&v6]
+   15 :        116         62 |                                         chlorine                                            [#17]
+   16 :         28         23 |                                          bromine                                            [#35]
+   17 :         12         11 |                                           iodine                                            [#53]
+TOTAL         7790        490
 ```
 
 ## References
