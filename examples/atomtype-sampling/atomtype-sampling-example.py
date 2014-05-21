@@ -53,10 +53,10 @@ class AtomTyper(object):
     """
     Atom typer based on SMARTS-defined atom types.
 
-    Based on 'Patty', by Pat Walters.
+    Based on 'Patty' implementation by Pat Walters.
 
     """
-    
+
     class TypingException(Exception):
         """
         Atom typing exception.
@@ -74,13 +74,13 @@ class AtomTyper(object):
         Create an atom typer instance.
 
         ARGUMENTS
-        
+
         typelist (string) - if specified, will read types from list with each element [smarts, typename]
         tagname (string) - tag name
 
         """
 
-        self.pattyTag = OEGetTag(tagname) 
+        self.pattyTag = OEGetTag(tagname)
 
         # Create table of search objects.
         self.smartsList = []
@@ -100,7 +100,7 @@ class AtomTyper(object):
     def assignTypes(self,mol):
         # Assign null types.
         for atom in mol.GetAtoms():
-            atom.SetStringData(self.pattyTag, "")        
+            atom.SetStringData(self.pattyTag, "")
 
         # Assign atom types using rules.
         OEAssignAromaticFlags(mol)
@@ -130,13 +130,13 @@ class AtomTyper(object):
     def read_typelist(cls, filename):
         """
         Read an atomtype or decorator list from a file.
-        
+
         ARGUMENTS
 
         filename (string) - the name of the file to be read
 
         RETURNS
-        
+
         typelist (list) - typelist[i] is element i of the typelist in format [smarts, typename]
 
         """
@@ -211,7 +211,7 @@ class AtomTypeSampler(object):
         proposed_molecules = copy.deepcopy(self.molecules)
         natomtypes = len(proposed_atomtypes)
         ndecorators = len(self.decorators)
-        
+
         if random.random() < 0.5:
             # Pick an atom type to destroy.
             atomtype_index = random.randint(0, natomtypes-1)
@@ -230,7 +230,7 @@ class AtomTypeSampler(object):
                 print e
                 # Reject since typing failed.
                 if verbose: print "Typing failed; rejecting."
-                return False            
+                return False
         else:
             # Pick an atomtype to subtype.
             atomtype_index = random.randint(0, natomtypes-1)
@@ -239,7 +239,7 @@ class AtomTypeSampler(object):
             # Create new atomtype to insert by appending decorator with 'and' operator.
             (atomtype, atomtype_typename) = self.atomtypes[atomtype_index]
             (decorator, decorator_typename) = self.decorators[decorator_index]
-            result = re.match('\[(.+)\]', atomtype)            
+            result = re.match('\[(.+)\]', atomtype)
             proposed_atomtype = '[' + result.groups(1)[0] + '&' + decorator + ']'
             proposed_typename = atomtype_typename + ' ' + decorator_typename
             print "Attempting to create new subtype: '%s' (%s) + '%s' (%s) -> '%s' (%s)" % (atomtype, atomtype_typename, decorator, decorator_typename, proposed_atomtype, proposed_typename)
@@ -249,7 +249,7 @@ class AtomTypeSampler(object):
                 existing_atomtypes.add(a)
             if proposed_atomtype in existing_atomtypes:
                 if verbose: print "Atom type already exists; rejecting to avoid duplication."
-                return False        
+                return False
             # Insert atomtype immediately after.
             proposed_atomtypes.insert(atomtype_index+1, [proposed_atomtype, proposed_typename])
             print proposed_atomtypes
@@ -258,7 +258,7 @@ class AtomTypeSampler(object):
                 # Type molecules.
                 self.type_molecules(proposed_atomtypes, proposed_molecules)
                 # Compute updated statistics.
-                [proposed_atom_typecounts, proposed_molecule_typecounts] = self.compute_type_statistics(proposed_atomtypes, proposed_molecules)                
+                [proposed_atom_typecounts, proposed_molecule_typecounts] = self.compute_type_statistics(proposed_atomtypes, proposed_molecules)
                 # Reject if new type is unused.
                 if (proposed_atom_typecounts[proposed_typename] == 0):
                     # Reject because new type is unused in dataset.
@@ -276,8 +276,8 @@ class AtomTypeSampler(object):
             except Exception as e:
                 print "Exception: %s" % str(e)
                 # Reject since typing failed.
-                if verbose: print "Typing failed for one or more molecules using proposed atomtypes; rejecting."                
-                return False            
+                if verbose: print "Typing failed for one or more molecules using proposed atomtypes; rejecting."
+                return False
 
         return
 
@@ -292,7 +292,7 @@ class AtomTypeSampler(object):
         # Type molecules.
         for molecule in molecules:
             atomtyper.assignTypes(molecule)
-        
+
         return
 
     def compute_type_statistics(self, typelist, molecules):
@@ -340,32 +340,32 @@ class AtomTypeSampler(object):
         print "%5s   %10s %10s   %48s %48s" % ('INDEX', 'ATOMS', 'MOLECULES', 'TYPE NAME', 'SMARTS')
         for [smarts, typename] in typelist:
             print "%5d : %10d %10d | %48s %48s" % (index, atom_typecounts[typename], molecule_typecounts[typename], typename, smarts)
-            natoms += atom_typecounts[typename]            
+            natoms += atom_typecounts[typename]
             index += 1
 
-        nmolecules = len(self.molecules)    
-        print "%5s   %10d %10d" % ('TOTAL', natoms, nmolecules)        
+        nmolecules = len(self.molecules)
+        print "%5s   %10d %10d" % ('TOTAL', natoms, nmolecules)
         return
 #=============================================================================================
 # SUBROUTINES
 #=============================================================================================
 
-def normalize_molecules(molecules):    
+def normalize_molecules(molecules):
     """
     Normalize all molecules in specified set.
 
     ARGUMENTS
 
     molecules (list of OEMol) - molecules to be normalized (in place)
-    
+
     """
 
     # Add explicit hydrogens.
     for molecule in molecules:
-        openeye.oechem.OEAddExplicitHydrogens(molecule)    
+        openeye.oechem.OEAddExplicitHydrogens(molecule)
 
     # Build a conformation for all molecules with Omega.
-    print "Building conformations for all molecules..."    
+    print "Building conformations for all molecules..."
     import openeye.oeomega
     omega = openeye.oeomega.OEOmega()
     omega.SetMaxConfs(1)
@@ -382,17 +382,17 @@ def normalize_molecules(molecules):
     ligand_mol2_dirname  = os.path.dirname(mcmcDbName) + '/mol2'
     if( not os.path.exists( ligand_mol2_dirname ) ):
         os.makedirs(ligand_mol2_dirname)
-    ligand_mol2_filename = ligand_mol2_dirname + '/temp' + os.path.basename(mcmcDbName) + '.mol2' 
-    start_time = time.time()    
-    omolstream = openeye.oechem.oemolostream(ligand_mol2_filename)    
+    ligand_mol2_filename = ligand_mol2_dirname + '/temp' + os.path.basename(mcmcDbName) + '.mol2'
+    start_time = time.time()
+    omolstream = openeye.oechem.oemolostream(ligand_mol2_filename)
     for molecule in molecules:
-        # Write molecule as mol2, changing molecule through normalization.    
+        # Write molecule as mol2, changing molecule through normalization.
         openeye.oechem.OEWriteMolecule(omolstream, molecule)
     omolstream.close()
     end_time = time.time()
     elapsed_time = end_time - start_time
     print "%.3f s elapsed" % elapsed_time
-    
+
     # Assign AM1-BCC charges.
     print "Assigning AM1-BCC charges..."
     start_time = time.time()
@@ -400,7 +400,7 @@ def normalize_molecules(molecules):
         # Assign AM1-BCC charges.
         if molecule.NumAtoms() == 1:
             # Use formal charges for ions.
-            OEFormalPartialCharges(molecule)         
+            OEFormalPartialCharges(molecule)
         else:
             # Assign AM1-BCC charges for multiatom molecules.
             OEAssignPartialCharges(molecule, OECharges_AM1BCC, False) # use explicit hydrogens
@@ -411,12 +411,12 @@ def normalize_molecules(molecules):
             # TODO: Write molecule out
             # Delete themolecule.
             molecules.remove(molecule)
-            
+
     end_time = time.time()
     elapsed_time = end_time - start_time
     print "%.3f s elapsed" % elapsed_time
     print "%d molecules remaining" % len(molecules)
-    
+
     return
 
 def read_molecules(filename, verbose=True):
@@ -426,11 +426,11 @@ def read_molecules(filename, verbose=True):
     ARGUMENTS
 
     filename (string) - filename from which molecules are to be read (e.g. mol2, sdf)
-    
+
     RETURNS
 
-    molecules (list of OEMol) - molecules read from file    
-    
+    molecules (list of OEMol) - molecules read from file
+
     """
 
     print "Loading molecules from '%s'..." % filename
@@ -462,9 +462,9 @@ if __name__=="__main__":
     # Create command-line argument options.
     usage_string = """\
     usage: %prog --basetypes smartsfile --decorators smartsfile --molecules molfile --iterations niterations
-    
+
     example: %prog --basetypes atomtypes/basetypes.smarts --decorators atomtypes/decorators.smarts --molecules datasets/solvation.sdf --iterations 150
-    
+
     """
     version_string = "%prog %__version__"
     parser = OptionParser(usage=usage_string, version=version_string)
@@ -484,15 +484,15 @@ if __name__=="__main__":
     parser.add_option("-i", "--iterations", metavar='ITERATIONS',
                       action="store", type="int", dest='iterations', default=150,
                       help="MCMC iterations.")
-    
+
     # Parse command-line arguments.
     (options,args) = parser.parse_args()
-    
+
     # Ensure all required options have been specified.
     if options.basetypes_filename=='' or options.decorators_filename=='' or options.molecules_filename=='':
         parser.print_help()
         parser.error("All input files must be specified.")
-        
+
     # Load and type all molecules in the specified dataset.
     molecules = read_molecules(options.molecules_filename)
 
@@ -503,9 +503,9 @@ if __name__=="__main__":
     niterations = options.iterations
     for iteration in range(niterations):
         accepted = atomtype_sampler.sample_atomtypes()
-        print "Iteration %d / %d: %s" % (iteration, niterations, str(accepted)) 
+        print "Iteration %d / %d: %s" % (iteration, niterations, str(accepted))
 
         # Compute atomtype statistics on molecules.
         [atom_typecounts, molecule_typecounts] = atomtype_sampler.compute_type_statistics(atomtype_sampler.atomtypes, atomtype_sampler.molecules)
         atomtype_sampler.show_type_statistics(atomtype_sampler.atomtypes, atom_typecounts, molecule_typecounts)
-        
+

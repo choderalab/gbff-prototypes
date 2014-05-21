@@ -5,7 +5,7 @@ This is a simple example of how Bayesian atom type sampling using reversible-jum
 ## Manifest
 
 ```
-atomtype-sampling-example.py - example illustrating use of pymc to sample over atom types
+atomtype-sampling-example.py - example illustrating use of RJMCMC to sample over SMARTS-specified atom types
 datasets/ - small molecule datasets for hydration free energy fitting example
 atomtypes/ - input files for atom type sampling
 ```
