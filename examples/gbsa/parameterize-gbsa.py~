@@ -180,7 +180,7 @@ def compute_hydration_energies(molecules, parameters):
 
     energies = dict() # energies[index] is the computed solvation energy of molecules[index]
 
-    platform = openmm.Platform.getPlatformByName("CPU")
+    platform = openmm.Platform.getPlatformByName("Reference")
 
     for molecule in molecules:
         # Create OpenMM System.
@@ -240,7 +240,7 @@ def compute_hydration_energies(molecules, parameters):
 
     return energies
 
-def compute_hydration_energy(molecule, parameters, platform_name="CPU"):
+def compute_hydration_energy(molecule, parameters, platform_name="Reference"):
     """
     Compute hydration energy of a single molecule given a GBSA parameter set.
 
@@ -272,7 +272,7 @@ def compute_hydration_energy(molecule, parameters, platform_name="CPU"):
     # Build indexable list of atoms.
     atoms = [atom for atom in molecule.GetAtoms()]   
     
-    # Assign GB/VI parameters.
+    # Assign GBSA parameters.
     for atom in molecule.GetAtoms():            
         atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
         charge = atom.GetPartialCharge() * units.elementary_charge

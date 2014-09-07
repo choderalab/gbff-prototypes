@@ -39,9 +39,11 @@ import openeye.oechem
 import openeye.oeomega
 import openeye.oequacpac
 
-from openeye.oechem import *
-from openeye.oequacpac import *
-from openeye.oeiupac import *
+# OpenEye toolkit
+from openeye import oechem
+from openeye import oequacpac
+from openeye import oeiupac
+from openeye import oeomega
 
 import pymc
 
@@ -67,10 +69,10 @@ class AtomTyper(object):
             self.atom = atom
 
         def __str__(self):
-            return "Atom not assigned: %6d %8s" % (self.atom.GetIdx(), OEGetAtomicSymbol(self.atom.GetAtomicNum()))
+            return "Atom not assigned: %6d %8s" % (self.atom.GetIdx(), oechem.OEGetAtomicSymbol(self.atom.GetAtomicNum()))
 
     def __init__(self, infileName, tagname):
-        self.pattyTag = OEGetTag(tagname)
+        self.pattyTag = oechem.OEGetTag(tagname)
         self.smartsList = []
         ifs = open(infileName)
         lines = ifs.readlines()
@@ -83,7 +85,7 @@ class AtomTyper(object):
             toks = string.split(line)
             if len(toks) == 2:
                 smarts,type = toks
-                pat = OESubSearch()
+                pat = oechem.OESubSearch()
                 pat.Init(smarts)
                 pat.SetMaxMatches(0)
                 self.smartsList.append([pat,type,smarts])
@@ -98,7 +100,7 @@ class AtomTyper(object):
             atom.SetStringData(self.pattyTag, "")
 
         # Assign atom types using rules.
-        OEAssignAromaticFlags(mol)
+        oechem.OEAssignAromaticFlags(mol)
         for pat,type,smarts in self.smartsList:
             for matchbase in pat.Match(mol):
                 for matchpair in matchbase.GetAtoms():
@@ -111,7 +113,7 @@ class AtomTyper(object):
 
     def debugTypes(self,mol):
         for atom in mol.GetAtoms():
-            print "%6d %8s %8s" % (atom.GetIdx(),OEGetAtomicSymbol(atom.GetAtomicNum()),atom.GetStringData(self.pattyTag))
+            print "%6d %8s %8s" % (atom.GetIdx(),oechem.OEGetAtomicSymbol(atom.GetAtomicNum()),atom.GetStringData(self.pattyTag))
 
     def getTypeList(self,mol):
         typeList = []
@@ -186,7 +188,7 @@ def compute_hydration_energies(molecules, parameters):
         # Create OpenMM System.
         system = openmm.System()
         for atom in molecule.GetAtoms():
-            mass = OEGetDefaultMass(atom.GetAtomicNum())
+            mass = oechem.OEGetDefaultMass(atom.GetAtomicNum())
             system.addParticle(mass * units.amu)
 
         # Add nonbonded term.
@@ -260,7 +262,7 @@ def compute_hydration_energy(molecule, parameters, platform_name="Reference"):
     # Create OpenMM System.
     system = openmm.System()
     for atom in molecule.GetAtoms():
-        mass = OEGetDefaultMass(atom.GetAtomicNum())
+        mass = oechem.OEGetDefaultMass(atom.GetAtomicNum())
         system.addParticle(mass * units.amu)
 
     # Add GBSA term
@@ -376,8 +378,10 @@ def create_model(molecules, initial_parameters):
     for (molecule_index, molecule) in enumerate(molecules):
         molecule_name          = molecule.GetTitle()
         variable_name          = "dg_exp_%08d" % molecule_index
-        dg_exp                 = float(OEGetSDData(molecule, 'dG(exp)')) # observed hydration free energy in kcal/mol
-        model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%08d' % molecule_index], tau=model['tau'], value=dg_exp, observed=True)
+        dg_exp                 = float(molecule.GetData('expt')) # observed hydration free energy in kcal/mol
+        ddg_exp                 = float(molecule.GetData('d_expt')) # observed hydration free energy uncertainty in kcal/mol
+        #model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%08d' % molecule_index], tau=model['tau'], value=expt, observed=True)
+        model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%08d' % molecule_index], tau=1.0/(ddg_exp**2), value=dg_exp, observed=True)
 
     return model
 
@@ -389,9 +393,9 @@ if __name__=="__main__":
 
     # Create command-line argument options.
     usage_string = """\
-    usage: %prog --types typefile --parameters paramfile --molecules molfile --iterations MCMC_iterations --mcmcout MCMC_db_name
+    usage: %prog --types typefile --parameters paramfile --database database --iterations MCMC_iterations --mcmcout MCMC_db_name
 
-    example: %prog --types parameters/gbsa.types --parameters parameters/gbsa-am1bcc.parameters --molecules datasets/neutrals.sdf --iterations 150 --mcmcout MCMC
+    example: %prog --types parameters/gbsa.types --parameters parameters/gbsa-am1bcc.parameters --database datasets/FreeSolv/v0.3/database.pickle --iterations 150 --mcmcout MCMC --verbose
 
     """
     version_string = "%prog %__version__"
@@ -405,25 +409,32 @@ if __name__=="__main__":
                       action="store", type="string", dest='parameters_filename', default='',
                       help="File containing initial parameter set.")
 
-    parser.add_option("-m", "--molecules", metavar='MOLECULES',
-                      action="store", type="string", dest='molecules_filename', default='',
-                      help="Small molecule set (in any OpenEye compatible file format) containing 'dG(exp)' fields with experimental hydration free energies.")
+    parser.add_option("-d", "--database", metavar='DATABASE',
+                      action="store", type="string", dest='database_filename', default='',
+                      help="Python pickle file of database with molecule names, SMILES strings, hydration free energies, and experimental uncertainties (FreeSolv format).")
 
     parser.add_option("-i", "--iterations", metavar='ITERATIONS',
                       action="store", type="int", dest='iterations', default=150,
                       help="MCMC iterations.")
-    
+
     parser.add_option("-o", "--mcmcout", metavar='MCMCOUT',
                       action="store", type="string", dest='mcmcout', default='MCMC',
                       help="MCMC output database name.")
-    
+
+    parser.add_option("-v", "--verbose", metavar='VERBOSE',
+                      action="store_true", dest='verbose', default=False,
+                      help="Verbosity flag.")
+
     # Parse command-line arguments.
     (options,args) = parser.parse_args()
-    
+
     # Ensure all required options have been specified.
-    if options.atomtypes_filename=='' or options.parameters_filename=='' or options.molecules_filename=='':
+    if options.atomtypes_filename=='' or options.parameters_filename=='' or options.database_filename=='':
         parser.print_help()
         parser.error("All input files must be specified.")
+
+    # Set verbosity.
+    verbose = options.verbose
 
     # Read GBSA parameters.
     parameters = read_gbsa_parameters(options.parameters_filename)
@@ -432,33 +443,39 @@ if __name__=="__main__":
     mcmcIterations = options.iterations
     mcmcDbName     = os.path.abspath(options.mcmcout)
 
-    printString  = "Starting " + sys.argv[0] + "\n"
-    printString += '    atom types=<'   + options.atomtypes_filename + ">\n"
-    printString += '    parameters=<'   + options.parameters_filename + ">\n"
-    printString += '    molecule=<'     + options.molecules_filename + ">\n"
-    printString += '    iterations=<'   + str(mcmcIterations) + ">\n"
-    printString += '    mcmcDB=<'       + mcmcDbName + ">\n"
-    sys.stderr.write( printString )
-    #sys.stdout.write( printString )
-
     # Construct atom typer.
     atom_typer = AtomTyper(options.atomtypes_filename, "gbsa_type")
     #atom_typer.dump()
 
-    # Load and type all molecules in the specified dataset.
-    print "Loading and typing all molecules in dataset..."
+    # Open database.
+    import pickle
+    database = pickle.load(open(options.database_filename, 'r'))
+
+    # Process all molecules in the dataset.
     start_time = time.time()
     molecules = list()
-    input_molstream = oemolistream(options.molecules_filename)
-    molecule = OECreateOEGraphMol()
-    while OEReadMolecule(input_molstream, molecule):
-        # Get molecule name.
-        name = OEGetSDData(molecule, 'name').strip()
-        molecule.SetTitle(name)
-        # Append to list.
-        molecule_copy = OEMol(molecule)
-        molecules.append(molecule_copy)
-    input_molstream.close()
+    for cid in database.keys():
+        # Read relevant entry data.
+        entry = database[cid]
+        smiles = entry['smiles']
+        iupac_name = entry['iupac']
+        experimental_DeltaG = entry['expt'] * units.kilocalories_per_mole
+        experimental_dDeltaG = entry['d_expt'] * units.kilocalories_per_mole
+
+        # Create OpenEye molecule representation.
+        molecule = openeye.oechem.OEGraphMol()
+        openeye.oechem.OEParseSmiles(molecule, "c1ccccc1")
+
+        # Set properties.
+        molecule.SetTitle(iupac_name)
+        molecule.SetData('smiles', smiles)
+        molecule.SetData('cid', cid)
+        molecule.SetData('expt', experimental_DeltaG / units.kilocalories_per_mole)
+        molecule.SetData('d_expt', experimental_dDeltaG / units.kilocalories_per_mole)
+
+        # Append molecule to list.
+        molecules.append(oechem.OEMol(molecule))
+
     print "%d molecules read" % len(molecules)
     end_time = time.time()
     elapsed_time = end_time - start_time
@@ -470,29 +487,14 @@ if __name__=="__main__":
 
     # Build a conformation for all molecules with Omega.
     print "Building conformations for all molecules..."
-    import openeye.oeomega
-    omega = openeye.oeomega.OEOmega()
+    omega = oeomega.OEOmega()
     omega.SetMaxConfs(1)
     omega.SetFromCT(True)
     for molecule in molecules:
-        #omega.SetFixMol(molecule)
-        omega(molecule)
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    print "%.3f s elapsed" % elapsed_time
+        if verbose: print "  " + molecule.GetTitle()
 
-    # Regularize all molecules through writing as mol2.
-    print "Regularizing all molecules..."
-    ligand_mol2_dirname  = os.path.dirname(mcmcDbName) + '/mol2'
-    if( not os.path.exists( ligand_mol2_dirname ) ):
-        os.makedirs(ligand_mol2_dirname)
-    ligand_mol2_filename = ligand_mol2_dirname + '/temp' + os.path.basename(mcmcDbName) + '.mol2'
-    start_time = time.time()
-    omolstream = openeye.oechem.oemolostream(ligand_mol2_filename)
-    for molecule in molecules:
-        # Write molecule as mol2, changing molecule through normalization.
-        openeye.oechem.OEWriteMolecule(omolstream, molecule)
-    omolstream.close()
+        # Assign conformation.
+        omega(molecule)
     end_time = time.time()
     elapsed_time = end_time - start_time
     print "%.3f s elapsed" % elapsed_time
@@ -501,17 +503,19 @@ if __name__=="__main__":
     print "Assigning AM1-BCC charges..."
     start_time = time.time()
     for molecule in molecules:
+        if verbose: print "  " + molecule.GetTitle()
+
         # Assign AM1-BCC charges.
         if molecule.NumAtoms() == 1:
             # Use formal charges for ions.
-            OEFormalPartialCharges(molecule)
+            oechem.OEFormalPartialCharges(molecule)
         else:
             # Assign AM1-BCC charges for multiatom molecules.
-            OEAssignPartialCharges(molecule, OECharges_AM1BCC, False) # use explicit hydrogens
+            oequacpac.OEAssignPartialCharges(molecule, oequacpac.OECharges_AM1BCC, False) # use explicit hydrogens
         # Check to make sure we ended up with partial charges.
-        if OEHasPartialCharges(molecule) == False:
+        if oechem.OEHasPartialCharges(molecule) == False:
             print "No charges on molecule: '%s'" % molecule.GetTitle()
-            print "IUPAC name: %s" % OECreateIUPACName(molecule)
+            print "IUPAC name: %s" % oeiupac.OECreateIUPACName(molecule)
             # TODO: Write molecule out
             # Delete themolecule.
             molecules.remove(molecule)
@@ -526,15 +530,17 @@ if __name__=="__main__":
     typed_molecules = list()
     untyped_molecules = list()
     for molecule in molecules:
+        if verbose: print "  " + molecule.GetTitle()
+
         # Assign GBSA types according to SMARTS rules.
         try:
             atom_typer.assignTypes(molecule)
-            typed_molecules.append(OEGraphMol(molecule))
+            typed_molecules.append(oechem.OEGraphMol(molecule))
             #atom_typer.debugTypes(molecule)
             #if( len(typed_molecules) > 10 ):
             #    sys.exit(-1)
         except AtomTyper.TypingException as exception:
-            name = OEGetSDData(molecule, 'name').strip()
+            name = molecule.GetTitle()
             print name
             print exception
             untyped_molecules.append(OEGraphMol(molecule))
@@ -558,18 +564,13 @@ if __name__=="__main__":
     signed_errors = numpy.zeros([len(typed_molecules)], numpy.float64)
     for (i, molecule) in enumerate(typed_molecules):
         # Get metadata.
-        name = OEGetSDData(molecule, 'name').strip()
-        try:
-            dg_exp           = float(OEGetSDData(molecule, 'dG(exp)')) * units.kilocalories_per_mole
-            signed_errors[i] = energies[molecule] / units.kilocalories_per_mole - dg_exp / units.kilocalories_per_mole
-        except Exception as exception:
-            # We couldn't find an experimental dG in the SDF file---ditch this molecule.
-            print "Couldn't find dG(exp) for molecule '%s'; discarding it." % name
-            typed_molecules.remove(molecule)
-            continue
+        name = molecule.GetTitle()
+        dg_exp           = float(molecule.GetData('expt')) * units.kilocalories_per_mole
+        ddg_exp         = float(molecule.GetData('d_expt')) * units.kilocalories_per_mole
+        signed_errors[i] = energies[molecule] / units.kilocalories_per_mole - dg_exp / units.kilocalories_per_mole
 
         # Form output.
-        outstring = "%48s %8.3f %8.3f" % (name, dg_exp / units.kilocalories_per_mole, energies[molecule] / units.kilocalories_per_mole)
+        outstring = "%48s %8.3f %8.3f %8.3f" % (name, dg_exp / units.kilocalories_per_mole, ddg_exp / units.kilocalories_per_mole, energies[molecule] / units.kilocalories_per_mole)
 
         print outstring
 
