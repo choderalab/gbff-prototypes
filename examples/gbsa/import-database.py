@@ -50,6 +50,8 @@ from openeye import oeomega
 
 import pymc
 
+import pymbar
+
 #=============================================================================================
 # Atom Typer
 #=============================================================================================
@@ -192,11 +194,11 @@ def compute_hydration_energies(database, parameters):
         molecule = entry['molecule']
 
         # Retrieve OpenMM System.
-        # Make deep copy.
-        system = copy.deepcopy(entry['system'])
+        vacuum_system = entry['system']
+        solvent_system = copy.deepcopy(entry['system'])
 
         # Get nonbonded force.
-        forces = { system.getForce(index).__class__.__name__ : system.getForce(index) for index in range(system.getNumForces()) }
+        forces = { solvent_system.getForce(index).__class__.__name__ : solvent_system.getForce(index) for index in range(solvent_system.getNumForces()) }
         nonbonded_force = forces['NonbondedForce']
 
         # Add GBSA term
@@ -217,33 +219,65 @@ def compute_hydration_energies(database, parameters):
             gbsa_force.addParticle(charge, radius, scalingFactor)
 
         # Add the force to the system.
-        system.addForce(gbsa_force)
+        solvent_system.addForce(gbsa_force)
 
-        timestep = 1.0 * units.femtosecond # arbitrary
-        integrator = openmm.VerletIntegrator(timestep)
-        context = openmm.Context(system, integrator, platform)
+        # Create context for solvent system.
+        timestep = 2.0 * units.femtosecond
+        collision_rate = 5.0 / units.picoseconds
+        temperature = 300.0 * units.kelvin # TODO: This should be part of the data specification
+        solvent_integrator = openmm.LangevinIntegrator(temperature, collision_rate, timestep)
+        solvent_context = openmm.Context(solvent_system, solvent_integrator, platform)
 
         # Set the coordinates.
         positions = entry['positions']
-        context.setPositions(positions)
+        solvent_context.setPositions(positions)
 
-        # Get the energy with GB.
-        state = context.getState(getEnergy=True)
-        energies[molecule] = state.getPotentialEnergy()
+        # Create context for vacuum system.
+        vacuum_integrator = openmm.VerletIntegrator(timestep)
+        vacuum_context = openmm.Context(vacuum_system, vacuum_integrator, platform)
+
+        # Simulate, saving snapshots every so often.
+        kB = units.BOLTZMANN_CONSTANT_kB * units.AVOGADRO_CONSTANT_NA # Boltzmann constant
+        kT = kB * temperature
+        beta = 1.0 / kT
+
+        initial_time = time.time()
+        nsteps_per_iteration = 500 
+        niterations = 100
+        DeltaE_n = numpy.zeros([niterations], numpy.float64) # energy differences, in kT
+        for iteration in range(niterations):
+            solvent_integrator.step(nsteps_per_iteration)
+            solvent_state = solvent_context.getState(getEnergy=True, getPositions=True)
+            E_solvent = beta * solvent_state.getPotentialEnergy()
+
+            positions = solvent_state.getPositions()
+            vacuum_context.setPositions(positions)
+            vacuum_state = vacuum_context.getState(getEnergy=True)
+            E_vacuum = beta * vacuum_state.getPotentialEnergy()
+
+            DeltaE_n[iteration] = (E_vacuum - E_solvent)
+
+        final_time = time.time()
+        elapsed_time = final_time - initial_time
+        print "Simulation took %.3f s" % (elapsed_time)
 
         # Clean up.
-        del context, integrator
+        del solvent_context, solvent_integrator
+        del vacuum_context, vacuum_integrator
 
-        # Compute the energy without GB.
-        system = entry['system']
-        timestep = 1.0 * units.femtosecond # arbitrary
-        integrator = openmm.VerletIntegrator(timestep)
-        context = openmm.Context(system, integrator, platform)
-        positions = entry['positions']
-        context.setPositions(positions)
-        state = context.getState(getEnergy=True)
-        energies[molecule] -= state.getPotentialEnergy()
-        del context, integrator
+        # Compute estimate of free energy difference.
+        from pymbar import timeseries
+        from pymbar import EXP
+        [t0, g, Neff_max] = timeseries.detectEquilibration(DeltaE_n)
+        DeltaE_n = DeltaE_n[t0:] # remove initial equilibration data
+        indices = timeseries.subsampleCorrelatedData(DeltaE_n, g=g)
+        DeltaE_n = DeltaE_n[indices] # subsample to decorrelate data
+        [DeltaG_in_kT, dDeltaG_in_kT] = EXP(DeltaE_n)
+        DeltaG_in_kT = - DeltaG_in_kT # Reverse sign of DeltaG since we are going from vacuum -> solvent
+
+        energies[molecule] = kT * DeltaG_in_kT
+
+        print "t0 = %d, g = %.1f, Neff_max = %.1f | DeltaG = %.3f +- %.3f kT" % (t0, g, Neff_max, DeltaG_in_kT, dDeltaG_in_kT)
 
     return energies
 
@@ -427,7 +461,7 @@ if __name__=="__main__":
     usage_string = """\
     usage: %prog --types typefile --parameters paramfile --database database --iterations MCMC_iterations --mcmcout MCMC_db_name
 
-    example: %prog --types parameters/gbsa.types --parameters parameters/gbsa-am1bcc.parameters --database datasets/FreeSolv/v0.3/database.pickle --iterations 150 --mcmcout MCMC --verbose
+    example: %prog --types parameters/gbsa.types --parameters parameters/gbsa-am1bcc.parameters --database datasets/FreeSolv/v0.3/database.pickle --iterations 150 --mcmcout MCMC --verbose [--subset 10]
 
     """
     version_string = "%prog %__version__"
@@ -452,6 +486,10 @@ if __name__=="__main__":
     parser.add_option("-o", "--mcmcout", metavar='MCMCOUT',
                       action="store", type="string", dest='mcmcout', default='MCMC',
                       help="MCMC output database name.")
+
+    parser.add_option("-s", "--subset", metavar='SUBSET',
+                      action="store", type="int", dest='subset_size', default=None,
+                      help="Size of subset to consider (for testing).")
 
     parser.add_option("-v", "--verbose", metavar='VERBOSE',
                       action="store_true", dest='verbose', default=False,
@@ -484,9 +522,10 @@ if __name__=="__main__":
     database = pickle.load(open(options.database_filename, 'r'))
 
     # DEBUG: Create a small subset.
-    subset_size = 20
-    cid_list = database.keys()
-    database = dict((k, database[k]) for k in cid_list[0:subset_size])
+    if options.subset_size:
+        subset_size = options.subset_size
+        cid_list = database.keys()
+        database = dict((k, database[k]) for k in cid_list[0:subset_size])
 
     # Process all molecules in the dataset.
     start_time = time.time()
@@ -645,3 +684,4 @@ if __name__=="__main__":
     sampler.isample(iter=mcmcIterations, burn=0, save_interval=1, verbose=True)
     #sampler.sample(iter=mcmcIterations, burn=0, save_interval=1, verbose=True, progress_bar=True)
     sampler.db.close()
+
