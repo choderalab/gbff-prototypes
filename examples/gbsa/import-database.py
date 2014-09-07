@@ -211,7 +211,6 @@ def compute_hydration_energies(database, parameters):
         # Assign GBSA parameters.
         for (atom_index, atom) in enumerate(atoms):
             [charge, sigma, epsilon] = nonbonded_force.getParticleParameters(atom_index)
-            print (entry['iupac'], atom_index, charge)
             atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
             radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
             scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')] * units.kilocalories_per_mole
@@ -242,6 +241,7 @@ def compute_hydration_energies(database, parameters):
         context = openmm.Context(system, integrator, platform)
         positions = entry['positions']
         context.setPositions(positions)
+        state = context.getState(getEnergy=True)
         energies[molecule] -= state.getPotentialEnergy()
         del context, integrator
 
@@ -326,6 +326,7 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
     context = openmm.Context(system, integrator, platform)
     positions = entry['positions']
     context.setPositions(positions)
+    state = context.getState(getEnergy=True)
     energy -= state.getPotentialEnergy() / units.kilocalories_per_mole
     del context, integrator
 
@@ -556,7 +557,7 @@ if __name__=="__main__":
         omolstream.close()
 
         # Parameterize for AMBER.
-        molecule_name = 'molecule.gaff'
+        molecule_name = 'molecule'
         [gaff_mol2_filename, frcmod_filename] = gaff2xml.utils.run_antechamber(molecule_name, tripos_mol2_filename, charge_method="bcc", net_charge=0)
         #print_file(gaff_mol2_filename)
         [prmtop_filename, inpcrd_filename] = gaff2xml.utils.run_tleap(molecule_name, gaff_mol2_filename, frcmod_filename)
@@ -567,14 +568,6 @@ if __name__=="__main__":
         inpcrd = app.AmberInpcrdFile(inpcrd_filename)
         system = prmtop.createSystem(nonbondedMethod=app.NoCutoff, constraints=app.HBonds, implicitSolvent=None, removeCMMotion=False)
         positions = inpcrd.getPositions()
-
-        # DEBUG
-        # Get nonbonded force.
-        forces = { system.getForce(index).__class__.__name__ : system.getForce(index) for index in range(system.getNumForces()) }
-        nonbonded_force = forces['NonbondedForce']
-        for index in range(system.getNumParticles()):
-            [charge, sigma, epsilon] = nonbonded_force.getParticleParameters(index)
-            print (index, charge / units.elementary_charge)
 
         # Store system and positions.
         entry['system'] = system
