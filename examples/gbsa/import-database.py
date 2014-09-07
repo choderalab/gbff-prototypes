@@ -195,6 +195,10 @@ def compute_hydration_energies(database, parameters):
         # Make deep copy.
         system = copy.deepcopy(entry['system'])
 
+        # Get nonbonded force.
+        forces = { system.getForce(index).__class__.__name__ : system.getForce(index) for index in range(system.getNumForces()) }
+        nonbonded_force = forces['NonbondedForce']
+
         # Add GBSA term
         gbsa_force = openmm.GBSAOBCForce()
         gbsa_force.setNonbondedMethod(openmm.GBSAOBCForce.NoCutoff) # set no cutoff
@@ -205,9 +209,10 @@ def compute_hydration_energies(database, parameters):
         atoms = [atom for atom in molecule.GetAtoms()]
 
         # Assign GBSA parameters.
-        for atom in molecule.GetAtoms():
+        for (atom_index, atom) in enumerate(atoms):
+            [charge, sigma, epsilon] = nonbonded_force.getParticleParameters(atom_index)
+            print (entry['iupac'], atom_index, charge)
             atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
-            charge = atom.GetPartialCharge() * units.elementary_charge
             radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
             scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')] * units.kilocalories_per_mole
             gbsa_force.addParticle(charge, radius, scalingFactor)
@@ -223,9 +228,22 @@ def compute_hydration_energies(database, parameters):
         positions = entry['positions']
         context.setPositions(positions)
 
-        # Get the energy
+        # Get the energy with GB.
         state = context.getState(getEnergy=True)
         energies[molecule] = state.getPotentialEnergy()
+
+        # Clean up.
+        del context, integrator
+
+        # Compute the energy without GB.
+        system = entry['system']
+        timestep = 1.0 * units.femtosecond # arbitrary
+        integrator = openmm.VerletIntegrator(timestep)
+        context = openmm.Context(system, integrator, platform)
+        positions = entry['positions']
+        context.setPositions(positions)
+        energies[molecule] -= state.getPotentialEnergy()
+        del context, integrator
 
     return energies
 
@@ -253,6 +271,9 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
     # Make deep copy.
     system = copy.deepcopy(entry['system'])
 
+    # Get nonbonded force.
+    forces = { system.getForce(index).__class__.__name__ : system.getForce(index) for index in range(system.getNumForces()) }
+    nonbonded_force = forces['NonbondedForce']
 
     # Add GBSA term
     gbsa_force = openmm.GBSAOBCForce()
@@ -264,9 +285,9 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
     atoms = [atom for atom in molecule.GetAtoms()]
 
     # Assign GBSA parameters.
-    for atom in molecule.GetAtoms():
+    for (atom_index, atom) in enumerate(atoms):
+        [charge, sigma, epsilon] = nonbonded_force.getParticleParameters(atom_index)
         atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
-        charge = atom.GetPartialCharge() * units.elementary_charge
         try:
             radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
             scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')] * units.kilocalories_per_mole
@@ -294,6 +315,19 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
     energy = state.getPotentialEnergy() / units.kilocalories_per_mole
     if numpy.isnan(energy):
         energy = +1e6;
+
+    # Clean up.
+    del context, integrator
+
+    # Compute the energy without GB.
+    system = entry['system']
+    timestep = 1.0 * units.femtosecond # arbitrary
+    integrator = openmm.VerletIntegrator(timestep)
+    context = openmm.Context(system, integrator, platform)
+    positions = entry['positions']
+    context.setPositions(positions)
+    energy -= state.getPotentialEnergy() / units.kilocalories_per_mole
+    del context, integrator
 
     return energy
 
@@ -333,7 +367,7 @@ def create_model(database, initial_parameters):
         molecule = entry['molecule']
 
         molecule_name = molecule.GetTitle()
-        variable_name = "dg_gbsa_%08d" % molecule_index
+        variable_name = "dg_gbsa_%s" % cid
         # Determine which parameters are involved in this molecule to limit number of parents for caching.
         parents = dict()
         for atom in molecule.GetAtoms():
@@ -362,7 +396,11 @@ def create_model(database, initial_parameters):
     model['log_sigma']         = pymc.Uniform('log_sigma', lower=log_sigma_min, upper=log_sigma_max, value=log_sigma_guess)
     model['sigma']             = pymc.Lambda('sigma', lambda log_sigma=model['log_sigma'] : math.exp(log_sigma) )
     model['tau']               = pymc.Lambda('tau', lambda sigma=model['sigma'] : sigma**(-2) )
-    for (molecule_index, molecule) in enumerate(molecules):
+    cid_list = database.keys()
+    for (molecule_index, cid) in enumerate(cid_list):
+        entry = database[cid]
+        molecule = entry['molecule']
+
         molecule_name          = molecule.GetTitle()
         variable_name          = "dg_exp_%s" % cid
         dg_exp                 = float(molecule.GetData('expt')) # observed hydration free energy in kcal/mol
@@ -372,6 +410,11 @@ def create_model(database, initial_parameters):
         model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%s' % cid], tau=model['tau_%s' % cid], value=dg_exp, observed=True)
 
     return model
+
+def print_file(filename):
+    infile = open(filename, 'r')
+    print infile.read()
+    infile.close()
 
 #=============================================================================================
 # MAIN
@@ -439,6 +482,11 @@ if __name__=="__main__":
     import pickle
     database = pickle.load(open(options.database_filename, 'r'))
 
+    # DEBUG: Create a small subset.
+    subset_size = 20
+    cid_list = database.keys()
+    database = dict((k, database[k]) for k in cid_list[0:subset_size])
+
     # Process all molecules in the dataset.
     start_time = time.time()
     for cid in database.keys():
@@ -453,7 +501,7 @@ if __name__=="__main__":
 
         # Create OpenEye molecule representation.
         molecule = openeye.oechem.OEGraphMol()
-        openeye.oechem.OEParseSmiles(molecule, "c1ccccc1")
+        openeye.oechem.OEParseSmiles(molecule, smiles)
 
         # Set properties.
         molecule.SetTitle(iupac_name)
@@ -510,7 +558,9 @@ if __name__=="__main__":
         # Parameterize for AMBER.
         molecule_name = 'molecule.gaff'
         [gaff_mol2_filename, frcmod_filename] = gaff2xml.utils.run_antechamber(molecule_name, tripos_mol2_filename, charge_method="bcc", net_charge=0)
+        #print_file(gaff_mol2_filename)
         [prmtop_filename, inpcrd_filename] = gaff2xml.utils.run_tleap(molecule_name, gaff_mol2_filename, frcmod_filename)
+        #print_file(prmtop_filename)
 
         # Create OpenMM System object for molecule in vacuum.
         prmtop = app.AmberPrmtopFile(prmtop_filename)
@@ -518,9 +568,21 @@ if __name__=="__main__":
         system = prmtop.createSystem(nonbondedMethod=app.NoCutoff, constraints=app.HBonds, implicitSolvent=None, removeCMMotion=False)
         positions = inpcrd.getPositions()
 
+        # DEBUG
+        # Get nonbonded force.
+        forces = { system.getForce(index).__class__.__name__ : system.getForce(index) for index in range(system.getNumForces()) }
+        nonbonded_force = forces['NonbondedForce']
+        for index in range(system.getNumParticles()):
+            [charge, sigma, epsilon] = nonbonded_force.getParticleParameters(index)
+            print (index, charge / units.elementary_charge)
+
         # Store system and positions.
         entry['system'] = system
         entry['positions'] = positions
+
+        # Unlink files.
+        for filename in os.listdir(working_directory):
+            os.unlink(filename)
 
     os.chdir(original_directory)
     # TODO: Remove temporary directory and contents.
@@ -558,15 +620,17 @@ if __name__=="__main__":
     # Compute energies with all molecules.
     print "Computing all energies..."
     start_time = time.time()
-    energies = compute_hydration_energies(typed_molecules, parameters)
+    energies = compute_hydration_energies(database, parameters)
     end_time = time.time()
     elapsed_time = end_time - start_time
     print "%.3f s elapsed" % elapsed_time
 
     # Print comparison.
-    signed_errors = numpy.zeros([len(typed_molecules)], numpy.float64)
-    for (i, molecule) in enumerate(typed_molecules):
+    signed_errors = numpy.zeros([len(database.keys())], numpy.float64)
+    for (i, cid) in enumerate(database.keys()):
         # Get metadata.
+        entry = database[cid]
+        molecule = entry['molecule']
         name = molecule.GetTitle()
         dg_exp           = float(molecule.GetData('expt')) * units.kilocalories_per_mole
         ddg_exp         = float(molecule.GetData('d_expt')) * units.kilocalories_per_mole
