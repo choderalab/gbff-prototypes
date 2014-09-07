@@ -381,7 +381,8 @@ def create_model(molecules, initial_parameters):
         dg_exp                 = float(molecule.GetData('expt')) # observed hydration free energy in kcal/mol
         ddg_exp                 = float(molecule.GetData('d_expt')) # observed hydration free energy uncertainty in kcal/mol
         #model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%08d' % molecule_index], tau=model['tau'], value=expt, observed=True)
-        model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%08d' % molecule_index], tau=1.0/(ddg_exp**2), value=dg_exp, observed=True)
+        model['tau_%08d' % molecule_index] = pymc.Lambda('tau_%08d' % molecule_index, lambda sigma=model['sigma'] : 1.0 / (sigma**2 + ddg_exp**2) )
+        model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%08d' % molecule_index], tau=model['tau_%08d' % molecule_index], value=dg_exp, observed=True)
 
     return model
 
