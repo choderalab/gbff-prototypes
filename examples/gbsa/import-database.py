@@ -23,17 +23,20 @@ The AtomTyper class is based on 'patty' by Pat Walters, Vertex Pharmaceuticals.
 
 import sys
 import string
-
-from optparse import OptionParser # For parsing of command line arguments
-
 import os
 import os.path
 import time
 import math
+import copy
+import tempfile
+
+from optparse import OptionParser # For parsing of command line arguments
+
 import numpy
 
 import simtk.openmm as openmm
 import simtk.unit as units
+import simtk.openmm.app as app
 
 import openeye.oechem
 import openeye.oeomega
@@ -165,7 +168,7 @@ def read_gbsa_parameters(filename):
 # Computation of hydration free energies
 #=============================================================================================
 
-def compute_hydration_energies(molecules, parameters):
+def compute_hydration_energies(database, parameters):
     """
     Compute solvation energies of a set of molecules given a GBSA parameter set.
 
@@ -184,22 +187,13 @@ def compute_hydration_energies(molecules, parameters):
 
     platform = openmm.Platform.getPlatformByName("Reference")
 
-    for molecule in molecules:
-        # Create OpenMM System.
-        system = openmm.System()
-        for atom in molecule.GetAtoms():
-            mass = oechem.OEGetDefaultMass(atom.GetAtomicNum())
-            system.addParticle(mass * units.amu)
+    for cid in database.keys():
+        entry = database[cid]
+        molecule = entry['molecule']
 
-        # Add nonbonded term.
-        #   nonbonded_force = openmm.NonbondedSoftcoreForce()
-        #   nonbonded_force.setNonbondedMethod(openmm.NonbondedForce.NoCutoff)
-        #   for atom in molecule.GetAtoms():
-        #      charge = 0.0 * units.elementary_charge
-        #      sigma = 1.0 * units.angstrom
-        #      epsilon = 0.0 * units.kilocalories_per_mole
-        #      nonbonded_force.addParticle(charge, sigma, epsilon)
-        #   system.addForce(nonbonded_force)
+        # Retrieve OpenMM System.
+        # Make deep copy.
+        system = copy.deepcopy(entry['system'])
 
         # Add GBSA term
         gbsa_force = openmm.GBSAOBCForce()
@@ -221,20 +215,13 @@ def compute_hydration_energies(molecules, parameters):
         # Add the force to the system.
         system.addForce(gbsa_force)
 
-        # Build coordinate array.
-        natoms = len(atoms)
-        coordinates = units.Quantity(numpy.zeros([natoms, 3]), units.angstroms)
-        for (index,atom) in enumerate(atoms):
-            (x,y,z) = molecule.GetCoords(atom)
-            coordinates[index,:] = units.Quantity(numpy.array([x,y,z]),units.angstroms)
-
-        # Create OpenMM Context.
         timestep = 1.0 * units.femtosecond # arbitrary
         integrator = openmm.VerletIntegrator(timestep)
         context = openmm.Context(system, integrator, platform)
 
         # Set the coordinates.
-        context.setPositions(coordinates)
+        positions = entry['positions']
+        context.setPositions(positions)
 
         # Get the energy
         state = context.getState(getEnergy=True)
@@ -242,7 +229,7 @@ def compute_hydration_energies(molecules, parameters):
 
     return energies
 
-def compute_hydration_energy(molecule, parameters, platform_name="Reference"):
+def compute_hydration_energy(entry, parameters, platform_name="Reference"):
     """
     Compute hydration energy of a single molecule given a GBSA parameter set.
 
@@ -259,11 +246,13 @@ def compute_hydration_energy(molecule, parameters, platform_name="Reference"):
 
     platform = openmm.Platform.getPlatformByName(platform_name)
 
-    # Create OpenMM System.
-    system = openmm.System()
-    for atom in molecule.GetAtoms():
-        mass = oechem.OEGetDefaultMass(atom.GetAtomicNum())
-        system.addParticle(mass * units.amu)
+    # Retrieve molecule.
+    molecule = entry['molecule']
+
+    # Retrieve OpenMM System.
+    # Make deep copy.
+    system = copy.deepcopy(entry['system'])
+
 
     # Add GBSA term
     gbsa_force = openmm.GBSAOBCForce()
@@ -291,20 +280,14 @@ def compute_hydration_energy(molecule, parameters, platform_name="Reference"):
     # Add the force to the system.
     system.addForce(gbsa_force)
 
-    # Build coordinate array.
-    natoms = len(atoms)
-    coordinates = units.Quantity(numpy.zeros([natoms, 3]), units.angstroms)
-    for (index,atom) in enumerate(atoms):
-        (x,y,z) = molecule.GetCoords(atom)
-        coordinates[index,:] = units.Quantity(numpy.array([x,y,z]),units.angstroms)
-
     # Create OpenMM Context.
     timestep = 1.0 * units.femtosecond # arbitrary
     integrator = openmm.VerletIntegrator(timestep)
     context = openmm.Context(system, integrator, platform)
 
     # Set the coordinates.
-    context.setPositions(coordinates)
+    positions = entry['positions']
+    context.setPositions(positions)
 
     # Get the energy
     state = context.getState(getEnergy=True)
@@ -314,9 +297,9 @@ def compute_hydration_energy(molecule, parameters, platform_name="Reference"):
 
     return energy
 
-def hydration_energy_factory(molecule):
+def hydration_energy_factory(entry):
     def hydration_energy(**parameters):
-        return compute_hydration_energy(molecule, parameters, platform_name="CPU")
+        return compute_hydration_energy(entry, parameters, platform_name="CPU")
     return hydration_energy
 
 #=============================================================================================
@@ -327,7 +310,7 @@ def testfun(molecule_index, *x):
     print molecule_index
     return molecule_index
 
-def create_model(molecules, initial_parameters):
+def create_model(database, initial_parameters):
 
     # Define priors for parameters.
     model = dict()
@@ -344,7 +327,11 @@ def create_model(molecules, initial_parameters):
         parameters[key] = stochastic
 
     # Define deterministic functions for hydration free energies.
-    for (molecule_index, molecule) in enumerate(molecules):
+    cid_list = database.keys()
+    for (molecule_index, cid) in enumerate(cid_list):
+        entry = database[cid]
+        molecule = entry['molecule']
+
         molecule_name = molecule.GetTitle()
         variable_name = "dg_gbsa_%08d" % molecule_index
         # Determine which parameters are involved in this molecule to limit number of parents for caching.
@@ -357,11 +344,11 @@ def create_model(molecules, initial_parameters):
         print "%s : " % molecule_name,
         print parents.keys()
         # Create deterministic variable for computed hydration free energy.
-        function = hydration_energy_factory(molecule)
+        function = hydration_energy_factory(entry)
         model[variable_name] = pymc.Deterministic(eval=function,
                                                   name=variable_name,
                                                   parents=parents,
-                                                  doc=molecule_name,
+                                                  doc=cid,
                                                   trace=True,
                                                   verbose=1,
                                                   dtype=float,
@@ -377,12 +364,12 @@ def create_model(molecules, initial_parameters):
     model['tau']               = pymc.Lambda('tau', lambda sigma=model['sigma'] : sigma**(-2) )
     for (molecule_index, molecule) in enumerate(molecules):
         molecule_name          = molecule.GetTitle()
-        variable_name          = "dg_exp_%08d" % molecule_index
+        variable_name          = "dg_exp_%s" % cid
         dg_exp                 = float(molecule.GetData('expt')) # observed hydration free energy in kcal/mol
         ddg_exp                 = float(molecule.GetData('d_expt')) # observed hydration free energy uncertainty in kcal/mol
         #model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%08d' % molecule_index], tau=model['tau'], value=expt, observed=True)
-        model['tau_%08d' % molecule_index] = pymc.Lambda('tau_%08d' % molecule_index, lambda sigma=model['sigma'] : 1.0 / (sigma**2 + ddg_exp**2) )
-        model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%08d' % molecule_index], tau=model['tau_%08d' % molecule_index], value=dg_exp, observed=True)
+        model['tau_%s' % cid] = pymc.Lambda('tau_%s' % cid, lambda sigma=model['sigma'] : 1.0 / (sigma**2 + ddg_exp**2) )
+        model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%s' % cid], tau=model['tau_%s' % cid], value=dg_exp, observed=True)
 
     return model
 
@@ -454,10 +441,11 @@ if __name__=="__main__":
 
     # Process all molecules in the dataset.
     start_time = time.time()
-    molecules = list()
     for cid in database.keys():
-        # Read relevant entry data.
+        # Get database entry.
         entry = database[cid]
+
+        # Read relevant entry data.
         smiles = entry['smiles']
         iupac_name = entry['iupac']
         experimental_DeltaG = entry['expt'] * units.kilocalories_per_mole
@@ -474,63 +462,77 @@ if __name__=="__main__":
         molecule.SetData('expt', experimental_DeltaG / units.kilocalories_per_mole)
         molecule.SetData('d_expt', experimental_dDeltaG / units.kilocalories_per_mole)
 
-        # Append molecule to list.
-        molecules.append(oechem.OEMol(molecule))
+        # Add explicit hydrogens.
+        oechem.OEAddExplicitHydrogens(molecule)
 
-    print "%d molecules read" % len(molecules)
+        # Store molecule.
+        entry['molecule'] = oechem.OEMol(molecule)
+
+    print "%d molecules read" % len(database.keys())
     end_time = time.time()
     elapsed_time = end_time - start_time
     print "%.3f s elapsed" % elapsed_time
-
-    # Add explicit hydrogens.
-    for molecule in molecules:
-        openeye.oechem.OEAddExplicitHydrogens(molecule)
 
     # Build a conformation for all molecules with Omega.
     print "Building conformations for all molecules..."
     omega = oeomega.OEOmega()
     omega.SetMaxConfs(1)
     omega.SetFromCT(True)
-    for molecule in molecules:
+    # Add explicit hydrogens.
+    for cid in database.keys():
+        entry = database[cid]
+        molecule = entry['molecule']
         if verbose: print "  " + molecule.GetTitle()
-
-        # Assign conformation.
         omega(molecule)
     end_time = time.time()
     elapsed_time = end_time - start_time
     print "%.3f s elapsed" % elapsed_time
 
-    # Assign AM1-BCC charges.
-    print "Assigning AM1-BCC charges..."
+    # Create OpenMM System objects.
+    import gaff2xml
+    print "Running Antechamber..."
+    original_directory = os.getcwd()
+    working_directory = tempfile.mkdtemp()
+    os.chdir(working_directory)
     start_time = time.time()
-    for molecule in molecules:
+    for cid in database.keys():
+        entry = database[cid]
+        molecule = entry['molecule']
+
         if verbose: print "  " + molecule.GetTitle()
 
-        # Assign AM1-BCC charges.
-        if molecule.NumAtoms() == 1:
-            # Use formal charges for ions.
-            oechem.OEFormalPartialCharges(molecule)
-        else:
-            # Assign AM1-BCC charges for multiatom molecules.
-            oequacpac.OEAssignPartialCharges(molecule, oequacpac.OECharges_AM1BCC, False) # use explicit hydrogens
-        # Check to make sure we ended up with partial charges.
-        if oechem.OEHasPartialCharges(molecule) == False:
-            print "No charges on molecule: '%s'" % molecule.GetTitle()
-            print "IUPAC name: %s" % oeiupac.OECreateIUPACName(molecule)
-            # TODO: Write molecule out
-            # Delete themolecule.
-            molecules.remove(molecule)
+        # Write molecule in Tripos format.
+        tripos_mol2_filename = 'molecule.tripos.mol2'
+        omolstream = oechem.oemolostream(tripos_mol2_filename)
+        oechem.OEWriteMolecule(omolstream, molecule)
+        omolstream.close()
 
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    print "%.3f s elapsed" % elapsed_time
-    print "%d molecules remaining" % len(molecules)
+        # Parameterize for AMBER.
+        molecule_name = 'molecule.gaff'
+        [gaff_mol2_filename, frcmod_filename] = gaff2xml.utils.run_antechamber(molecule_name, tripos_mol2_filename, charge_method="bcc", net_charge=0)
+        [prmtop_filename, inpcrd_filename] = gaff2xml.utils.run_tleap(molecule_name, gaff_mol2_filename, frcmod_filename)
+
+        # Create OpenMM System object for molecule in vacuum.
+        prmtop = app.AmberPrmtopFile(prmtop_filename)
+        inpcrd = app.AmberInpcrdFile(inpcrd_filename)
+        system = prmtop.createSystem(nonbondedMethod=app.NoCutoff, constraints=app.HBonds, implicitSolvent=None, removeCMMotion=False)
+        positions = inpcrd.getPositions()
+
+        # Store system and positions.
+        entry['system'] = system
+        entry['positions'] = positions
+
+    os.chdir(original_directory)
+    # TODO: Remove temporary directory and contents.
 
     # Type all molecules with GBSA parameters.
     start_time = time.time()
     typed_molecules = list()
     untyped_molecules = list()
-    for molecule in molecules:
+    for cid in database.keys():
+        entry = database[cid]
+        molecule = entry['molecule']
+
         if verbose: print "  " + molecule.GetTitle()
 
         # Assign GBSA types according to SMARTS rules.
@@ -544,7 +546,7 @@ if __name__=="__main__":
             name = molecule.GetTitle()
             print name
             print exception
-            untyped_molecules.append(OEGraphMol(molecule))
+            untyped_molecules.append(oechem.OEGraphMol(molecule))
             if( len(untyped_molecules) > 10 ):
                sys.exit(-1)
     end_time = time.time()
@@ -578,7 +580,7 @@ if __name__=="__main__":
     print "Initial RMS error %8.3f kcal/mol" % (signed_errors.std())
 
     # Create MCMC model.
-    model = create_model(typed_molecules, parameters)
+    model = create_model(database, parameters)
 
     # Sample models.
     from pymc import MCMC
