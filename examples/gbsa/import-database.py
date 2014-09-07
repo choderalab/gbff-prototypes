@@ -583,6 +583,7 @@ if __name__=="__main__":
     working_directory = tempfile.mkdtemp()
     os.chdir(working_directory)
     start_time = time.time()
+    problematic_cids = list() # list of cid entries that must be removed
     for cid in database.keys():
         entry = database[cid]
         molecule = entry['molecule']
@@ -595,22 +596,24 @@ if __name__=="__main__":
         oechem.OEWriteMolecule(omolstream, molecule)
         omolstream.close()
 
-        # Parameterize for AMBER.
-        molecule_name = 'molecule'
-        [gaff_mol2_filename, frcmod_filename] = gaff2xml.utils.run_antechamber(molecule_name, tripos_mol2_filename, charge_method="bcc", net_charge=0)
-        #print_file(gaff_mol2_filename)
-        [prmtop_filename, inpcrd_filename] = gaff2xml.utils.run_tleap(molecule_name, gaff_mol2_filename, frcmod_filename)
-        #print_file(prmtop_filename)
+        try:
+            # Parameterize for AMBER.
+            molecule_name = 'molecule'
+            [gaff_mol2_filename, frcmod_filename] = gaff2xml.utils.run_antechamber(molecule_name, tripos_mol2_filename, charge_method="bcc", net_charge=0)
+            [prmtop_filename, inpcrd_filename] = gaff2xml.utils.run_tleap(molecule_name, gaff_mol2_filename, frcmod_filename)
 
-        # Create OpenMM System object for molecule in vacuum.
-        prmtop = app.AmberPrmtopFile(prmtop_filename)
-        inpcrd = app.AmberInpcrdFile(inpcrd_filename)
-        system = prmtop.createSystem(nonbondedMethod=app.NoCutoff, constraints=app.HBonds, implicitSolvent=None, removeCMMotion=False)
-        positions = inpcrd.getPositions()
+            # Create OpenMM System object for molecule in vacuum.
+            prmtop = app.AmberPrmtopFile(prmtop_filename)
+            inpcrd = app.AmberInpcrdFile(inpcrd_filename)
+            system = prmtop.createSystem(nonbondedMethod=app.NoCutoff, constraints=app.HBonds, implicitSolvent=None, removeCMMotion=False)
+            positions = inpcrd.getPositions()
 
-        # Store system and positions.
-        entry['system'] = system
-        entry['positions'] = positions
+            # Store system and positions.
+            entry['system'] = system
+            entry['positions'] = positions
+        except Exception as e:
+            print e
+            problematic_cids.append(cid)
 
         # Unlink files.
         for filename in os.listdir(working_directory):
@@ -618,6 +621,15 @@ if __name__=="__main__":
 
     os.chdir(original_directory)
     # TODO: Remove temporary directory and contents.
+
+    # Remove problematic molecules
+    print "Problematic molecules: %s" % str(problematic_cids)
+    outfile = open('removed-molecules.txt', 'w')
+    for cid in problematic_cids:
+        iupac = database[cid]['iupac']
+        outfile.write('%s %s\n' % (cid, iupac))
+        del database[cid]
+    outfile.close()
 
     # Type all molecules with GBSA parameters.
     start_time = time.time()
