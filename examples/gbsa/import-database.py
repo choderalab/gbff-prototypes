@@ -192,6 +192,7 @@ def compute_hydration_energies(database, parameters):
     for cid in database.keys():
         entry = database[cid]
         molecule = entry['molecule']
+        iupac_name = entry['iupac']
 
         # Retrieve OpenMM System.
         vacuum_system = entry['system']
@@ -242,7 +243,7 @@ def compute_hydration_energies(database, parameters):
         beta = 1.0 / kT
 
         initial_time = time.time()
-        nsteps_per_iteration = 500 
+        nsteps_per_iteration = 500
         niterations = 100
         DeltaE_n = numpy.zeros([niterations], numpy.float64) # energy differences, in kT
         for iteration in range(niterations):
@@ -259,7 +260,7 @@ def compute_hydration_energies(database, parameters):
 
         final_time = time.time()
         elapsed_time = final_time - initial_time
-        print "Simulation took %.3f s" % (elapsed_time)
+        print "%48s | %48s | simulation took %.3f s" % (cid, iupac_name, elapsed_time)
 
         # Clean up.
         del solvent_context, solvent_integrator
@@ -268,16 +269,22 @@ def compute_hydration_energies(database, parameters):
         # Compute estimate of free energy difference.
         from pymbar import timeseries
         from pymbar import EXP
-        [t0, g, Neff_max] = timeseries.detectEquilibration(DeltaE_n)
-        DeltaE_n = DeltaE_n[t0:] # remove initial equilibration data
-        indices = timeseries.subsampleCorrelatedData(DeltaE_n, g=g)
-        DeltaE_n = DeltaE_n[indices] # subsample to decorrelate data
-        [DeltaG_in_kT, dDeltaG_in_kT] = EXP(DeltaE_n)
-        DeltaG_in_kT = - DeltaG_in_kT # Reverse sign of DeltaG since we are going from vacuum -> solvent
+        try:
+            [t0, g, Neff_max] = timeseries.detectEquilibration(DeltaE_n)
+            DeltaE_n = DeltaE_n[t0:] # remove initial equilibration data
+            indices = timeseries.subsampleCorrelatedData(DeltaE_n, g=g)
+            DeltaE_n = DeltaE_n[indices] # subsample to decorrelate data
+            [DeltaG_in_kT, dDeltaG_in_kT] = EXP(DeltaE_n)
+            DeltaG_in_kT = - DeltaG_in_kT # Reverse sign of DeltaG since we are going from vacuum -> solvent
+        except Exception as e:
+            print str(e)
+            DeltaG_in_kT = 0.0
+            dDeltaG_in_kT = 0.0
 
         energies[molecule] = kT * DeltaG_in_kT
 
-        print "t0 = %d, g = %.1f, Neff_max = %.1f | DeltaG = %.3f +- %.3f kT" % (t0, g, Neff_max, DeltaG_in_kT, dDeltaG_in_kT)
+        print "%48s | %48s | t0 = %d, g = %.1f, Neff_max = %.1f | DeltaG = %.3f +- %.3f kT" % (cid, iupac_name, t0, g, Neff_max, DeltaG_in_kT, dDeltaG_in_kT)
+        print ""
 
     return energies
 
@@ -461,7 +468,7 @@ if __name__=="__main__":
     usage_string = """\
     usage: %prog --types typefile --parameters paramfile --database database --iterations MCMC_iterations --mcmcout MCMC_db_name
 
-    example: %prog --types parameters/gbsa.types --parameters parameters/gbsa-am1bcc.parameters --database datasets/FreeSolv/v0.3/database.pickle --iterations 150 --mcmcout MCMC --verbose [--subset 10]
+    example: %prog --types parameters/gbsa.types --parameters parameters/gbsa-am1bcc.parameters --database datasets/FreeSolv/v0.3/database.pickle --iterations 150 --mcmcout MCMC --verbose [--subset 10] [--mol2 datasets/FreeSolv/v0.3/mol2files_sybyl]
 
     """
     version_string = "%prog %__version__"
@@ -478,6 +485,10 @@ if __name__=="__main__":
     parser.add_option("-d", "--database", metavar='DATABASE',
                       action="store", type="string", dest='database_filename', default='',
                       help="Python pickle file of database with molecule names, SMILES strings, hydration free energies, and experimental uncertainties (FreeSolv format).")
+
+    parser.add_option("-m", "--mol2", metavar='MOL2',
+                      action="store", type="string", dest='mol2_directory', default='',
+                      help="Directory containing charged mol2 files (optional).")
 
     parser.add_option("-i", "--iterations", metavar='ITERATIONS',
                       action="store", type="int", dest='iterations', default=150,
@@ -527,21 +538,35 @@ if __name__=="__main__":
         cid_list = database.keys()
         database = dict((k, database[k]) for k in cid_list[0:subset_size])
 
+    # Create omega instance in case we have to generate geometry.
+    omega = oeomega.OEOmega()
+    omega.SetMaxConfs(1)
+    omega.SetFromCT(True)
+
     # Process all molecules in the dataset.
     start_time = time.time()
     for cid in database.keys():
         # Get database entry.
         entry = database[cid]
 
-        # Read relevant entry data.
+        # Extract relevant entry data from database.
         smiles = entry['smiles']
         iupac_name = entry['iupac']
         experimental_DeltaG = entry['expt'] * units.kilocalories_per_mole
         experimental_dDeltaG = entry['d_expt'] * units.kilocalories_per_mole
 
-        # Create OpenEye molecule representation.
+        # Read molecule.
         molecule = openeye.oechem.OEGraphMol()
-        openeye.oechem.OEParseSmiles(molecule, smiles)
+        if options.mol2_directory:
+            # Load the mol2 file.
+            tripos_mol2_filename = os.path.join(options.mol2_directory, cid + '.mol2')
+            omolstream = oechem.oemolistream(tripos_mol2_filename)
+            oechem.OEReadMolecule(omolstream, molecule)
+            omolstream.close()
+        else:
+            # Create OpenEye molecule from SMILES representation.
+            openeye.oechem.OEParseSmiles(molecule, smiles)
+            omega(molecule)
 
         # Set properties.
         molecule.SetTitle(iupac_name)
@@ -557,21 +582,6 @@ if __name__=="__main__":
         entry['molecule'] = oechem.OEMol(molecule)
 
     print "%d molecules read" % len(database.keys())
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    print "%.3f s elapsed" % elapsed_time
-
-    # Build a conformation for all molecules with Omega.
-    print "Building conformations for all molecules..."
-    omega = oeomega.OEOmega()
-    omega.SetMaxConfs(1)
-    omega.SetFromCT(True)
-    # Add explicit hydrogens.
-    for cid in database.keys():
-        entry = database[cid]
-        molecule = entry['molecule']
-        if verbose: print "  " + molecule.GetTitle()
-        omega(molecule)
     end_time = time.time()
     elapsed_time = end_time - start_time
     print "%.3f s elapsed" % elapsed_time
@@ -599,7 +609,7 @@ if __name__=="__main__":
         try:
             # Parameterize for AMBER.
             molecule_name = 'molecule'
-            [gaff_mol2_filename, frcmod_filename] = gaff2xml.utils.run_antechamber(molecule_name, tripos_mol2_filename, charge_method="bcc", net_charge=0)
+            [gaff_mol2_filename, frcmod_filename] = gaff2xml.utils.run_antechamber(molecule_name, tripos_mol2_filename, charge_method=None)
             [prmtop_filename, inpcrd_filename] = gaff2xml.utils.run_tleap(molecule_name, gaff_mol2_filename, frcmod_filename)
 
             # Create OpenMM System object for molecule in vacuum.
@@ -645,9 +655,6 @@ if __name__=="__main__":
         try:
             atom_typer.assignTypes(molecule)
             typed_molecules.append(oechem.OEGraphMol(molecule))
-            #atom_typer.debugTypes(molecule)
-            #if( len(typed_molecules) > 10 ):
-            #    sys.exit(-1)
         except AtomTyper.TypingException as exception:
             name = molecule.GetTitle()
             print name
@@ -677,7 +684,7 @@ if __name__=="__main__":
         molecule = entry['molecule']
         name = molecule.GetTitle()
         dg_exp           = float(molecule.GetData('expt')) * units.kilocalories_per_mole
-        ddg_exp         = float(molecule.GetData('d_expt')) * units.kilocalories_per_mole
+        ddg_exp          = float(molecule.GetData('d_expt')) * units.kilocalories_per_mole
         signed_errors[i] = energies[molecule] / units.kilocalories_per_mole - dg_exp / units.kilocalories_per_mole
 
         # Form output.
