@@ -5,14 +5,11 @@
 #=============================================================================================
 
 """
-parameterize-gbsa.py
-
-Parameterize the GBSA model on hydration free energies of small molecules using Bayesian inference
-via Markov chain Monte Carlo (MCMC).
+Utilities for Bayesian parameterization of GBSA models based on hydration free energies of small molecules.
 
 AUTHORS
 
-John Chodera <jchodera@berkeley.edu>, University of California, Berkeley
+John D. Chodera <john.chodera@choderalab.org>
 
 The AtomTyper class is based on 'patty' by Pat Walters, Vertex Pharmaceuticals.
 
@@ -53,10 +50,10 @@ import pymc
 import pymbar
 
 #=============================================================================================
-# PARAMETERS
+# Constants
 #=============================================================================================
 
-temperature = 300.0 * units.kelvin # TODO: This should be part of the data specification
+kB = units.BOLTZMANN_CONSTANT_kB * units.AVOGADRO_CONSTANT_NA # Boltzmann constant
 
 #=============================================================================================
 # Atom Typer
@@ -227,6 +224,7 @@ def generate_simulation_data(database, parameters):
         # Create context for solvent system.
         timestep = 2.0 * units.femtosecond
         collision_rate = 5.0 / units.picoseconds
+        temperature = entry['temperature']
         solvent_integrator = openmm.LangevinIntegrator(temperature, collision_rate, timestep)
         solvent_context = openmm.Context(solvent_system, solvent_integrator, platform)
 
@@ -238,7 +236,6 @@ def generate_simulation_data(database, parameters):
         openmm.LocalEnergyMinimizer.minimize(solvent_context)
 
         # Simulate, saving periodic snapshots of configurations.
-        kB = units.BOLTZMANN_CONSTANT_kB * units.AVOGADRO_CONSTANT_NA # Boltzmann constant
         kT = kB * temperature
         beta = 1.0 / kT
 
@@ -349,7 +346,7 @@ def compute_hydration_energies(database, parameters):
         vacuum_context = openmm.Context(vacuum_system, vacuum_integrator, platform)
 
         # Compute energy differences.
-        kB = units.BOLTZMANN_CONSTANT_kB * units.AVOGADRO_CONSTANT_NA # Boltzmann constant
+        temperature = entry['temperature']
         kT = kB * temperature
         beta = 1.0 / kT
 
@@ -460,7 +457,7 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
     vacuum_context = openmm.Context(vacuum_system, vacuum_integrator, platform)
 
     # Compute energy differences.
-    kB = units.BOLTZMANN_CONSTANT_kB * units.AVOGADRO_CONSTANT_NA # Boltzmann constant
+    temperature = entry['temperature']
     kT = kB * temperature
     beta = 1.0 / kT
 
@@ -515,164 +512,27 @@ def hydration_energy_factory(entry):
     return hydration_energy
 
 #=============================================================================================
-# PyMC model
+# Prepare the FreeSolv-format database for calculations.
 #=============================================================================================
 
-def testfun(molecule_index, *x):
-    print molecule_index
-    return molecule_index
+def prepare_database(database, atomtypes_filename, parameters, mol2_directory=None, verbose=False):
+    """
+    Prepare the database for calculations, operating in place.
 
-def create_model(database, initial_parameters):
-
-    # Define priors for parameters.
-    model = dict()
-    parameters = dict() # just the parameters
-    for (key, value) in initial_parameters.iteritems():
-        (atomtype, parameter_name) = key.split('_')
-        if parameter_name == 'scalingFactor':
-            stochastic = pymc.Uniform(key, value=value, lower=+0.01, upper=+1.0)
-        elif parameter_name == 'radius':
-            stochastic = pymc.Uniform(key, value=value, lower=0.5, upper=3.5)
-        else:
-            raise Exception("Unrecognized parameter name: %s" % parameter_name)
-        model[key] = stochastic
-        parameters[key] = stochastic
-
-    # Define deterministic functions for hydration free energies.
-    cid_list = database.keys()
-    for (molecule_index, cid) in enumerate(cid_list):
-        entry = database[cid]
-        molecule = entry['molecule']
-
-        molecule_name = molecule.GetTitle()
-        variable_name = "dg_gbsa_%s" % cid
-        # Determine which parameters are involved in this molecule to limit number of parents for caching.
-        parents = dict()
-        for atom in molecule.GetAtoms():
-            atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
-            for parameter_name in ['scalingFactor', 'radius']:
-                stochastic_name = '%s_%s' % (atomtype,parameter_name)
-                parents[stochastic_name] = parameters[stochastic_name]
-        print "%s : " % molecule_name,
-        print parents.keys()
-        # Create deterministic variable for computed hydration free energy.
-        function = hydration_energy_factory(entry)
-        model[variable_name] = pymc.Deterministic(eval=function,
-                                                  name=variable_name,
-                                                  parents=parents,
-                                                  doc=cid,
-                                                  trace=True,
-                                                  verbose=1,
-                                                  dtype=float,
-                                                  plot=False,
-                                                  cache_depth=2)
-
-    # Define error model
-    log_sigma_min              = math.log(0.01) # kcal/mol
-    log_sigma_max              = math.log(10.0) # kcal/mol
-    log_sigma_guess            = math.log(0.2) # kcal/mol
-    model['log_sigma']         = pymc.Uniform('log_sigma', lower=log_sigma_min, upper=log_sigma_max, value=log_sigma_guess)
-    model['sigma']             = pymc.Lambda('sigma', lambda log_sigma=model['log_sigma'] : math.exp(log_sigma) )
-    model['tau']               = pymc.Lambda('tau', lambda sigma=model['sigma'] : sigma**(-2) )
-    cid_list = database.keys()
-    for (molecule_index, cid) in enumerate(cid_list):
-        entry = database[cid]
-        molecule = entry['molecule']
-
-        molecule_name          = molecule.GetTitle()
-        variable_name          = "dg_exp_%s" % cid
-        dg_exp                 = float(molecule.GetData('expt')) # observed hydration free energy in kcal/mol
-        ddg_exp                 = float(molecule.GetData('d_expt')) # observed hydration free energy uncertainty in kcal/mol
-        #model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%08d' % molecule_index], tau=model['tau'], value=expt, observed=True)
-        model['tau_%s' % cid] = pymc.Lambda('tau_%s' % cid, lambda sigma=model['sigma'] : 1.0 / (sigma**2 + ddg_exp**2) )
-        model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%s' % cid], tau=model['tau_%s' % cid], value=dg_exp, observed=True)
-
-    return model
-
-def print_file(filename):
-    infile = open(filename, 'r')
-    print infile.read()
-    infile.close()
-
-#=============================================================================================
-# MAIN
-#=============================================================================================
-
-if __name__=="__main__":
-
-    # Create command-line argument options.
-    usage_string = """\
-    usage: %prog --types typefile --parameters paramfile --database database --iterations MCMC_iterations --mcmcout MCMC_db_name
-
-    example: %prog --types parameters/gbsa.types --parameters parameters/gbsa-am1bcc.parameters --database datasets/FreeSolv/v0.3/database.pickle --iterations 150 --mcmcout MCMC --verbose [--subset 10] [--mol2 datasets/FreeSolv/v0.3/mol2files_sybyl]
+    Parameters
+    ----------
+    database : dict
+       FreeSolv format database.
+    atomtypes_filename : str
+       Filename specifying atom types for patty atom typer.
+    parameters : dict
+       Parameters to use in initial atom typing.
+    mol2_directory : str, optional, default=None
+       Directory name to read mol2 files for corresponding entries in database; otherwise will generate based on SMILES strings.
+    verbose : bool, optiona, default=False
+       Control verbosity.
 
     """
-    version_string = "%prog %__version__"
-    parser = OptionParser(usage=usage_string, version=version_string)
-
-    parser.add_option("-t", "--types", metavar='TYPES',
-                      action="store", type="string", dest='atomtypes_filename', default='',
-                      help="Filename defining atomtypes as SMARTS atom matches.")
-
-    parser.add_option("-p", "--parameters", metavar='PARAMETERS',
-                      action="store", type="string", dest='parameters_filename', default='',
-                      help="File containing initial parameter set.")
-
-    parser.add_option("-d", "--database", metavar='DATABASE',
-                      action="store", type="string", dest='database_filename', default='',
-                      help="Python pickle file of database with molecule names, SMILES strings, hydration free energies, and experimental uncertainties (FreeSolv format).")
-
-    parser.add_option("-m", "--mol2", metavar='MOL2',
-                      action="store", type="string", dest='mol2_directory', default='',
-                      help="Directory containing charged mol2 files (optional).")
-
-    parser.add_option("-i", "--iterations", metavar='ITERATIONS',
-                      action="store", type="int", dest='iterations', default=150,
-                      help="MCMC iterations.")
-
-    parser.add_option("-o", "--mcmcout", metavar='MCMCOUT',
-                      action="store", type="string", dest='mcmcout', default='MCMC',
-                      help="MCMC output database name.")
-
-    parser.add_option("-s", "--subset", metavar='SUBSET',
-                      action="store", type="int", dest='subset_size', default=None,
-                      help="Size of subset to consider (for testing).")
-
-    parser.add_option("-v", "--verbose", metavar='VERBOSE',
-                      action="store_true", dest='verbose', default=False,
-                      help="Verbosity flag.")
-
-    # Parse command-line arguments.
-    (options,args) = parser.parse_args()
-
-    # Ensure all required options have been specified.
-    if options.atomtypes_filename=='' or options.parameters_filename=='' or options.database_filename=='':
-        parser.print_help()
-        parser.error("All input files must be specified.")
-
-    # Set verbosity.
-    verbose = options.verbose
-
-    # Read GBSA parameters.
-    parameters = read_gbsa_parameters(options.parameters_filename)
-    print parameters
-
-    mcmcIterations = options.iterations
-    mcmcDbName     = os.path.abspath(options.mcmcout)
-
-    # Construct atom typer.
-    atom_typer = AtomTyper(options.atomtypes_filename, "gbsa_type")
-    #atom_typer.dump()
-
-    # Open database.
-    import pickle
-    database = pickle.load(open(options.database_filename, 'r'))
-
-    # DEBUG: Create a small subset.
-    if options.subset_size:
-        subset_size = options.subset_size
-        cid_list = database.keys()
-        database = dict((k, database[k]) for k in cid_list[0:subset_size])
 
     # Create omega instance in case we have to generate geometry.
     omega = oeomega.OEOmega()
@@ -680,10 +540,15 @@ if __name__=="__main__":
     omega.SetFromCT(True)
 
     # Process all molecules in the dataset.
+    charge_method = None # charge method to be used in antechamber call
     start_time = time.time()
     for cid in database.keys():
         # Get database entry.
         entry = database[cid]
+
+        # Store temperature
+        # TODO: Get this from database?
+        entry['temperature'] = 300.0 * units.kelvin
 
         # Extract relevant entry data from database.
         smiles = entry['smiles']
@@ -693,16 +558,22 @@ if __name__=="__main__":
 
         # Read molecule.
         molecule = openeye.oechem.OEGraphMol()
-        if options.mol2_directory:
+        if mol2_directory:
             # Load the mol2 file.
-            tripos_mol2_filename = os.path.join(options.mol2_directory, cid + '.mol2')
+            tripos_mol2_filename = os.path.join(mol2_directory, cid + '.mol2')
             omolstream = oechem.oemolistream(tripos_mol2_filename)
             oechem.OEReadMolecule(omolstream, molecule)
             omolstream.close()
+            # Will use mol2 charges.
+            charge_method = None
+
         else:
             # Create OpenEye molecule from SMILES representation.
             openeye.oechem.OEParseSmiles(molecule, smiles)
+            # Create geometry.
             omega(molecule)
+            # Be sure to assign charges.
+            charge_method = 'bcc'
 
         # Set properties.
         molecule.SetTitle(iupac_name)
@@ -745,7 +616,7 @@ if __name__=="__main__":
         try:
             # Parameterize for AMBER.
             molecule_name = 'molecule'
-            [gaff_mol2_filename, frcmod_filename] = gaff2xml.utils.run_antechamber(molecule_name, tripos_mol2_filename, charge_method=None)
+            [gaff_mol2_filename, frcmod_filename] = gaff2xml.utils.run_antechamber(molecule_name, tripos_mol2_filename, charge_method=charge_method)
             [prmtop_filename, inpcrd_filename] = gaff2xml.utils.run_tleap(molecule_name, gaff_mol2_filename, frcmod_filename)
 
             # Create OpenMM System object for molecule in vacuum.
@@ -778,6 +649,10 @@ if __name__=="__main__":
         outfile.write('%s %s\n' % (cid, iupac))
         del database[cid]
     outfile.close()
+
+    # Construct atom typer.
+    atom_typer = AtomTyper(atomtypes_filename, "gbsa_type")
+    #atom_typer.dump()
 
     # Type all molecules with GBSA parameters.
     start_time = time.time()
@@ -813,40 +688,4 @@ if __name__=="__main__":
     end_time = time.time()
     elapsed_time = end_time - start_time
     print "%.3f s elapsed" % elapsed_time
-
-    # Compute energies with all molecules.
-    print "Computing all energies..."
-    start_time = time.time()
-    energies = compute_hydration_energies(database, parameters)
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    print "%.3f s elapsed" % elapsed_time
-
-    # Print comparison.
-    signed_errors = numpy.zeros([len(database.keys())], numpy.float64)
-    for (i, cid) in enumerate(database.keys()):
-        # Get metadata.
-        entry = database[cid]
-        molecule = entry['molecule']
-        name = molecule.GetTitle()
-        dg_exp           = float(molecule.GetData('expt')) * units.kilocalories_per_mole
-        ddg_exp          = float(molecule.GetData('d_expt')) * units.kilocalories_per_mole
-        signed_errors[i] = energies[molecule] / units.kilocalories_per_mole - dg_exp / units.kilocalories_per_mole
-
-        # Form output.
-        outstring = "%48s %8.3f %8.3f %8.3f" % (name, dg_exp / units.kilocalories_per_mole, ddg_exp / units.kilocalories_per_mole, energies[molecule] / units.kilocalories_per_mole)
-
-        print outstring
-
-    print "Initial RMS error %8.3f kcal/mol" % (signed_errors.std())
-
-    # Create MCMC model.
-    model = create_model(database, parameters)
-
-    # Sample models.
-    from pymc import MCMC
-    sampler = MCMC(model, db='txt', name=mcmcDbName)
-    sampler.isample(iter=mcmcIterations, burn=0, save_interval=1, verbose=True)
-    #sampler.sample(iter=mcmcIterations, burn=0, save_interval=1, verbose=True, progress_bar=True)
-    sampler.db.close()
 
