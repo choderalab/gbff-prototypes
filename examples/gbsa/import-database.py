@@ -53,6 +53,12 @@ import pymc
 import pymbar
 
 #=============================================================================================
+# PARAMETERS
+#=============================================================================================
+
+temperature = 300.0 * units.kelvin # TODO: This should be part of the data specification
+
+#=============================================================================================
 # Atom Typer
 #=============================================================================================
 
@@ -167,6 +173,114 @@ def read_gbsa_parameters(filename):
         return parameters
 
 #=============================================================================================
+# Generate simulation data.
+#=============================================================================================
+
+def generate_simulation_data(database, parameters):
+    """
+    Regenerate simulation data for given parameters.
+
+    ARGUMENTS
+
+    database (dict) - database of molecules
+    parameters (dict) - dictionary of GBSA parameters keyed on GBSA atom types
+
+    """
+
+    platform = openmm.Platform.getPlatformByName("Reference")
+
+    from pymbar import timeseries
+
+    for cid in database.keys():
+        entry = database[cid]
+        molecule = entry['molecule']
+        iupac_name = entry['iupac']
+
+        # Retrieve OpenMM System.
+        solvent_system = copy.deepcopy(entry['system'])
+
+        # Get nonbonded force.
+        forces = { solvent_system.getForce(index).__class__.__name__ : solvent_system.getForce(index) for index in range(solvent_system.getNumForces()) }
+        nonbonded_force = forces['NonbondedForce']
+
+        # Add GBSA term
+        gbsa_force = openmm.GBSAOBCForce()
+        gbsa_force.setNonbondedMethod(openmm.GBSAOBCForce.NoCutoff) # set no cutoff
+        gbsa_force.setSoluteDielectric(1)
+        gbsa_force.setSolventDielectric(78)
+
+        # Build indexable list of atoms.
+        atoms = [atom for atom in molecule.GetAtoms()]
+        natoms = len(atoms)
+
+        # Assign GBSA parameters.
+        for (atom_index, atom) in enumerate(atoms):
+            [charge, sigma, epsilon] = nonbonded_force.getParticleParameters(atom_index)
+            atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
+            radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
+            scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')] * units.kilocalories_per_mole
+            gbsa_force.addParticle(charge, radius, scalingFactor)
+
+        # Add the force to the system.
+        solvent_system.addForce(gbsa_force)
+
+        # Create context for solvent system.
+        timestep = 2.0 * units.femtosecond
+        collision_rate = 5.0 / units.picoseconds
+        solvent_integrator = openmm.LangevinIntegrator(temperature, collision_rate, timestep)
+        solvent_context = openmm.Context(solvent_system, solvent_integrator, platform)
+
+        # Set the coordinates.
+        positions = entry['positions']
+        solvent_context.setPositions(positions)
+
+        # Minimize.
+        openmm.LocalEnergyMinimizer.minimize(solvent_context)
+
+        # Simulate, saving periodic snapshots of configurations.
+        kB = units.BOLTZMANN_CONSTANT_kB * units.AVOGADRO_CONSTANT_NA # Boltzmann constant
+        kT = kB * temperature
+        beta = 1.0 / kT
+
+        initial_time = time.time()
+        nsteps_per_iteration = 500
+        niterations = 100
+        x_n = numpy.zeros([niterations,natoms,3], numpy.float32) # positions, in nm
+        u_n = numpy.zeros([niterations], numpy.float64) # energy differences, in kT
+        for iteration in range(niterations):
+            solvent_integrator.step(nsteps_per_iteration)
+            solvent_state = solvent_context.getState(getEnergy=True, getPositions=True)
+            x_n[iteration,:,:] = solvent_state.getPositions(asNumpy=True) / units.nanometers
+            u_n[iteration] = beta * solvent_state.getPotentialEnergy()
+
+        if numpy.any(numpy.isnan(u_n)):
+            raise Exception("Encountered NaN for molecule %s | %s" % (cid, iupac_name))
+
+        final_time = time.time()
+        elapsed_time = final_time - initial_time
+
+        # Clean up.
+        del solvent_context, solvent_integrator
+
+        # Discard initial transient to equilibration.
+        [t0, g, Neff_max] = timeseries.detectEquilibration(u_n)
+        x_n = x_n[t0:,:,:]
+        u_n = u_n[t0:]
+
+        # Subsample to remove correlation.
+        indices = timeseries.subsampleCorrelatedData(u_n, g=g)
+        x_n = x_n[indices,:,:]
+        u_n = u_n[indices]
+
+        # Store data.
+        entry['x_n'] = x_n
+        entry['u_n'] = u_n
+
+        print "%48s | %48s | simulation %12.3f s | %5d samples discarded | %5d independent samples remain" % (cid, iupac_name, elapsed_time, t0, len(indices))
+
+    return
+
+#=============================================================================================
 # Computation of hydration free energies
 #=============================================================================================
 
@@ -189,6 +303,8 @@ def compute_hydration_energies(database, parameters):
 
     platform = openmm.Platform.getPlatformByName("Reference")
 
+    from pymbar import MBAR
+
     for cid in database.keys():
         entry = database[cid]
         molecule = entry['molecule']
@@ -210,6 +326,7 @@ def compute_hydration_energies(database, parameters):
 
         # Build indexable list of atoms.
         atoms = [atom for atom in molecule.GetAtoms()]
+        natoms = len(atoms)
 
         # Assign GBSA parameters.
         for (atom_index, atom) in enumerate(atoms):
@@ -224,20 +341,14 @@ def compute_hydration_energies(database, parameters):
 
         # Create context for solvent system.
         timestep = 2.0 * units.femtosecond
-        collision_rate = 5.0 / units.picoseconds
-        temperature = 300.0 * units.kelvin # TODO: This should be part of the data specification
-        solvent_integrator = openmm.LangevinIntegrator(temperature, collision_rate, timestep)
+        solvent_integrator = openmm.VerletIntegrator(timestep)
         solvent_context = openmm.Context(solvent_system, solvent_integrator, platform)
-
-        # Set the coordinates.
-        positions = entry['positions']
-        solvent_context.setPositions(positions)
 
         # Create context for vacuum system.
         vacuum_integrator = openmm.VerletIntegrator(timestep)
         vacuum_context = openmm.Context(vacuum_system, vacuum_integrator, platform)
 
-        # Simulate, saving snapshots every so often.
+        # Compute energy differences.
         kB = units.BOLTZMANN_CONSTANT_kB * units.AVOGADRO_CONSTANT_NA # Boltzmann constant
         kT = kB * temperature
         beta = 1.0 / kT
@@ -245,45 +356,44 @@ def compute_hydration_energies(database, parameters):
         initial_time = time.time()
         nsteps_per_iteration = 500
         niterations = 100
-        DeltaE_n = numpy.zeros([niterations], numpy.float64) # energy differences, in kT
-        for iteration in range(niterations):
-            solvent_integrator.step(nsteps_per_iteration)
-            solvent_state = solvent_context.getState(getEnergy=True, getPositions=True)
-            E_solvent = beta * solvent_state.getPotentialEnergy()
+        x_n = entry['x_n']
+        u_n = entry['u_n']
+        nsamples = len(u_n)
+        nstates = 3 # number of thermodynamic states
+        u_kln = numpy.zeros([3,3,nsamples], numpy.float64)
+        for sample in range(nsamples):
+            positions = units.Quantity(x_n[sample,:,:], units.nanometers)
 
-            positions = solvent_state.getPositions()
+            u_kln[0,0,sample] = u_n[sample]
+
             vacuum_context.setPositions(positions)
             vacuum_state = vacuum_context.getState(getEnergy=True)
-            E_vacuum = beta * vacuum_state.getPotentialEnergy()
+            u_kln[0,1,sample] = beta * vacuum_state.getPotentialEnergy()
 
-            DeltaE_n[iteration] = (E_vacuum - E_solvent)
+            solvent_context.setPositions(positions)
+            solvent_state = solvent_context.getState(getEnergy=True)
+            u_kln[0,2,sample] = beta * solvent_state.getPotentialEnergy()
+
+        N_k = numpy.zeros([nstates], numpy.int32)
+        N_k[0] = nsamples
+
+        mbar = MBAR(u_kln, N_k)
+        [df_ij, ddf_ij] = mbar.getFreeEnergyDifferences()
+
+        DeltaG_in_kT = df_ij[1,2]
+        dDeltaG_in_kT = ddf_ij[1,2]
 
         final_time = time.time()
         elapsed_time = final_time - initial_time
-        print "%48s | %48s | simulation took %.3f s" % (cid, iupac_name, elapsed_time)
+        print "%48s | %48s | reweighting took %.3f s" % (cid, iupac_name, elapsed_time)
 
         # Clean up.
         del solvent_context, solvent_integrator
         del vacuum_context, vacuum_integrator
 
-        # Compute estimate of free energy difference.
-        from pymbar import timeseries
-        from pymbar import EXP
-        try:
-            [t0, g, Neff_max] = timeseries.detectEquilibration(DeltaE_n)
-            DeltaE_n = DeltaE_n[t0:] # remove initial equilibration data
-            indices = timeseries.subsampleCorrelatedData(DeltaE_n, g=g)
-            DeltaE_n = DeltaE_n[indices] # subsample to decorrelate data
-            [DeltaG_in_kT, dDeltaG_in_kT] = EXP(DeltaE_n)
-            DeltaG_in_kT = - DeltaG_in_kT # Reverse sign of DeltaG since we are going from vacuum -> solvent
-        except Exception as e:
-            print str(e)
-            DeltaG_in_kT = 0.0
-            dDeltaG_in_kT = 0.0
-
         energies[molecule] = kT * DeltaG_in_kT
 
-        print "%48s | %48s | t0 = %d, g = %.1f, Neff_max = %.1f | DeltaG = %.3f +- %.3f kT" % (cid, iupac_name, t0, g, Neff_max, DeltaG_in_kT, dDeltaG_in_kT)
+        print "%48s | %48s | DeltaG = %.3f +- %.3f kT" % (cid, iupac_name, DeltaG_in_kT, dDeltaG_in_kT)
         print ""
 
     return energies
@@ -305,15 +415,18 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
 
     platform = openmm.Platform.getPlatformByName(platform_name)
 
-    # Retrieve molecule.
+    from pymbar import MBAR
+
     molecule = entry['molecule']
+    iupac_name = entry['iupac']
+    cid = molecule.GetData('cid')
 
     # Retrieve OpenMM System.
-    # Make deep copy.
-    system = copy.deepcopy(entry['system'])
+    vacuum_system = entry['system']
+    solvent_system = copy.deepcopy(entry['system'])
 
     # Get nonbonded force.
-    forces = { system.getForce(index).__class__.__name__ : system.getForce(index) for index in range(system.getNumForces()) }
+    forces = { solvent_system.getForce(index).__class__.__name__ : solvent_system.getForce(index) for index in range(solvent_system.getNumForces()) }
     nonbonded_force = forces['NonbondedForce']
 
     # Add GBSA term
@@ -324,58 +437,81 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
 
     # Build indexable list of atoms.
     atoms = [atom for atom in molecule.GetAtoms()]
+    natoms = len(atoms)
 
     # Assign GBSA parameters.
     for (atom_index, atom) in enumerate(atoms):
         [charge, sigma, epsilon] = nonbonded_force.getParticleParameters(atom_index)
         atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
-        try:
-            radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
-            scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')] * units.kilocalories_per_mole
-        except Exception, exception:
-            print "Cannot find parameters for atomtype '%s' in molecule '%s'" % (atomtype, molecule.GetTitle())
-            print parameters.keys()
-            raise exception
-
-        gbsa_force.addParticle(charge, radius, scalingFactor) #
+        radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
+        scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')] * units.kilocalories_per_mole
+        gbsa_force.addParticle(charge, radius, scalingFactor)
 
     # Add the force to the system.
-    system.addForce(gbsa_force)
+    solvent_system.addForce(gbsa_force)
 
-    # Create OpenMM Context.
-    timestep = 1.0 * units.femtosecond # arbitrary
-    integrator = openmm.VerletIntegrator(timestep)
-    context = openmm.Context(system, integrator, platform)
+    # Create context for solvent system.
+    timestep = 2.0 * units.femtosecond
+    solvent_integrator = openmm.VerletIntegrator(timestep)
+    solvent_context = openmm.Context(solvent_system, solvent_integrator, platform)
 
-    # Set the coordinates.
-    positions = entry['positions']
-    context.setPositions(positions)
+    # Create context for vacuum system.
+    vacuum_integrator = openmm.VerletIntegrator(timestep)
+    vacuum_context = openmm.Context(vacuum_system, vacuum_integrator, platform)
 
-    # Get the energy
-    state = context.getState(getEnergy=True)
-    energy = state.getPotentialEnergy() / units.kilocalories_per_mole
-    if numpy.isnan(energy):
-        energy = +1e6;
+    # Compute energy differences.
+    kB = units.BOLTZMANN_CONSTANT_kB * units.AVOGADRO_CONSTANT_NA # Boltzmann constant
+    kT = kB * temperature
+    beta = 1.0 / kT
+
+    initial_time = time.time()
+    nsteps_per_iteration = 500
+    niterations = 100
+    x_n = entry['x_n']
+    u_n = entry['u_n']
+    nsamples = len(u_n)
+    nstates = 3 # number of thermodynamic states
+    u_kln = numpy.zeros([3,3,nsamples], numpy.float64)
+    for sample in range(nsamples):
+        positions = units.Quantity(x_n[sample,:,:], units.nanometers)
+
+        u_kln[0,0,sample] = u_n[sample]
+
+        vacuum_context.setPositions(positions)
+        vacuum_state = vacuum_context.getState(getEnergy=True)
+        u_kln[0,1,sample] = beta * vacuum_state.getPotentialEnergy()
+
+        solvent_context.setPositions(positions)
+        solvent_state = solvent_context.getState(getEnergy=True)
+        u_kln[0,2,sample] = beta * solvent_state.getPotentialEnergy()
+
+    N_k = numpy.zeros([nstates], numpy.int32)
+    N_k[0] = nsamples
+
+    mbar = MBAR(u_kln, N_k)
+    [df_ij, ddf_ij] = mbar.getFreeEnergyDifferences()
+
+    DeltaG_in_kT = df_ij[1,2]
+    dDeltaG_in_kT = ddf_ij[1,2]
+
+    final_time = time.time()
+    elapsed_time = final_time - initial_time
+    print "%48s | %48s | reweighting took %.3f s" % (cid, iupac_name, elapsed_time)
 
     # Clean up.
-    del context, integrator
+    del solvent_context, solvent_integrator
+    del vacuum_context, vacuum_integrator
 
-    # Compute the energy without GB.
-    system = entry['system']
-    timestep = 1.0 * units.femtosecond # arbitrary
-    integrator = openmm.VerletIntegrator(timestep)
-    context = openmm.Context(system, integrator, platform)
-    positions = entry['positions']
-    context.setPositions(positions)
-    state = context.getState(getEnergy=True)
-    energy -= state.getPotentialEnergy() / units.kilocalories_per_mole
-    del context, integrator
+    energy = kT * DeltaG_in_kT
 
-    return energy
+    print "%48s | %48s | DeltaG = %.3f +- %.3f kT" % (cid, iupac_name, DeltaG_in_kT, dDeltaG_in_kT)
+    print ""
+
+    return energy / units.kilocalories_per_mole
 
 def hydration_energy_factory(entry):
     def hydration_energy(**parameters):
-        return compute_hydration_energy(entry, parameters, platform_name="CPU")
+        return compute_hydration_energy(entry, parameters, platform_name="Reference")
     return hydration_energy
 
 #=============================================================================================
@@ -618,6 +754,8 @@ if __name__=="__main__":
             system = prmtop.createSystem(nonbondedMethod=app.NoCutoff, constraints=app.HBonds, implicitSolvent=None, removeCMMotion=False)
             positions = inpcrd.getPositions()
 
+            # TODO: Ensure that atom charges from molecule match those from System generated via prmtop file (as a check of atom ordering).
+
             # Store system and positions.
             entry['system'] = system
             entry['positions'] = positions
@@ -666,6 +804,14 @@ if __name__=="__main__":
     elapsed_time = end_time - start_time
     print "%d molecules correctly typed" % (len(typed_molecules))
     print "%d molecules missing some types" % (len(untyped_molecules))
+    print "%.3f s elapsed" % elapsed_time
+
+    # Generate simulation data.
+    print "Generating simulation data for all molecules..."
+    start_time = time.time()
+    generate_simulation_data(database, parameters)
+    end_time = time.time()
+    elapsed_time = end_time - start_time
     print "%.3f s elapsed" % elapsed_time
 
     # Compute energies with all molecules.
