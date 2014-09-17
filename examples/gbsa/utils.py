@@ -493,7 +493,7 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
 
     final_time = time.time()
     elapsed_time = final_time - initial_time
-    print "%48s | %48s | reweighting took %.3f s" % (cid, iupac_name, elapsed_time)
+    #print "%48s | %48s | reweighting took %.3f s" % (cid, iupac_name, elapsed_time)
 
     # Clean up.
     del solvent_context, solvent_integrator
@@ -501,8 +501,8 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
 
     energy = kT * DeltaG_in_kT
 
-    print "%48s | %48s | DeltaG = %.3f +- %.3f kT" % (cid, iupac_name, DeltaG_in_kT, dDeltaG_in_kT)
-    print ""
+    #print "%48s | %48s | DeltaG = %.3f +- %.3f kT" % (cid, iupac_name, DeltaG_in_kT, dDeltaG_in_kT)
+    #print ""
 
     return energy / units.kilocalories_per_mole
 
@@ -579,8 +579,8 @@ def prepare_database(database, atomtypes_filename, parameters, mol2_directory=No
         molecule.SetTitle(iupac_name)
         molecule.SetData('smiles', smiles)
         molecule.SetData('cid', cid)
-        molecule.SetData('expt', experimental_DeltaG / units.kilocalories_per_mole)
-        molecule.SetData('d_expt', experimental_dDeltaG / units.kilocalories_per_mole)
+        molecule.SetData('expt', experimental_DeltaG / units.kilocalories_per_mole) # experimental hydration free energy (kcal/mol)
+        molecule.SetData('d_expt', experimental_dDeltaG / units.kilocalories_per_mole) # uncertainty in experimental hydration free energy (kcal/mol)
 
         # Add explicit hydrogens.
         oechem.OEAddExplicitHydrogens(molecule)
@@ -625,7 +625,7 @@ def prepare_database(database, atomtypes_filename, parameters, mol2_directory=No
             system = prmtop.createSystem(nonbondedMethod=app.NoCutoff, constraints=app.HBonds, implicitSolvent=None, removeCMMotion=False)
             positions = inpcrd.getPositions()
 
-            # TODO: Ensure that atom charges from molecule match those from System generated via prmtop file (as a check of atom ordering).
+            # TODO: Ensure that atomic numbers and charges from molecule match those from System generated via prmtop file (as a check of atom ordering).
 
             # Store system and positions.
             entry['system'] = system

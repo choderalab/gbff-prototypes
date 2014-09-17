@@ -124,8 +124,31 @@ def create_model(database, initial_parameters):
         dg_exp                 = float(molecule.GetData('expt')) # observed hydration free energy in kcal/mol
         ddg_exp                 = float(molecule.GetData('d_expt')) # observed hydration free energy uncertainty in kcal/mol
         #model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%08d' % molecule_index], tau=model['tau'], value=expt, observed=True)
-        model['tau_%s' % cid] = pymc.Lambda('tau_%s' % cid, lambda sigma=model['sigma'] : 1.0 / (sigma**2 + ddg_exp**2) )
+        #model['tau_%s' % cid] = pymc.Lambda('tau_%s' % cid, lambda sigma=model['sigma'] : 1.0 / (sigma**2 + ddg_exp**2) ) # Include model error
+        model['tau_%s' % cid] = pymc.Lambda('tau_%s' % cid, lambda sigma=model['sigma'] : 1.0 / (ddg_exp**2) ) # Do not include model error.
         model[variable_name]   = pymc.Normal(variable_name, mu=model['dg_gbsa_%s' % cid], tau=model['tau_%s' % cid], value=dg_exp, observed=True)
+
+    # Define convenience functions.
+    parents = {'dg_gbsa_%s'%cid : model['dg_gbsa_%s' % cid] for cid in cid_list }
+    def RMSE(**args):
+        nmolecules = len(cid_list)
+        error = numpy.zeros([nmolecules], numpy.float64)
+        for (molecule_index, cid) in enumerate(cid_list):
+            entry = database[cid]
+            molecule = entry['molecule']
+            error[molecule_index] = args['dg_gbsa_%s' % cid] - float(molecule.GetData('expt'))
+        mse = numpy.mean((error - numpy.mean(error))**2)
+        return numpy.sqrt(mse)
+
+    model['RMSE'] = pymc.Deterministic(eval=RMSE,
+                                       name='RMSE',
+                                       parents=parents,
+                                       doc='RMSE',
+                                       trace=True,
+                                       verbose=1,
+                                       dtype=float,
+                                       plot=True,
+                                       cache_depth=2)
 
     return model
 
