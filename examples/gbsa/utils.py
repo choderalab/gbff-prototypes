@@ -193,6 +193,9 @@ def generate_simulation_data(database, parameters):
         molecule = entry['molecule']
         iupac_name = entry['iupac']
 
+        # Retrieve vacuum system.
+        vacuum_system = copy.deepcopy(entry['system'])
+
         # Retrieve OpenMM System.
         solvent_system = copy.deepcopy(entry['system'])
 
@@ -223,32 +226,32 @@ def generate_simulation_data(database, parameters):
 
         # Create context for solvent system.
         timestep = 2.0 * units.femtosecond
-        collision_rate = 5.0 / units.picoseconds
+        collision_rate = 20.0 / units.picoseconds
         temperature = entry['temperature']
-        solvent_integrator = openmm.LangevinIntegrator(temperature, collision_rate, timestep)
-        solvent_context = openmm.Context(solvent_system, solvent_integrator, platform)
+        integrator = openmm.LangevinIntegrator(temperature, collision_rate, timestep)
+        context = openmm.Context(vacuum_system, integrator, platform)
 
         # Set the coordinates.
         positions = entry['positions']
-        solvent_context.setPositions(positions)
+        context.setPositions(positions)
 
         # Minimize.
-        openmm.LocalEnergyMinimizer.minimize(solvent_context)
+        openmm.LocalEnergyMinimizer.minimize(context)
 
         # Simulate, saving periodic snapshots of configurations.
         kT = kB * temperature
         beta = 1.0 / kT
 
         initial_time = time.time()
-        nsteps_per_iteration = 500
+        nsteps_per_iteration = 2500
         niterations = 100
         x_n = numpy.zeros([niterations,natoms,3], numpy.float32) # positions, in nm
         u_n = numpy.zeros([niterations], numpy.float64) # energy differences, in kT
         for iteration in range(niterations):
-            solvent_integrator.step(nsteps_per_iteration)
-            solvent_state = solvent_context.getState(getEnergy=True, getPositions=True)
-            x_n[iteration,:,:] = solvent_state.getPositions(asNumpy=True) / units.nanometers
-            u_n[iteration] = beta * solvent_state.getPotentialEnergy()
+            integrator.step(nsteps_per_iteration)
+            state = context.getState(getEnergy=True, getPositions=True)
+            x_n[iteration,:,:] = state.getPositions(asNumpy=True) / units.nanometers
+            u_n[iteration] = beta * state.getPotentialEnergy()
 
         if numpy.any(numpy.isnan(u_n)):
             raise Exception("Encountered NaN for molecule %s | %s" % (cid, iupac_name))
@@ -257,7 +260,7 @@ def generate_simulation_data(database, parameters):
         elapsed_time = final_time - initial_time
 
         # Clean up.
-        del solvent_context, solvent_integrator
+        del context, integrator
 
         # Discard initial transient to equilibration.
         [t0, g, Neff_max] = timeseries.detectEquilibration(u_n)
@@ -273,7 +276,7 @@ def generate_simulation_data(database, parameters):
         entry['x_n'] = x_n
         entry['u_n'] = u_n
 
-        print "%48s | %48s | simulation %12.3f s | %5d samples discarded | %5d independent samples remain" % (cid, iupac_name, elapsed_time, t0, len(indices))
+        print "%48s | %64s | simulation %12.3f s | %5d samples discarded | %5d independent samples remain" % (cid, iupac_name, elapsed_time, t0, len(indices))
 
     return
 
@@ -351,8 +354,6 @@ def compute_hydration_energies(database, parameters):
         beta = 1.0 / kT
 
         initial_time = time.time()
-        nsteps_per_iteration = 500
-        niterations = 100
         x_n = entry['x_n']
         u_n = entry['u_n']
         nsamples = len(u_n)
@@ -462,8 +463,6 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
     beta = 1.0 / kT
 
     initial_time = time.time()
-    nsteps_per_iteration = 500
-    niterations = 100
     x_n = entry['x_n']
     u_n = entry['u_n']
     nsamples = len(u_n)
