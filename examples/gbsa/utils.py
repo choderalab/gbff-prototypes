@@ -624,8 +624,6 @@ def prepare_database(database, atomtypes_filename, parameters, mol2_directory=No
             system = prmtop.createSystem(nonbondedMethod=app.NoCutoff, constraints=app.HBonds, implicitSolvent=None, removeCMMotion=False)
             positions = inpcrd.getPositions()
 
-            # TODO: Ensure that atomic numbers and charges from molecule match those from System generated via prmtop file (as a check of atom ordering).
-
             # Store system and positions.
             entry['system'] = system
             entry['positions'] = positions
@@ -636,6 +634,15 @@ def prepare_database(database, atomtypes_filename, parameters, mol2_directory=No
         # Unlink files.
         for filename in os.listdir(working_directory):
             os.unlink(filename)
+
+    # Ensure atom names match between OEMol and prmtop representations.
+    oemol_atoms = [atom for atom in molecule.GetAtoms()]
+    top_atoms = list(prmtop.topology.atoms())
+    for (oemol_atom, top_atom) in zip(oemol_atoms, top_atoms):
+        oemol_atom_name = oemol_atom.GetName()
+        prmtop_atom_name = top_atom.name
+        if (oemol_atom_name != prmtop_atom_name):
+            raise Exception("molecule %s : OEMol has atom %s while prmtop has atom %s" % (cid, oemol_atom_name, prmtop_atom_name))
 
     os.chdir(original_directory)
     # TODO: Remove temporary directory and contents.
@@ -651,7 +658,6 @@ def prepare_database(database, atomtypes_filename, parameters, mol2_directory=No
 
     # Construct atom typer.
     atom_typer = AtomTyper(atomtypes_filename, "gbsa_type")
-    #atom_typer.dump()
 
     # Type all molecules with GBSA parameters.
     start_time = time.time()
@@ -674,6 +680,13 @@ def prepare_database(database, atomtypes_filename, parameters, mol2_directory=No
             untyped_molecules.append(oechem.OEGraphMol(molecule))
             if( len(untyped_molecules) > 10 ):
                sys.exit(-1)
+
+        # DEBUG: Report types
+        print "Molecule %s : %s" % (cid, entry['iupac'])
+        for atom in molecule.GetAtoms():
+            print "%5s : %5s" % (atom.GetName(), atom.GetStringData("gbsa_type"))
+        print ""
+
     end_time = time.time()
     elapsed_time = end_time - start_time
     print "%d molecules correctly typed" % (len(typed_molecules))
