@@ -244,7 +244,7 @@ def generate_simulation_data(database, parameters):
 
         initial_time = time.time()
         nsteps_per_iteration = 2500
-        niterations = 100
+        niterations = 250
         x_n = numpy.zeros([niterations,natoms,3], numpy.float32) # positions, in nm
         u_n = numpy.zeros([niterations], numpy.float64) # energy differences, in kT
         for iteration in range(niterations):
