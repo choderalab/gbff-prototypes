@@ -125,9 +125,9 @@ if __name__=="__main__":
 
     # Create command-line argument options.
     usage_string = """\
-    usage: %prog --types typefile --parameters paramfile --database database --iterations MCMC_iterations --mcmcout MCMC_db_name
+    usage: %prog --types typefile --parameters paramfile --iterations MCMC_iterations --mcmcout MCMC_db_name [--train train.pkl] [--test test.pkl]
 
-    example: %prog --types parameters/gbsa-amber-mbondi2.types --parameters parameters/gbsa-amber-mbondi2.parameters --database datasets/FreeSolv/v0.3/database.pickle --mcmcout MCMC --verbose --mol2 datasets/FreeSolv/v0.3/mol2files_sybyl --test 10 --train 10
+    example: %prog --types parameters/gbsa-amber-mbondi2.types --parameters parameters/gbsa-amber-mbondi2.parameters --mcmcout MCMC --verbose --mol2 datasets/FreeSolv/v0.3/mol2files_sybyl --train train.pkl --test test.pkl
 
     """
     version_string = "%prog %__version__"
@@ -140,10 +140,6 @@ if __name__=="__main__":
     parser.add_option("-p", "--parameters", metavar='PARAMETERS',
                       action="store", type="string", dest='parameters_filename', default='',
                       help="File containing initial parameter set.")
-
-    parser.add_option("-d", "--database", metavar='DATABASE',
-                      action="store", type="string", dest='database_filename', default='',
-                      help="Python pickle file of database with molecule names, SMILES strings, hydration free energies, and experimental uncertainties (FreeSolv format).")
 
     parser.add_option("-m", "--mol2", metavar='MOL2',
                       action="store", type="string", dest='mol2_directory', default='',
@@ -158,11 +154,11 @@ if __name__=="__main__":
                       help="MCMC output database name.")
 
     parser.add_option("-r", "--train", metavar='TRAIN',
-                      action="store", type="int", dest='train_size', default=None,
+                      action="store", type="string", dest='train_database_filename', default=None,
                       help="Size of subset to consider for training.")
 
     parser.add_option("-s", "--test", metavar='TEST',
-                      action="store", type="int", dest='test_size', default=None,
+                      action="store", type="string", dest='test_database_filename', default=None,
                       help="Size of subset to consider for testing.")
 
     parser.add_option("-v", "--verbose", metavar='VERBOSE',
@@ -173,7 +169,7 @@ if __name__=="__main__":
     (options,args) = parser.parse_args()
 
     # Ensure all required options have been specified.
-    if options.atomtypes_filename=='' or options.parameters_filename=='' or options.database_filename=='':
+    if options.atomtypes_filename=='' or options.parameters_filename=='' or options.train_database_filename=='' or options.test_database_filename=='':
         parser.print_help()
         parser.error("All input files must be specified.")
 
@@ -184,16 +180,6 @@ if __name__=="__main__":
 
     # Open database.
     import pickle
-    database = pickle.load(open(options.database_filename, 'r'))
-
-    # Divide database into training set and test set.
-    cid_list = database.keys()
-    train_database = dict((k, database[k]) for k in cid_list[0:options.train_size])
-    test_database = dict((k, database[k]) for k in cid_list[options.train_size:(options.train_size+options.test_size)])
-
-    # Prepare the database for calculations.
-    utils.prepare_database(train_database, options.atomtypes_filename, parameters, mol2_directory=options.mol2_directory, verbose=options.verbose)
-    utils.prepare_database(test_database, options.atomtypes_filename, parameters, mol2_directory=options.mol2_directory, verbose=options.verbose)
 
     # Load updated parameter sets.
     parameter_sets  = list()
@@ -216,9 +202,16 @@ if __name__=="__main__":
                 parameter_sets.append( dict() )
                 parameter_sets[index][key] = parameter
 
-    nmolecules = len(database)
 
-    evaluate_performance('train', train_database, parameters, parameter_sets)
-    evaluate_performance('test', test_database, parameters, parameter_sets)
+    # Divide database into training set and test set.
+    if options.train_database_filename:
+        train_database = pickle.load(open(options.train_database_filename, 'r'))
+        utils.prepare_database(train_database, options.atomtypes_filename, parameters, mol2_directory=options.mol2_directory, verbose=options.verbose)
+        evaluate_performance('train', train_database, parameters, parameter_sets)
+
+    if options.test_database_filename:
+        test_database = pickle.load(open(options.test_database_filename, 'r'))
+        utils.prepare_database(test_database, options.atomtypes_filename, parameters, mol2_directory=options.mol2_directory, verbose=options.verbose)
+        evaluate_performance('test', test_database, parameters, parameter_sets)
 
 

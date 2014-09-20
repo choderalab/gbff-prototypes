@@ -243,8 +243,8 @@ def generate_simulation_data(database, parameters):
         beta = 1.0 / kT
 
         initial_time = time.time()
-        nsteps_per_iteration = 2500
-        niterations = 250
+        nsteps_per_iteration = 500
+        niterations = 100
         x_n = numpy.zeros([niterations,natoms,3], numpy.float32) # positions, in nm
         u_n = numpy.zeros([niterations], numpy.float64) # energy differences, in kT
         for iteration in range(niterations):
@@ -541,6 +541,7 @@ def prepare_database(database, atomtypes_filename, parameters, mol2_directory=No
     # Process all molecules in the dataset.
     charge_method = None # charge method to be used in antechamber call
     start_time = time.time()
+    print "Reading all molecules in dataset, creating configurations if needed..."
     for cid in database.keys():
         # Get database entry.
         entry = database[cid]
@@ -556,7 +557,7 @@ def prepare_database(database, atomtypes_filename, parameters, mol2_directory=No
         experimental_dDeltaG = entry['d_expt'] * units.kilocalories_per_mole
 
         # Read molecule.
-        molecule = openeye.oechem.OEGraphMol()
+        molecule = openeye.oechem.OEMol()
         if mol2_directory:
             # Load the mol2 file.
             tripos_mol2_filename = os.path.join(mol2_directory, cid + '.mol2')
@@ -571,6 +572,8 @@ def prepare_database(database, atomtypes_filename, parameters, mol2_directory=No
             openeye.oechem.OEParseSmiles(molecule, smiles)
             # Create geometry.
             omega(molecule)
+            # TODO: Add Christopher Bayly suggested method to expand conformations and pick most "open" one for charging by OpenEye tools.
+
             # Be sure to assign charges.
             charge_method = 'bcc'
 
