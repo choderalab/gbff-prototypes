@@ -218,7 +218,7 @@ def generate_simulation_data(database, parameters):
             [charge, sigma, epsilon] = nonbonded_force.getParticleParameters(atom_index)
             atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
             radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
-            scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')] * units.kilocalories_per_mole
+            scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')]
             gbsa_force.addParticle(charge, radius, scalingFactor)
 
         # Add the force to the system.
@@ -243,7 +243,7 @@ def generate_simulation_data(database, parameters):
         beta = 1.0 / kT
 
         initial_time = time.time()
-        nsteps_per_iteration = 500
+        nsteps_per_iteration = 2500
         niterations = 100
         x_n = numpy.zeros([niterations,natoms,3], numpy.float32) # positions, in nm
         u_n = numpy.zeros([niterations], numpy.float64) # energy differences, in kT
@@ -333,7 +333,7 @@ def compute_hydration_energies(database, parameters):
             [charge, sigma, epsilon] = nonbonded_force.getParticleParameters(atom_index)
             atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
             radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
-            scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')] * units.kilocalories_per_mole
+            scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')]
             gbsa_force.addParticle(charge, radius, scalingFactor)
 
         # Add the force to the system.
@@ -442,7 +442,7 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
         [charge, sigma, epsilon] = nonbonded_force.getParticleParameters(atom_index)
         atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
         radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
-        scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')] * units.kilocalories_per_mole
+        scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')]
         gbsa_force.addParticle(charge, radius, scalingFactor)
 
     # Add the force to the system.
