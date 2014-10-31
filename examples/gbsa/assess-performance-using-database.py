@@ -127,7 +127,7 @@ if __name__=="__main__":
     usage_string = """\
     usage: %prog --types typefile --parameters paramfile --iterations MCMC_iterations --mcmcout MCMC_db_name [--train train.pkl] [--test test.pkl]
 
-    example: %prog --types parameters/gbsa-amber-mbondi2.types --parameters parameters/gbsa-amber-mbondi2.parameters --mcmcout MCMC --verbose --mol2 datasets/FreeSolv/v0.3/mol2files_sybyl --train train.pkl --test test.pkl
+    example: %prog --types parameters/gbsa-amber-mbondi2.types --parameters parameters/gbsa-amber-mbondi2.parameters --mcmcout MCMC --verbose --mol2 datasets/FreeSolv/FreeSolv/tripos_mol2 --train train.pkl --test test.pkl
 
     """
     version_string = "%prog %__version__"
