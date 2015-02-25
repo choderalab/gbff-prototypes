@@ -244,7 +244,7 @@ def generate_simulation_data(database, parameters):
 
         initial_time = time.time()
         nsteps_per_iteration = 2500
-        niterations = 100
+        niterations = 200
         x_n = numpy.zeros([niterations,natoms,3], numpy.float32) # positions, in nm
         u_n = numpy.zeros([niterations], numpy.float64) # energy differences, in kT
         for iteration in range(niterations):
@@ -305,6 +305,11 @@ def compute_hydration_energies(database, parameters):
 
     from pymbar import MBAR
 
+    if 'gbmodel' in parameters:
+        gbmodel = parameters['gbmodel']
+    else:
+        gbmodel = None
+
     for cid in database.keys():
         entry = database[cid]
         molecule = entry['molecule']
@@ -318,11 +323,23 @@ def compute_hydration_energies(database, parameters):
         forces = { solvent_system.getForce(index).__class__.__name__ : solvent_system.getForce(index) for index in range(solvent_system.getNumForces()) }
         nonbonded_force = forces['NonbondedForce']
 
-        # Add GBSA term
-        gbsa_force = openmm.GBSAOBCForce()
-        gbsa_force.setNonbondedMethod(openmm.GBSAOBCForce.NoCutoff) # set no cutoff
-        gbsa_force.setSoluteDielectric(1)
-        gbsa_force.setSolventDielectric(78)
+        # Add GBSA force.
+        from simtk.openmm.app.internal import customgbforces
+        if gbmodel is None:
+            gbsa_force = openmm.GBSAOBCForce()
+            gbsa_force.setNonbondedMethod(openmm.GBSAOBCForce.NoCutoff) # set no cutoff
+            gbsa_force.setSoluteDielectric(1)
+            gbsa_force.setSolventDielectric(78)
+        elif gbmodel == 0:
+            gbsa_force = customgbforces.GBSAHCTForce(SA='ACE')
+        elif gbmodel == 1:
+            gbsa_force = customgbforces.GBSAOBC1Force(SA='ACE')
+        elif gbmodel == 2:
+            gbsa_force = customgbforces.GBSAOBC2Force(SA='ACE')
+        elif gbmodel == 3:
+            gbsa_force = customgbforces.GBSAGBnForce(SA='ACE')
+        elif gbmodel == 4:
+            gbsa_force = customgbforces.GBSAGBn2Force(SA='ACE')
 
         # Build indexable list of atoms.
         atoms = [atom for atom in molecule.GetAtoms()]
@@ -334,7 +351,10 @@ def compute_hydration_energies(database, parameters):
             atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
             radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
             scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')]
-            gbsa_force.addParticle(charge, radius, scalingFactor)
+            if gbmodel is None:
+                gbsa_force.addParticle(charge, radius, scalingFactor)
+            else:
+                gbsa_force.addParticle([charge, radius, scalingFactor])
 
         # Add the force to the system.
         solvent_system.addForce(gbsa_force)
@@ -415,6 +435,8 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
 
     from pymbar import MBAR
 
+    gbmodel = parameters['gbmodel']
+
     molecule = entry['molecule']
     iupac_name = entry['iupac']
     cid = molecule.GetData('cid')
@@ -427,11 +449,23 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
     forces = { solvent_system.getForce(index).__class__.__name__ : solvent_system.getForce(index) for index in range(solvent_system.getNumForces()) }
     nonbonded_force = forces['NonbondedForce']
 
-    # Add GBSA term
-    gbsa_force = openmm.GBSAOBCForce()
-    gbsa_force.setNonbondedMethod(openmm.GBSAOBCForce.NoCutoff) # set no cutoff
-    gbsa_force.setSoluteDielectric(1)
-    gbsa_force.setSolventDielectric(78)
+    # Add GBSA force.
+    from simtk.openmm.app.internal import customgbforces
+    if gbmodel is None:
+        gbsa_force = openmm.GBSAOBCForce()
+        gbsa_force.setNonbondedMethod(openmm.GBSAOBCForce.NoCutoff) # set no cutoff
+        gbsa_force.setSoluteDielectric(1)
+        gbsa_force.setSolventDielectric(78)
+    elif gbmodel == 0:
+        gbsa_force = customgbforces.GBSAHCTForce(SA='ACE')
+    elif gbmodel == 1:
+        gbsa_force = customgbforces.GBSAOBC1Force(SA='ACE')
+    elif gbmodel == 2:
+        gbsa_force = customgbforces.GBSAOBC2Force(SA='ACE')
+    elif gbmodel == 3:
+        gbsa_force = customgbforces.GBSAGBnForce(SA='ACE')
+    elif gbmodel == 4:
+        gbsa_force = customgbforces.GBSAGBn2Force(SA='ACE')
 
     # Build indexable list of atoms.
     atoms = [atom for atom in molecule.GetAtoms()]
@@ -443,7 +477,10 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
         atomtype = atom.GetStringData("gbsa_type") # GBSA atomtype
         radius = parameters['%s_%s' % (atomtype, 'radius')] * units.angstroms
         scalingFactor = parameters['%s_%s' % (atomtype, 'scalingFactor')]
-        gbsa_force.addParticle(charge, radius, scalingFactor)
+        if gbmodel is None:
+            gbsa_force.addParticle(charge, radius, scalingFactor)
+        else:
+            gbsa_force.addParticle([charge, radius, scalingFactor])
 
     # Add the force to the system.
     solvent_system.addForce(gbsa_force)
@@ -500,7 +537,7 @@ def compute_hydration_energy(entry, parameters, platform_name="Reference"):
 
     energy = kT * DeltaG_in_kT
 
-    #print "%48s | %48s | DeltaG = %.3f +- %.3f kT" % (cid, iupac_name, DeltaG_in_kT, dDeltaG_in_kT)
+    print "%48s | %48s | DeltaG = %.3f +- %.3f kT | gbmodel = %d" % (cid, iupac_name, DeltaG_in_kT, dDeltaG_in_kT, gbmodel)
     #print ""
 
     return energy / units.kilocalories_per_mole

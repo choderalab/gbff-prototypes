@@ -78,6 +78,11 @@ def create_model(database, initial_parameters):
         model[key] = stochastic
         parameters[key] = stochastic
 
+    # Define prior on GB models.
+    ngbmodels = 3 # number of GB models
+    all_models = numpy.ones([ngbmodels], numpy.float64) / float(ngbmodels)
+    model['gbmodel'] = pymc.Categorical('gbmodel', p=all_models)
+
     # Define deterministic functions for hydration free energies.
     cid_list = database.keys()
     for (molecule_index, cid) in enumerate(cid_list):
@@ -93,6 +98,7 @@ def create_model(database, initial_parameters):
             for parameter_name in ['scalingFactor', 'radius']:
                 stochastic_name = '%s_%s' % (atomtype,parameter_name)
                 parents[stochastic_name] = parameters[stochastic_name]
+        parents['gbmodel'] = model['gbmodel'] # add GB model choice
         print "%s : " % molecule_name,
         print parents.keys()
         # Create deterministic variable for computed hydration free energy.
