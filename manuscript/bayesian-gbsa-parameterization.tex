@@ -1,0 +1,247 @@
+% DOCUMENT CLASS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\documentclass[journal=jacsat,manuscript=article]{achemso}
+
+% Single-spaced, two-column with PRL look and style (easy on the eyes)
+\documentclass[aps,pre,twocolumn,nofootinbib,superscriptaddress,linenumbers]{revtex4-1}
+
+
+% Double-spaced, one-column style (for submission/review/editing)
+%\documentclass[aps,preprint,prl,superscriptaddress,showpacs]{revtex4}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PREAMBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% FONT
+%\usepackage{palatino}
+
+%\usepackage{palatino}
+% Change to a sans serif font.
+\usepackage{sourcesanspro}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage[T1]{fontenc}
+%\usepackage[font=sf,justification=justified]{caption}
+\usepackage[font=sf]{floatrow}
+
+% Rework captions to use sans serif font.
+\makeatletter	
+\renewcommand\@make@capt@title[2]{%
+ \@ifx@empty\float@link{\@firstofone}{\expandafter\href\expandafter{\float@link}}%
+  {\sf\textbf{#1}}\sf\@caption@fignum@sep#2\quad
+}%
+\makeatother
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{boxedminipage}
+\usepackage{verbatim}
+\usepackage{booktabs}
+\usepackage{subfigure}
+\usepackage{listings}
+
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+
+% The figures are in a figures/ subdirectory.
+\graphicspath{{../figures/}}
+
+%\bibliographystyle{apsrevlong}
+\bibliographystyle{apsrev}
+
+% italicized boldface for math (e.g. vectors)
+\newcommand{\bfv}[1]{{\mbox{\boldmath{$#1$}}}}
+% non-italicized boldface for math (e.g. matrices)
+\newcommand{\bfm}[1]{{\bf #1}}          
+
+% Pretty-printing of shell commands
+\newcommand{\shellcmd}[1]{\\\ \texttt{\scriptsize\# #1}\\}
+
+%\newcommand{\bfm}[1]{{\mbox{\boldmath{$#1$}}}}
+%\newcommand{\bfm}[1]{{\bf #1}}
+\newcommand{\expect}[1]{\left \langle #1 \right \rangle}                % <.> for denoting expectations over realizations of an experiment or thermal averages
+\newcommand{\dhdl}{\frac{dH}{d\lambda}}
+% vectors
+\newcommand{\var}[1]{{\mathrm var}{(#1)}}
+\newcommand{\x}{\bfv{x}}
+\newcommand{\y}{\bfv{y}}
+\newcommand{\f}{\bfv{f}}
+
+\newcommand{\bfc}{\bfm{c}}
+\newcommand{\hatf}{\hat{f}}
+
+\newcommand{\bTheta}{\bfm{\Theta}}
+\newcommand{\btheta}{\bfm{\theta}}
+\newcommand{\bhatf}{\bfm{\hat{f}}}
+\newcommand{\Cov}[1] {\mathrm{cov}\left( #1 \right)}
+\newcommand{\Ept}[1] {{\mathrm E}\left[ #1 \right]}
+\newcommand{\Eptk}[2] {{\mathrm E}_{#1}\left[ #2\right]}
+\newcommand{\T}{\mathrm{T}}                                % T used in matrix transpose
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TITLE AND AUTHORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Assessing systematic error in forcefields using a Bayesian approach to parameterization}
+
+\author{Patrick B. Grinaway }
+\email{patrick.grinaway@choderalab.org}
+\affiliation{Graduate Program in Physiology, Biophysics, and Systems Biology, Weill Cornell Medical College, New York, NY}
+
+\author{Kyle A. Beauchamp$^+$}
+\email{kyle.beauchamp@choderalab.org}
+\affiliation{Computational Biology Program, Sloan Kettering Institute, Memorial Sloan Kettering Cancer Center, New York, NY}
+ 
+ \author{Michael R. Shirts}
+ \email{michael.shirts@virginia.edu}
+ \affiliation{Department of Chemical Engineering, University of Virginia, Charlottesville, VA}
+ 
+ \author{John D. Chodera}
+ \thanks{Corresponding author}
+ \email{john.chodera@choderalab.org}
+ \affiliation{Computational Biology Program, Sloan Kettering Institute, Memorial Sloan Kettering Cancer Center, New York, NY}
+
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABSTRACT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Abstract}
+\begin{abstract}
+
+This is an abstract.\\
+
+\emph{Keywords: molecular mechanics forcefields; forcefield parameterization; forcefield accuracy; biomolecular simulation}
+
+\end{abstract}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INTRODUCTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+{\bf Predictive simulations of many molecular scale phenomena require accurate force fields.} 
+There is little dispute that atomistic molecular simulation has had an enormous impact across a wide variety of fields, from chemistry to biophysics to materials science.
+Molecular simulations---generally variations of molecular dynamics or Metropolis Monte Carlo simulation techniques---utilize a force field to describe the behavior of material under equilibrium or nonequilibrium conditions within the realm of statistical mechanics.  
+For simplicity, we confine our discussion to atomistic models of molecular systems obeying classical statistical mechanics, and concentrate on equilibrium thermodynamic properties, though these concepts could readily be extended to kinetic properties or coarse-grained potentials as well.
+Our proposal illustrates the parameterization concepts developed in this proposal in the context of mixtures of small organic molecules in the liquid phase across a range of compositions and temperatures at ambient pressure.
+
+{\bf Force fields specify how to construct the potential energy function to model a molecular system.} 
+Molecular mechanics force fields define how the potential energy function $U({\bf x};{\bf \theta})$ and corresponding forces $F({\bf x}; {\bf \theta}) \equiv -\nabla_{\bf x}U({\bf x}; {\bf \theta})$ are constructed for a given system of interest, where ${\bf x}$ denotes atomic coordinates and ${\bf \theta}$ force field parameters.
+These force fields typically consist of four essential components:  
+(1) A {\bf functional form} specifies the potential $U({\bf x}; {\bf \theta})$, generally inspired by known physical behavior but with free parameters that can be fit to reproduce experimental or quantum chemical data; (2) a set of $N$ {\bf atom types} that describe how atoms in similar chemical environments are grouped together and assigned identical parameters, reducing the total size of the parameter space; (3) a set of {\bf parameters} ${\bf \theta}$ associated with one or more atom types for each of the kinds of interactions in the system, where interactions typically include valence terms (bond stretching, angle bending, torsions) and nonbonded terms (atomic repulsion and dispersive attraction, electrostatic interactions); and (4) a set of {\bf nonbonded combining rules} that can be used to determine how parameters for pairs of atom types are combined, avoiding the need for $O(N^2)$ distinct sets of nonbonded interaction parameters.
+
+{\bf Current force field parameterization approaches have a number of significant limitations.}
+Traditionally, force fields have been constructed through a manually laborious process guided by a combination of experimental data, quantum chemical calculations, and physical insight.
+The functional forms in use by many modern force fields---for example, Lennard-Jones potentials for describing the dispersive and repulsive interactions between nonbonded atoms---were chosen some decades ago for describing simple liquids with forms chosen as a compromise between physical insight and computational convenience.
+While a variety of functional forms have been elaborated, the forms---and indeed many parameters---in use by a multitude of modern biomolecular force fields (e.g.~AMBER, CHARMM, OPLS) remain largely unchanged~\citep{ponder-case:adv-prot-chem:2003:force-fields-review}.
+While quantum chemical calculations have been very useful for determining many of the valence terms and charge models, they have not been as useful as experimental data in the parameterization of nonbonded interactions, which we focus on in this proposal.
+
+The procedure by which force fields have been parameterized has gradually become more sophisticated over the decades as computational power has increased and the systems modeled have become more complex.
+Early models of water, such as TIP3P and TIP4P~\cite{jorgensen_comparison_1983}, were essentially parameterized by iterative manual selection of geometry and parameters given a fixed functional form.
+Early biomolecular force fields, such as AMBER {\em parm94}~\cite{cornell-kollman:jacs:1995:amber94}, used human insight into the nature of chemical environments to select a variety of distinct atom types to which individual parameters were assigned, with quantum chemical calculations providing a great deal of aid in selecting valence parameters and partial atomic charges.
+Later attempts to parameterize the enormous space of small organic molecules with a general small molecule force field utilized semi-automated optimization approaches to select parameters, such as genetic algorithms~\cite{wang-kollman:j-comput-chem:2001:genetic-algorithm-parameterization} or derived extrapolation approaches~\cite{Burger2013,Law1997,MacKerrell2002,longo2005,Netz2009}.
+Gradient-based optimization approaches, such as least-squares optimization of an objective function, were later introduced, as in the parameterization of the TIP4P-Ew water model~\cite{tip4p-ew}.
+
+Despite this progress, critical deficiencies in the force field parameterization process remain:
+\begin{itemize}
+\item {\bf Atom types are imposed by fiat}, and are products of chemical intuition, without statistical clarity on whether available experimental data is being under- or overfit.
+\item {\bf Least-squares optimization techniques are vulnerable to getting trapped in local optima} in parameter space, with no clear way to tell if global optima have been found.
+\item {\bf Objective functions require human-assigned weights} to individual classes of experimental data in order to include them in the same objective.~\citep{paliwal_phd}
+\item {\bf Functional forms and combining rules are often chosen for convenience or through historical inertia}, rather than a data-driven approach that penalizes unnecessary complexity.
+\item {\bf There is currently no clear way to quantify the systematic error} induced by uncertainty in the appropriate choice of atom types, functional forms, parameters, and combining rules.  
+\end{itemize}
+
+{\bf Bayesian inference provides a statistical framework for data-driven parameter selection.}
+The fundamental concepts behind Bayesian inference are straightforward.
+Given a model $\mathcal{M}$ with unknown parameters ${\bf \theta}_*$ and observed data $\mathcal{D}$ generated from the model, we can write the conditional probability that a particular choice of parameters ${\bf \theta}$ was responsible for data $\mathcal{D}$ as
+%\begin{eqnarray}
+$p({\bf \theta} | \mathcal{D}) \propto p(\mathcal{D} | {\bf \theta}) \, p({\bf \theta})$,
+%\end{eqnarray}
+where $p(\mathcal{D} | {\bf \theta})$ is the probability that the data $\mathcal{D}$ were observed given true model parameters ${\bf \theta}$, and $p({\bf \theta})$ denotes the prior probability of parameter choice ${\bf \theta}$ known \emph{a priori} before any data was observed.
+Note that the result of a Bayesian inference step is not a single parameter set $\hat{\bf \theta}$, but an entire \emph{posterior distribution} over parameters given data, $p({\bf \theta} | \mathcal{D})$.
+When this distribution is not analytically tractable, it can be efficiently sampled using standard Markov chain Monte Carlo techniques~\cite{jun-s-liu:mcmc} essentially identical to standard techniques used to sample equilibrium distributions from molecular mechanics force fields.
+
+{\bf The fundamental concept behind this proposal is to recast the force field parameterization problem as a Bayesian inference problem.}
+In this framework, the appropriate underlying model (atom types, functional forms, combining rules) and associated parameters (force field parameters ${\bf \theta}$) are jointly \emph{inferred} from a set of experimental data $\mathcal{D}$.
+Critical to this approach is the ability to construct the likelihood function $p(\mathcal{D} | {\bf \theta}, \mathcal{M})$ based on an understanding of the experimental measurement process and a dataset for which the measurement uncertainties are well characterized.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{figure}[h]
+%\begin{centering}
+%\includegraphics[width=0.90\textwidth]{information-flowchart.pdf}
+%
+%\end{centering}
+%\vspace{0.5em}
+%\caption{
+%\label{figure:information-flowchart}
+%\small
+%{\bf Information flow in Bayesian parameterization scheme.}
+%Given experimental data $\mathcal{D}$ and a model for the observed experimental observations, efficient Markov %chain Monte Carlo (MCMC) are used to sample from the Bayesian posterior for parameters ${\bf \theta}$ given data $\mathcal{D}$, producing not a single parameter set, but a \emph{family} of parameters consistent with the data and whose diversity can capture much of the \emph{systematic error} in the resulting force field family.
+%}
+%\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{\bf Parameterizing a force field for small organic molecular liquids is a good model system for studying force field parameterization approaches.}
+We will test these Bayesian techniques in the context of parameterizing a force field for mixtures of small organic molecular liquids at ambient pressure over a range of compositions and biologically relevant temperatures (10--60$^\circ$C).
+While a liquid force field will have significant utility on its own, it primarily serves as a stepping stone to larger efforts once these methodologies have been validated, retaining many of the same challenges as more complex force field parameterization challenges across a range of disciplines.
+
+Notably, both data collection and molecular simulation of these systems are tractable and inexpensive.
+Molecular mechanics force fields have not typically been parameterized for mixture properties such as excess heats of mixture and excess density (Figure~\ref{fig:mixtures})\citep{nezbeda_methanol_mixtures_2006,vdS_mixtures_2003}. Exceptions to this cover only a few selected mixtures~\citep{chen_monte_2001,stubbs_transferable_2004}, leaving only fitted analytical models generally available for such modeling complex mixtures.~\citep{PolingLiquidProp,TDEbinary}
+And yet, the mixing properties of molecular fluids and polymers are the driving forces which control the behavior of complex systems, from polymer self-assembly to biomolecular interactions.
+
+This proposal also re-evaluates current choice of nonbonded potential functions and associated combining rules.
+These terms have not received significant attention in biomolecular or small organic molecule force fields in quite some time (with notable but rare exceptions~\cite{ponder-case:adv-prot-chem:2003:force-fields-review}), despite the fact that significant improvement is still possible (e.g.~Figure~\ref{fig:mixtures}).
+Lessons learned here will be directly applicable in the parameterization of molecular mechanics force fields for biomolecules, arbitrary small organic and inorganic molecules, and large ranges of temperatures and pressures associated with chemical engineering problems.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% METHODS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Methods}
+\label{section:methods}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONCLUSIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conclusions}
+
+Locavore biodiesel gentrify 90's small batch skateboard. Bicycle rights gentrify pop-up normcore, Thundercats single-origin coffee tofu American Apparel pug tattooed post-ironic. Shabby chic fanny pack biodiesel, cornhole Pinterest pug selvage forage beard literally four dollar toast roof party hella fingerstache master cleanse. Stumptown American Apparel locavore listicle. Cold-pressed hashtag Neutra kale chips, ugh occupy deep v slow-carb pug roof party Bushwick Tumblr shabby chic Austin. Pug selfies mustache umami, asymmetrical DIY mlkshk wayfarers Williamsburg farm-to-table Marfa single-origin coffee. Irony blog Marfa butcher, tousled selvage forage kale chips master cleanse single-origin coffee asymmetrical Williamsburg Neutra.
+
+Banjo actually organic, salvia umami Odd Future pickled whatever brunch. Actually freegan kale chips cronut jean shorts, heirloom four loko organic fingerstache fap Bushwick biodiesel Thundercats asymmetrical deep v. +1 ethical umami distillery bitters, Odd Future mumblecore. Polaroid occupy vegan dreamcatcher, 90's stumptown tilde Marfa butcher Schlitz retro. Butcher Brooklyn seitan, American Apparel gastropub cred Austin small batch. YOLO aesthetic Williamsburg selfies, try-hard mustache occupy cardigan sriracha meggings flannel wayfarers. Mumblecore kitsch deep v fixie McSweeney's Truffaut, pop-up readymade salvia skateboard hoodie dreamcatcher polaroid Helvetica.
+
+Fanny pack photo booth crucifix, PBR trust fund pickled sustainable. Williamsburg disrupt before they sold out irony pug banjo. Kale chips lomo hella food truck, mixtape literally Blue Bottle Marfa Odd Future. Keffiyeh flexitarian normcore pickled flannel, irony tattooed. Fingerstache selfies Vice semiotics, High Life vegan Kickstarter trust fund twee bespoke literally bitters Portland. Wes Anderson taxidermy swag Austin disrupt. Pitchfork Banksy pickled, vegan cray irony drinking vinegar health goth.
+
+Literally hashtag master cleanse, organic tofu quinoa food truck banjo chillwave drinking vinegar Etsy Williamsburg wayfarers Marfa Carles. Brunch photo booth next level, kitsch church-key bitters lomo Banksy cold-pressed gastropub 8-bit blog chambray. Carles sriracha synth, tattooed hella four loko Etsy typewriter try-hard Intelligentsia VHS irony gastropub chambray vegan. Roof party Austin small batch, sriracha tofu cronut church-key try-hard gentrify tilde. Kogi squid fanny pack cliche, mustache Carles 3 wolf moon iPhone. Austin kitsch deep v raw denim. Pork belly art party crucifix ennui, pop-up chia organic.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACKNOWLEDGMENTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Acknowledgements}
+
+We thank Vijay S.~Pande (Stanford University), Lee-Ping Wang (Stanford University), Peter Eastman (Stanford University), Robert McGibbon (Stanford University), Jason Swails (Rutgers University), David L.~Mobley (University of California, Irvine), Christopher I.~Bayly (OpenEye Software), and members of Chodera lab for helpful discussions.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BIBLIOGRAPHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliography{citations/benchmark,citations/MRS_general_lib1,citations/MRS_general_lib3,citations/MRS_general_lib4}
+
+\end{document}
