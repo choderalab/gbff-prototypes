@@ -80,6 +80,13 @@
 \newcommand{\Eptk}[2] {{\mathrm E}_{#1}\left[ #2\right]}
 \newcommand{\T}{\mathrm{T}}                                % T used in matrix transpose
 
+\newenvironment{packed_itemize}{
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  }{\end{itemize}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DOCUMENT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -132,18 +139,18 @@ This is an abstract.\\
 
 \section{Introduction}
 
-{\bf Predictive simulations of many molecular scale phenomena require accurate force fields.} 
+%{\bf Predictive simulations of many molecular scale phenomena require accurate force fields.} 
 There is little dispute that atomistic molecular simulation has had an enormous impact across a wide variety of fields, from chemistry to biophysics to materials science.
 Molecular simulations---generally variations of molecular dynamics or Metropolis Monte Carlo simulation techniques---utilize a force field to describe the behavior of material under equilibrium or nonequilibrium conditions within the realm of statistical mechanics.  
 For simplicity, we confine our discussion to atomistic models of molecular systems obeying classical statistical mechanics, and concentrate on equilibrium thermodynamic properties, though these concepts could readily be extended to kinetic properties or coarse-grained potentials as well.
 Our proposal illustrates the parameterization concepts developed in this proposal in the context of mixtures of small organic molecules in the liquid phase across a range of compositions and temperatures at ambient pressure.
 
-{\bf Force fields specify how to construct the potential energy function to model a molecular system.} 
+%{\bf Force fields specify how to construct the potential energy function to model a molecular system.} 
 Molecular mechanics force fields define how the potential energy function $U({\bf x};{\bf \theta})$ and corresponding forces $F({\bf x}; {\bf \theta}) \equiv -\nabla_{\bf x}U({\bf x}; {\bf \theta})$ are constructed for a given system of interest, where ${\bf x}$ denotes atomic coordinates and ${\bf \theta}$ force field parameters.
 These force fields typically consist of four essential components:  
 (1) A {\bf functional form} specifies the potential $U({\bf x}; {\bf \theta})$, generally inspired by known physical behavior but with free parameters that can be fit to reproduce experimental or quantum chemical data; (2) a set of $N$ {\bf atom types} that describe how atoms in similar chemical environments are grouped together and assigned identical parameters, reducing the total size of the parameter space; (3) a set of {\bf parameters} ${\bf \theta}$ associated with one or more atom types for each of the kinds of interactions in the system, where interactions typically include valence terms (bond stretching, angle bending, torsions) and nonbonded terms (atomic repulsion and dispersive attraction, electrostatic interactions); and (4) a set of {\bf nonbonded combining rules} that can be used to determine how parameters for pairs of atom types are combined, avoiding the need for $O(N^2)$ distinct sets of nonbonded interaction parameters.
 
-{\bf Current force field parameterization approaches have a number of significant limitations.}
+%{\bf Current force field parameterization approaches have a number of significant limitations.}
 Traditionally, force fields have been constructed through a manually laborious process guided by a combination of experimental data, quantum chemical calculations, and physical insight.
 The functional forms in use by many modern force fields---for example, Lennard-Jones potentials for describing the dispersive and repulsive interactions between nonbonded atoms---were chosen some decades ago for describing simple liquids with forms chosen as a compromise between physical insight and computational convenience.
 While a variety of functional forms have been elaborated, the forms---and indeed many parameters---in use by a multitude of modern biomolecular force fields (e.g.~AMBER, CHARMM, OPLS) remain largely unchanged~\citep{ponder-case:adv-prot-chem:2003:force-fields-review}.
@@ -156,13 +163,13 @@ Later attempts to parameterize the enormous space of small organic molecules wit
 Gradient-based optimization approaches, such as least-squares optimization of an objective function, were later introduced, as in the parameterization of the TIP4P-Ew water model~\cite{tip4p-ew}.
 
 Despite this progress, critical deficiencies in the force field parameterization process remain:
-\begin{itemize}
+\begin{packed_itemize}
 \item {\bf Atom types are imposed by fiat}, and are products of chemical intuition, without statistical clarity on whether available experimental data is being under- or overfit.
 \item {\bf Least-squares optimization techniques are vulnerable to getting trapped in local optima} in parameter space, with no clear way to tell if global optima have been found.
 \item {\bf Objective functions require human-assigned weights} to individual classes of experimental data in order to include them in the same objective.~\citep{paliwal_phd}
 \item {\bf Functional forms and combining rules are often chosen for convenience or through historical inertia}, rather than a data-driven approach that penalizes unnecessary complexity.
 \item {\bf There is currently no clear way to quantify the systematic error} induced by uncertainty in the appropriate choice of atom types, functional forms, parameters, and combining rules.  
-\end{itemize}
+\end{packed_itemize}
 
 {\bf Bayesian inference provides a statistical framework for data-driven parameter selection.}
 The fundamental concepts behind Bayesian inference are straightforward.
@@ -203,7 +210,7 @@ Molecular mechanics force fields have not typically been parameterized for mixtu
 And yet, the mixing properties of molecular fluids and polymers are the driving forces which control the behavior of complex systems, from polymer self-assembly to biomolecular interactions.
 
 This proposal also re-evaluates current choice of nonbonded potential functions and associated combining rules.
-These terms have not received significant attention in biomolecular or small organic molecule force fields in quite some time (with notable but rare exceptions~\cite{ponder-case:adv-prot-chem:2003:force-fields-review}), despite the fact that significant improvement is still possible (e.g.~Figure~\ref{fig:mixtures}).
+These terms have not received significant attention in biomolecular or small organic molecule force fields in quite some time (with notable but rare exceptions~\cite{ponder-case:adv-prot-chem:2003:force-fields-review}), despite the fact that significant improvement is still possible.
 Lessons learned here will be directly applicable in the parameterization of molecular mechanics force fields for biomolecules, arbitrary small organic and inorganic molecules, and large ranges of temperatures and pressures associated with chemical engineering problems.
 
 
